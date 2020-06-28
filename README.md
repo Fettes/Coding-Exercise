@@ -10,9 +10,13 @@
 ![Hard](https://img.shields.io/badge/Hard-3-red)
 
 ## Array 
-|  #  | Title           |  Solution       | Difficulty    |
-|-----|---------------- | --------------- |-------------- |
-0442 | [Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/) | [View](./Array/FindAllDuplicatesInAnArray.cpp) | Medium |||
+|  #  | Title           |  Solution       | Difficulty    | Similar Questions |
+|-----|---------------- | --------------- |-------------- | ----------------- |
+<span id="0001"> 0001 </span> | [Two Sum](https://leetcode.com/problems/two-sum/) | [View](Array/1.two-sum.java) | Easy | [3Sum](#0015), 
+<span id="0015"> 0015 </span> | [3Sum](https://leetcode.com/problems/3sum/) | [View](Array/15.3-sum.java) | Medium | [Two Sum](#0001), [3Sum Closest](#0016), [3Sum Smaller](#0259)
+<span id="0016"> 0016 </span> | [3Sum Closest](https://leetcode.com/problems/3sum-closest/) | [View](Array/16.3-sum-closest.java) | Medium | [3Sum](#0015), [3Sum Smaller](#0259)
+<span id="0259"> 0259 </span> | [3Sum Smaller](https://leetcode.com/problems/3sum-smaller/) | [View](Array/259.3-sum-smaller.java) | Medium | [3Sum](#0015), [3Sum Closest](#0016), [Valid Triangle Number](#611), [Two Sum Less Than K](#1099)
+<span id="0442"> 0442 </span> | [Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/) | [View](./Array/FindAllDuplicatesInAnArray.cpp) | Medium |||
 1437 | [Check If All 1's Are at Least Length K Places Away](https://leetcode.com/problems/check-if-all-1s-are-at-least-length-k-places-away/) | [View](./Array/CheckIfAll1sAreAtLeastLengthKPlacesAway.cpp) | Medium |
 0706 | [Design Hash Map](https://leetcode.com/problems/design-hashmap/) | [View](./Array/DesignHashMap.cpp) | Easy |||
 0705 | [Design Hash Set](https://leetcode.com/problems/design-hashset/) | [View](./Array/DesignHashSet.cpp) | Easy |||
