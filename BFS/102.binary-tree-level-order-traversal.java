@@ -1,7 +1,3 @@
-import java.util.Queue;
-
-import javax.swing.tree.TreeNode;
-
 /*
  * @lc app=leetcode id=102 lang=java
  *

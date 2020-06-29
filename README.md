@@ -46,7 +46,8 @@
 ## BFS (Breadth-first search)
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
-<span id="0102">0102 </span> 
+#<span id="0102">0102 </span> | [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/) | [View](BFS/102.binary-tree-level-order-traversal.java) | Medium | [Zigzag Level Traversal](#0103), [Level Order Traversal II](#0107), [ Vertical Order Traversal](#0314), [N-ary Level Order Traversal](#0429)
+#<span id="0433">0433 </span> | [Minimum Genetic Mutation](https://leetcode.com/problems/minimum-genetic-mutation/) | [View](BFS/433.minimum-genetic-mutation.java) | Medium | [Word Ladder](#0127)
 
 ## Binary Search
 |  #  | Title           |  Solution       | Difficulty    |
@@ -61,8 +62,9 @@
 1300 | [Sum of Mutated Array Closest to Target](https://leetcode.com/problems/sum-of-mutated-array-closest-to-target/) | [View](./BinarySearch/SumOfMutatedArrayClosestToTarget.cpp) | Medium |||
 
 ## DFS (Depth First Search)
-|  #  | Title           |  Solution       | Difficulty    |
-|-----|---------------- | --------------- |------------- |
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0022">0022 </span> | [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/) | [View](DFS/22.generate-parentheses.java) | Medium | [Letter Combinations of a Phone Number](#0017), [Valid Parentheses](#0020)
 0200 | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](./DFS/NumberOfIslands.cpp) | Medium |||
 1020 | [Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/) | [View](./DFS/NumberOfEnclaves.cpp) | Medium |||
 0130 | [Surrounded Regions](https://leetcode.com/problems/surrounded-regions/) | [View](./DFS/SurroundedRegions.cpp) | Medium |||
@@ -124,7 +126,7 @@
 ## Sliding Window
 |  #  | Title           |  Solution       | Difficulty    | Similar Questions |
 |-----|---------------- | --------------- |-------------- | ----------------- |
-<span id="0713">0713 </span> | [Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | [View](Sliding%20Window/713.subarray-product-less-than-k.java) | Medium | [Maximum Product Subarray](#0152), [Maximum Size Subarray Sum Equals k](#0352), [Subarray Sum Equals K](#0560), [Two Sum Less Than K](#1099)
+#<span id="0713">0713 </span> | [Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | [View](Sliding%20Window/713.subarray-product-less-than-k.java) | Medium | [Maximum Product Subarray](#0152), [Maximum Size Subarray Sum Equals k](#0352), [Subarray Sum Equals K](#0560), [Two Sum Less Than K](#1099)
 0904 | [Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/) | [View](./SlidingWindow/FruitsIntoBaskets.cpp) | Medium |||
 1052 | [Grumpy Bookstore Owner](https://leetcode.com/problems/grumpy-bookstore-owner/) | [View](./SlidingWindow/GrumpyBookstoreOwner.cpp) | Medium |||
 1004 | [Max Consecutive Ones III](https://leetcode.com/problems/max-consecutive-ones-iii/) | [View](./SlidingWindow/MaxConsecutiveOnesIII.cpp) | Medium |||
@@ -132,8 +134,9 @@
 1234 | [Replace the Substring for Balanced String](https://leetcode.com/problems/replace-the-substring-for-balanced-string/) | [View](./SlidingWindow/ReplaceTheSubstringForBalancedString.cpp) | Medium |||
 
 ## Tree
-|  #  | Title           |  Solution       | Difficulty    | Similar Questions |
-|-----|---------------- | --------------- |-------------- | ----------------- |
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0102">0102 </span> | [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/) | [View](Tree/102.binary-tree-level-order-traversal.java) | Medium | [Minimum Depth of Binary Tree](#0111), [Average of Levels in Binary Tree](#0637), [Cousins in Binary Tree](#0993)
 #<span id="0653">0653 </span> | [Two Sum IV](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/) | [View](Tree/653.two-sum-iv-input-is-a-bst.java) | Easy | [Two Sum](#0001), [Two Sum II](#0167), [Two Sum III](#0170), [Two Sum BSTs](#1214)
 0938 | [Range Sum of BST](https://leetcode.com/problems/range-sum-of-bst/) | [View](./Tree/RangeSumOfBST.cpp) | Easy |||
 0617 | [Merge Two Binary Trees](https://leetcode.com/problems/merge-two-binary-trees/) | [View](./Tree/MergeTwoBinaryTree.cpp) | Easy |||
