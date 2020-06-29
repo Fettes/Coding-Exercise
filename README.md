@@ -12,13 +12,13 @@
 ## Array 
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |-----|---------------- | --------------- |-------------- | ----------------- |
-#<span id="0001"> 0001 </span> | [Two Sum](https://leetcode.com/problems/two-sum/) | [View](Array/1.two-sum.java) | Easy | [3Sum](#0015), [Two Sum II](#0167), [Two Sum III](#0170), [Subarray Sum Equals K](#0560), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
-#<span id="0015"> 0015 </span> | [3Sum](https://leetcode.com/problems/3sum/) | [View](Array/15.3-sum.java) | Medium | [Two Sum](#0001), [3Sum Closest](#0016), [3Sum Smaller](#0259)
-#<span id="0016"> 0016 </span> | [3Sum Closest](https://leetcode.com/problems/3sum-closest/) | [View](Array/16.3-sum-closest.java) | Medium | [3Sum](#0015), [3Sum Smaller](#0259)
-#<span id="0167"> 0167 </span> | [Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) | [View](Array/167.two-sum-ii-input-array-is-sorted.java) | Easy | [Two Sum](#0001), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
-#<span id="0170"> 0170 </span> | [Two Sum III](https://leetcode.com/problems/two-sum-iii-data-structure-design/) | [View](Array/170.two-sum-iii-data-structure-design.java) | Easy | [Two Sum](#0001), [Unique Word Abbreviation](#0288), [Two Sum IV](#0653)
-#<span id="0259"> 0259 </span> | [3Sum Smaller](https://leetcode.com/problems/3sum-smaller/) | [View](Array/259.3-sum-smaller.java) | Medium | [3Sum](#0015), [3Sum Closest](#0016), [Valid Triangle Number](#0611), [Two Sum Less Than K](#1099)
-#<span id="1099"> 1099 </span> | [Two Sum Less Than K](https://leetcode.com/problems/two-sum-less-than-k/) | [View](Array/1099.two-sum-less-than-k.java) | Easy | [Two Sum](#0001), [Two Sum II](#0167), [3Sum Smaller](#0259), [Subarray Product Less Than K](#0713)
+#<span id="0001">0001 </span> | [Two Sum](https://leetcode.com/problems/two-sum/) | [View](Array/1.two-sum.java) | Easy | [3Sum](#0015), [Two Sum II](#0167), [Two Sum III](#0170), [Subarray Sum Equals K](#0560), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
+#<span id="0015">0015 </span> | [3Sum](https://leetcode.com/problems/3sum/) | [View](Array/15.3-sum.java) | Medium | [Two Sum](#0001), [3Sum Closest](#0016), [3Sum Smaller](#0259)
+#<span id="0016">0016 </span> | [3Sum Closest](https://leetcode.com/problems/3sum-closest/) | [View](Array/16.3-sum-closest.java) | Medium | [3Sum](#0015), [3Sum Smaller](#0259)
+#<span id="0167">0167 </span> | [Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) | [View](Array/167.two-sum-ii-input-array-is-sorted.java) | Easy | [Two Sum](#0001), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
+#<span id="0170">0170 </span> | [Two Sum III](https://leetcode.com/problems/two-sum-iii-data-structure-design/) | [View](Array/170.two-sum-iii-data-structure-design.java) | Easy | [Two Sum](#0001), [Unique Word Abbreviation](#0288), [Two Sum IV](#0653)
+#<span id="0259">0259 </span> | [3Sum Smaller](https://leetcode.com/problems/3sum-smaller/) | [View](Array/259.3-sum-smaller.java) | Medium | [3Sum](#0015), [3Sum Closest](#0016), [Valid Triangle Number](#0611), [Two Sum Less Than K](#1099)
+#<span id="1099">1099 </span> | [Two Sum Less Than K](https://leetcode.com/problems/two-sum-less-than-k/) | [View](Array/1099.two-sum-less-than-k.java) | Easy | [Two Sum](#0001), [Two Sum II](#0167), [3Sum Smaller](#0259), [Subarray Product Less Than K](#0713)
 
 <span id="0442"> 0442 </span> | [Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/) | [View](./Array/FindAllDuplicatesInAnArray.cpp) | Medium |||
 1437 | [Check If All 1's Are at Least Length K Places Away](https://leetcode.com/problems/check-if-all-1s-are-at-least-length-k-places-away/) | [View](./Array/CheckIfAll1sAreAtLeastLengthKPlacesAway.cpp) | Medium |
