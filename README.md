@@ -19,8 +19,9 @@
 #<span id="0170">0170 </span> | [Two Sum III](https://leetcode.com/problems/two-sum-iii-data-structure-design/) | [View](Array/170.two-sum-iii-data-structure-design.java) | Easy | [Two Sum](#0001), [Unique Word Abbreviation](#0288), [Two Sum IV](#0653)
 #<span id="0259">0259 </span> | [3Sum Smaller](https://leetcode.com/problems/3sum-smaller/) | [View](Array/259.3-sum-smaller.java) | Medium | [3Sum](#0015), [3Sum Closest](#0016), [Valid Triangle Number](#0611), [Two Sum Less Than K](#1099)
 #<span id="1099">1099 </span> | [Two Sum Less Than K](https://leetcode.com/problems/two-sum-less-than-k/) | [View](Array/1099.two-sum-less-than-k.java) | Easy | [Two Sum](#0001), [Two Sum II](#0167), [3Sum Smaller](#0259), [Subarray Product Less Than K](#0713)
+#<span id="0713">0713 </span> | [Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | [View](Array/713.subarray-product-less-than-k.java) | Medium | [Maximum Product Subarray](#0152), [Maximum Size Subarray Sum Equals k](#0352), [Subarray Sum Equals K](#0560), [Two Sum Less Than K](#1099)
 
-<span id="0442"> 0442 </span> | [Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/) | [View](./Array/FindAllDuplicatesInAnArray.cpp) | Medium |||
+#<span id="0442"> 0442 </span> | [Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/) | [View](./Array/FindAllDuplicatesInAnArray.cpp) | Medium |||
 1437 | [Check If All 1's Are at Least Length K Places Away](https://leetcode.com/problems/check-if-all-1s-are-at-least-length-k-places-away/) | [View](./Array/CheckIfAll1sAreAtLeastLengthKPlacesAway.cpp) | Medium |
 0706 | [Design Hash Map](https://leetcode.com/problems/design-hashmap/) | [View](./Array/DesignHashMap.cpp) | Easy |||
 0705 | [Design Hash Set](https://leetcode.com/problems/design-hashset/) | [View](./Array/DesignHashSet.cpp) | Easy |||
