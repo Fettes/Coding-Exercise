@@ -49,7 +49,7 @@
 #<span id="0102">0102 </span> | [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/) | [View](BFS/102.binary-tree-level-order-traversal.java) | Medium | [Zigzag Level Traversal](#0103), [Level Order Traversal II](#0107), [ Vertical Order Traversal](#0314), [N-ary Level Order Traversal](#0429)
 #<span id="0126">0126 </span> | [Word Ladder II](https://leetcode.com/problems/word-ladder-ii/) | [View](BFS/126.word-ladder-ii.java) | Hard | [Word Ladder](#0127)
 #<span id="0127">0127 </span> | [Word Ladder](https://leetcode.com/problems/word-ladder/) | [View](BFS/127.word-ladder.java) | Medium | [Word Ladder II](#0126), [Minimum Genetic Mutation](#0433)
-#<span id="0200">0200 </span> | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](BFS/200.number-of-islands.java) | [Surrounded Regions](#0130), [Walls and Gates](#0286), [Number of Islands II](#0305), [Number of Connected Components in an Undirected Graph](#0323), [Number of Distinct Islands](#0694), [Max Area of Island](#0695)
+#<span id="0200">0200 </span> | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](BFS/200.number-of-islands.java) | Medium | [Surrounded Regions](#0130), [Walls and Gates](#0286), [Number of Islands II](#0305), [Number of Connected Components in an Undirected Graph](#0323), [Number of Distinct Islands](#0694), [Max Area of Island](#0695)
 #<span id="0433">0433 </span> | [Minimum Genetic Mutation](https://leetcode.com/problems/minimum-genetic-mutation/) | [View](BFS/433.minimum-genetic-mutation.java) | Medium | [Word Ladder](#0127)
 #<span id="0515">0515 </span> | [Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/) | [View](BFS/515.find-largest-value-in-each-tree-row.java) | Medium | 
 ## Binary Search
@@ -68,6 +68,7 @@
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0022">0022 </span> | [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/) | [View](DFS/22.generate-parentheses.java) | Medium | [Letter Combinations of a Phone Number](#0017), [Valid Parentheses](#0020)
+#<span id="0200">0200 </span> | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](DFS/200.number-of-islands.java) | Medium | [Surrounded Regions](#0130), [Walls and Gates](#0286), [Number of Islands II](#0305), [Number of Connected Components in an Undirected Graph](#0323), [Number of Distinct Islands](#0694), [Max Area of Island](#0695)
 0200 | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](./DFS/NumberOfIslands.cpp) | Medium |||
 1020 | [Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/) | [View](./DFS/NumberOfEnclaves.cpp) | Medium |||
 0130 | [Surrounded Regions](https://leetcode.com/problems/surrounded-regions/) | [View](./DFS/SurroundedRegions.cpp) | Medium |||
