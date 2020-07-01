@@ -43,13 +43,14 @@
 1471 | [The k Strongest Values in an Array](https://leetcode.com/problems/the-k-strongest-values-in-an-array/) | [View](./Array/TheKStrongestValuesInAnArray.cpp) | Medium |||
 0941 | [Valid Mountain Array](https://leetcode.com/problems/valid-mountain-array/) | [View](./Array/ValidMountainArray.cpp) | Medium |||
 
-## BFS (Breadth-first search)
+## BFS (Breadth First Search)
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0102">0102 </span> | [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/) | [View](BFS/102.binary-tree-level-order-traversal.java) | Medium | [Zigzag Level Traversal](#0103), [Level Order Traversal II](#0107), [ Vertical Order Traversal](#0314), [N-ary Level Order Traversal](#0429)
 #<span id="0126">0126 </span> | [Word Ladder II](https://leetcode.com/problems/word-ladder-ii/) | [View](BFS/126.word-ladder-ii.java) | Hard | [Word Ladder](#0127)
 #<span id="0127">0127 </span> | [Word Ladder](https://leetcode.com/problems/word-ladder/) | [View](BFS/127.word-ladder.java) | Medium | [Word Ladder II](#0126), [Minimum Genetic Mutation](#0433)
 #<span id="0200">0200 </span> | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](BFS/200.number-of-islands.java) | Medium | [Surrounded Regions](#0130), [Walls and Gates](#0286), [Number of Islands II](#0305), [Number of Connected Components in an Undirected Graph](#0323), [Number of Distinct Islands](#0694), [Max Area of Island](#0695)
+#<span id="0286">0286 </span> | [Walls and Gates](https://leetcode.com/problems/walls-and-gates/) | [View](BFS/286.walls-and-gates.java) | Medium | [Surrounded Regions](#0130), [Number of Islands](#0200), [Shortest Distance from All Buildings](#0317), [Robot Room Cleaner](#0489), [Rotting Oranges](#0994)
 #<span id="0433">0433 </span> | [Minimum Genetic Mutation](https://leetcode.com/problems/minimum-genetic-mutation/) | [View](BFS/433.minimum-genetic-mutation.java) | Medium | [Word Ladder](#0127)
 #<span id="0515">0515 </span> | [Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/) | [View](BFS/515.find-largest-value-in-each-tree-row.java) | Medium | 
 #<span id="0994">0994 </span> | [Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | [View](BFS/994.rotting-oranges.java) | Medium | [Walls and Gates](#0286)
