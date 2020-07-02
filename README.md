@@ -56,10 +56,17 @@
 #<span id="0994">0994 </span> | [Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | [View](BFS/994.rotting-oranges.java) | Medium | [Walls and Gates](#0286)
 
 ## Binary Search
-|  #  | Title           |  Solution       | Difficulty    |
-|-----|---------------- | --------------- |------------- |
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0033">0033 </span> | [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | [View](Binary%20Seach/33.search-in-rotated-sorted-array.java) | Medium | [Search in Rotated Sorted Array II](#0081), [Find Minimum in Rotated Sorted Array](#0153)
+#<span id="0034">0034 </span> | [Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) | [View](Binary%20Seach/34.find-first-and-last-position-of-element-in-sorted-array.java) | Medium | [First Bad Version](#0278)
+#<span id="0069">0069 </span> | [Sqrt(x)](https://leetcode.com/problems/sqrtx/) | [View](Binary%20Seach/69.sqrt-x.java) | Easy | [Pow(x, n)](#0050), [Valid Perfect Square](#0367)
+#<span id="0074">0074 </span> | [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/) | [View](Binary%20Seach/74.search-a-2-d-matrix.java) | Medium | [Search a 2D Matrix II](#0240)
+#<span id="0153">0153 </span> | [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) | [View](Binary%20Seach/153.find-minimum-in-rotated-sorted-array.java) | Medium | [Search in Rotated Sorted Array](#0033), [Find Minimum in Rotated Sorted Array II](#154)
+#<span id="0154">0154 </span> | [Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/) | [View](Binary%20Seach/154.find-minimum-in-rotated-sorted-array-ii.java) | Hard | [Find Minimum in Rotated Sorted Array](#0153)
+#<span id="0240">0240 </span> | [Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/) | [View](Binary%20Seach/240.search-a-2-d-matrix-ii.java) | Medium | [Search a 2D Matrix](#0074)
+#<span id="0367">0367 </span> | [Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/) | [View](Binary%20Seach/367.valid-perfect-square.java) | Easy | [Sqrt(x)](#0069), [Sum of Square Numbers](#0633)
 0034 | [Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) | [View](./BinarySearch/FindFirstAndLastPositionOfElementInSortedArray.cpp) | Medium |||
-0153 | [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) | [View](./BinarySearch/FindMinimumInRotatedSortedArray.cpp) | Medium |||
 0162 | [Find Peak Element](https://leetcode.com/problems/find-peak-element/) | [View](./BinarySearch/FindPeakElement.cpp) | Medium |||
 0744 | [Find Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/) | [View](./BinarySearch/FindSmallestLetterGreaterThanTarget.cpp) | Easy |||
 0275 | [H-Index II](https://leetcode.com/problems/h-index-ii/) | [View](./BinarySearch/H-IndexII.cpp) | Medium |||
