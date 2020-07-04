@@ -67,6 +67,7 @@
 #<span id="0154">0154 </span> | [Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/) | [View](Binary%20Seach/154.find-minimum-in-rotated-sorted-array-ii.java) | Hard | [Find Minimum in Rotated Sorted Array](#0153)
 #<span id="0240">0240 </span> | [Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/) | [View](Binary%20Seach/240.search-a-2-d-matrix-ii.java) | Medium | [Search a 2D Matrix](#0074)
 #<span id="0367">0367 </span> | [Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/) | [View](Binary%20Seach/367.valid-perfect-square.java) | Easy | [Sqrt(x)](#0069), [Sum of Square Numbers](#0633)
+#<span id="0374">0374 </span> | [Guess Number Higher or Lower](https://leetcode.com/problems/guess-number-higher-or-lower/) | [View](Binary%20Seach/374.guess-number-higher-or-lower.java) | Easy | [First Bad Version](#0278), [Guess Number Higher or Lower II](#0375), [Find K Closest Elements](#0658)
 0162 | [Find Peak Element](https://leetcode.com/problems/find-peak-element/) | [View](./BinarySearch/FindPeakElement.cpp) | Medium |||
 0744 | [Find Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/) | [View](./BinarySearch/FindSmallestLetterGreaterThanTarget.cpp) | Easy |||
 0275 | [H-Index II](https://leetcode.com/problems/h-index-ii/) | [View](./BinarySearch/H-IndexII.cpp) | Medium |||
@@ -105,7 +106,7 @@
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0045">0045 </span> | [Jump Game II](https://leetcode.com/problems/jump-game-ii/) | [View](Greedy%20Algorithm/45.jump-game-ii.java) | Hard | [Jump Game](#0055), [Jump Game III](#1306)
 #<span id="0055">0055 </span> | [Jump Game](https://leetcode.com/problems/jump-game/) | [View](Greedy%20Algorithm/55.jump-game.java) | Medium | [Jump Game II](#0045), [Jump Game III](#1306)
-#<span id="0121">0122 </span> | [Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/) | [View](Greedy%20Algorithm/122.best-time-to-buy-and-sell-stock-ii.java) | Easy | 
+#<span id="0122">0122 </span> | [Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/) | [View](Greedy%20Algorithm/122.best-time-to-buy-and-sell-stock-ii.java) | Easy | 
 #<span id="0455">0455 </span> | [Assign Cookies](https://leetcode.com/problems/assign-cookies/) | [View](Greedy%20Algorithm/455.assign-cookies.java) | Easy |
 #<span id="0860">0860 </span> | [Lemonade Change](https://leetcode.com/problems/lemonade-change/) | [View](Greedy%20Algorithm/860.lemonade-change.java) | Easy |  [Best Time to Buy and Sell Stock](#0121), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309), [Best Time to Buy and Sell Stock with Transaction Fee](#0714)
 #<span id="0874">0874 </span> | [Walking Robot Simulation](https://leetcode.com/problems/walking-robot-simulation/) | [View](Greedy%20Algorithm/874.walking-robot-simulation.java) | Easy | 
