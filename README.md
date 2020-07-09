@@ -13,13 +13,24 @@
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0001">0001 </span> | [Two Sum](https://leetcode.com/problems/two-sum/) | [View](Array/1.two-sum.java) | Easy | [3Sum](#0015), [Two Sum II](#0167), [Two Sum III](#0170), [Subarray Sum Equals K](#0560), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
+#<span id="0004">0004 </span> | [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/) | [View](Array/4.median-of-two-sorted-arrays.java) | Hard | 
 #<span id="0015">0015 </span> | [3Sum](https://leetcode.com/problems/3sum/) | [View](Array/15.3-sum.java) | Medium | [Two Sum](#0001), [3Sum Closest](#0016), [3Sum Smaller](#0259)
 #<span id="0016">0016 </span> | [3Sum Closest](https://leetcode.com/problems/3sum-closest/) | [View](Array/16.3-sum-closest.java) | Medium | [3Sum](#0015), [3Sum Smaller](#0259)
+#<span id="0027">0027 </span> | [Remove Element](https://leetcode.com/problems/remove-element/) | [View](Array/27.remove-element.java) | Easy | [Remove Duplicates from Sorted Array](#0026), [Remove Linked List Elements](#0203), [Move Zeroes](#0283)
+#<span id="0056">0056 </span> | [Merge Intervals](https://leetcode.com/problems/merge-intervals/) | [View](Array/56.merge-intervals.java) | Medium | [Insert Interval](#0057), [Meeting Rooms](#0252), [Meeting Rooms II](#0253), [Teemo Attacking](#0495), [Add Bold Tag in String](#0616), [Range Module](#0715), [Employee Free Time](#0759), [Partition Labels](#0763), [Interval List Intersections](#0986)
+#<span id="0088">0088 </span> | [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/) | [View](Array/88.merge-sorted-array.java) | Easy | [Merge Two Sorted Lists](#0021), [Squares of a Sorted Array](#0977), [Interval List Intersections](#0986)
+#<span id="0121">0121 </span> | [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | [View](Array/121.best-time-to-buy-and-sell-stock.java) | Easy | [Maximum Subarray](#0053), [Best Time to Buy and Sell Stock II](#0122), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309)
 #<span id="0167">0167 </span> | [Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) | [View](Array/167.two-sum-ii-input-array-is-sorted.java) | Easy | [Two Sum](#0001), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
 #<span id="0170">0170 </span> | [Two Sum III](https://leetcode.com/problems/two-sum-iii-data-structure-design/) | [View](Array/170.two-sum-iii-data-structure-design.java) | Easy | [Two Sum](#0001), [Unique Word Abbreviation](#0288), [Two Sum IV](#0653)
-#<span id="0121">0121 </span> | [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | [View](Array/121.best-time-to-buy-and-sell-stock.java) | Easy | [Maximum Subarray](#0053), [Best Time to Buy and Sell Stock II](#0122), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309)
+#<span id="0189">0189 </span> | [Rotate Array](https://leetcode.com/problems/rotate-array/) | [View](Array/189.rotate-array.java) | Easy | [Rotate List](#0061), [Reverse Words in a String II](#0186) 
 #<span id="0259">0259 </span> | [3Sum Smaller](https://leetcode.com/problems/3sum-smaller/) | [View](Array/259.3-sum-smaller.java) | Medium | [3Sum](#0015), [3Sum Closest](#0016), [Valid Triangle Number](#0611), [Two Sum Less Than K](#1099)
+#<span id="0268">0268 </span> | [Missing Number](https://leetcode.com/problems/missing-number/) | [View](Array/268.missing-number.java) | Easy | [First Missing Positive](#0041), [Single Number](#0136), [Find the Duplicate Number](#0287), [Couples Holding Hands](#0765)
+#<span id="0274">0274 </span> | [H-Index](https://leetcode.com/problems/h-index/) | [View](Array/274.h-index.java) | Medium | [H-Index II](#0275)
+#<span id="0283">0283 </span> | [Move Zeroes](https://leetcode.com/problems/move-zeroes/) | [View](Array/283.move-zeroes.java) | Easy | [Remove Element](#0027)
+#<span id="0485">0485 </span> | [Max Consecutive Ones](https://leetcode.com/problems/max-consecutive-ones/) | [View](Array/485.max-consecutive-ones.java) | Easy | [Max Consecutive Ones II](#0487), [Max Consecutive Ones III](#1004), [Consecutive Characters](#1446)
+#<span id="0487">0487 </span> | [Max Consecutive Ones II](https://leetcode.com/problems/max-consecutive-ones-ii/) | [View](Array/487.max-consecutive-ones-ii.java) | Medium | [Max Consecutive Ones](#0485), [Max Consecutive Ones III](#1004)
 #<span id="1099">1099 </span> | [Two Sum Less Than K](https://leetcode.com/problems/two-sum-less-than-k/) | [View](Array/1099.two-sum-less-than-k.java) | Easy | [Two Sum](#0001), [Two Sum II](#0167), [3Sum Smaller](#0259), [Subarray Product Less Than K](#0713)
+
 #<span id="0442"> 0442 </span> | [Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/) | [View](./Array/FindAllDuplicatesInAnArray.cpp) | Medium |||
 1437 | [Check If All 1's Are at Least Length K Places Away](https://leetcode.com/problems/check-if-all-1s-are-at-least-length-k-places-away/) | [View](./Array/CheckIfAll1sAreAtLeastLengthKPlacesAway.cpp) | Medium |
 0706 | [Design Hash Map](https://leetcode.com/problems/design-hashmap/) | [View](./Array/DesignHashMap.cpp) | Easy |||
@@ -70,10 +81,11 @@
 #<span id="0278">0278 </span> | [First Bad Version](https://leetcode.com/problems/first-bad-version/) | [View](Binary%20Seach/278.first-bad-version.java) | Easy | [Find First and Last Position of Element in Sorted Array](#0034), [Search Insert Position](#0035), [Guess Number Higher or Lower](#0374)
 #<span id="0367">0367 </span> | [Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/) | [View](Binary%20Seach/367.valid-perfect-square.java) | Easy | [Sqrt(x)](#0069), [Sum of Square Numbers](#0633)
 #<span id="0374">0374 </span> | [Guess Number Higher or Lower](https://leetcode.com/problems/guess-number-higher-or-lower/) | [View](Binary%20Seach/374.guess-number-higher-or-lower.java) | Easy | [First Bad Version](#0278), [Guess Number Higher or Lower II](#0375), [Find K Closest Elements](#0658)
-0744 | [Find Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/) | [View](./BinarySearch/FindSmallestLetterGreaterThanTarget.cpp) | Easy |||
-0275 | [H-Index II](https://leetcode.com/problems/h-index-ii/) | [View](./BinarySearch/H-IndexII.cpp) | Medium |||
+#<span id="0744">0744 </span> | [Find Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/) | [View](Binary%20Seach/744.find-smallest-letter-greater-than-target.java) | Easy | 
+#<span id="0852">0852 </span> | [Peak Index in a Mountain Array](https://leetcode.com/problems/peak-index-in-a-mountain-array/) | [View](Binary%20Seach/852.peak-index-in-a-mountain-array.java) | Easy | [Find Peak Element](#0162), [Find in Mountain Array](#1095)
+#<span id="1095">1095 </span> | [Find in Mountain Array](https://leetcode.com/problems/find-in-mountain-array/) | [View](Binary%20Seach/1095.find-in-mountain-array.java) | Hard | [Peak Index in a Mountain Array](#0852)
+
 1482 | [Minimum Number of Days to Make m Bouquets](https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/) | [View](./BinarySearch/MinimumNumberOfDaysToMakeMBouquets.cpp) | Medium |||
-0852 | [Peak Index in a Mountain Array](https://leetcode.com/problems/peak-index-in-a-mountain-array/) | [View](./BinarySearch/PeakIndexInAMountainArray.cpp) | Easy |||
 1300 | [Sum of Mutated Array Closest to Target](https://leetcode.com/problems/sum-of-mutated-array-closest-to-target/) | [View](./BinarySearch/SumOfMutatedArrayClosestToTarget.cpp) | Medium |||
 
 ## DFS (Depth First Search)
@@ -109,7 +121,7 @@
 #<span id="0055">0055 </span> | [Jump Game](https://leetcode.com/problems/jump-game/) | [View](Greedy%20Algorithm/55.jump-game.java) | Medium | [Jump Game II](#0045), [Jump Game III](#1306)
 #<span id="0122">0122 </span> | [Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/) | [View](Greedy%20Algorithm/122.best-time-to-buy-and-sell-stock-ii.java) | Easy | 
 #<span id="0455">0455 </span> | [Assign Cookies](https://leetcode.com/problems/assign-cookies/) | [View](Greedy%20Algorithm/455.assign-cookies.java) | Easy |
-#<span id="0860">0860 </span> | [Lemonade Change](https://leetcode.com/problems/lemonade-change/) | [View](Greedy%20Algorithm/860.lemonade-change.java) | Easy |  [Best Time to Buy and Sell Stock](#0121), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309), [Best Time to Buy and Sell Stock with Transaction Fee](#0714)
+#<span id="0860">0860 </span> | [Lemonade Change](https://leetcode.com/problems/lemonade-change/) | [View](Greedy%20Algorithm/860.lemonade-change.java) | Easy | [Best Time to Buy and Sell Stock](#0121), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309), [Best Time to Buy and Sell Stock with Transaction Fee](#0714)
 #<span id="0874">0874 </span> | [Walking Robot Simulation](https://leetcode.com/problems/walking-robot-simulation/) | [View](Greedy%20Algorithm/874.walking-robot-simulation.java) | Easy | 
 
 ## Linked List
@@ -130,6 +142,11 @@
 0092 | [Reverse Linked List II](https://leetcode.com/problems/reverse-linked-list-ii/) | [View](./LinkedList/ReverseLinkedListII.cpp) | Medium |||
 0019 | [Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/) | [View](./LinkedList/RemoveNthNodeFromEndOfList.cpp) | Medium |||
 0024 | [Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/) | [View](./LinkedList/SwapNodeInPairs.cpp) | Medium |||
+
+## Recursion
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0050">0050 </span> | [Pow(x, n)](https://leetcode.com/problems/powx-n/) | [View](Recursion/50.pow-x-n.java) | Medium | [Sqrt(x)](#0069), [Super Pow](#0372)
 
 ## Strings
 |  #  | Title           |  Solution       | Difficulty    |
@@ -153,6 +170,7 @@
 |  #  | Title           |  Solution       | Difficulty    | Similar Questions |
 |-----|---------------- | --------------- |-------------- | ----------------- |
 #<span id="0713">0713 </span> | [Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | [View](Sliding%20Window/713.subarray-product-less-than-k.java) | Medium | [Maximum Product Subarray](#0152), [Maximum Size Subarray Sum Equals k](#0352), [Subarray Sum Equals K](#0560), [Two Sum Less Than K](#1099)
+#<span id="1004">1004 </span> | [Max Consecutive Ones III](https://leetcode.com/problems/max-consecutive-ones-iii/) | [View](Sliding%20Window/1004.max-consecutive-ones-iii.java) | Medium | [Longest Substring with At Most K Distinct Characters](#0340), [Longest Repeating Character Replacement](#0424), [Max Consecutive Ones](#0485), [Max Consecutive Ones II](#0487) 
 0904 | [Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/) | [View](./SlidingWindow/FruitsIntoBaskets.cpp) | Medium |||
 1052 | [Grumpy Bookstore Owner](https://leetcode.com/problems/grumpy-bookstore-owner/) | [View](./SlidingWindow/GrumpyBookstoreOwner.cpp) | Medium |||
 1004 | [Max Consecutive Ones III](https://leetcode.com/problems/max-consecutive-ones-iii/) | [View](./SlidingWindow/MaxConsecutiveOnesIII.cpp) | Medium |||
