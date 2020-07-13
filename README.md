@@ -17,18 +17,26 @@
 #<span id="0015">0015 </span> | [3Sum](https://leetcode.com/problems/3sum/) | [View](Array/15.3-sum.java) | Medium | [Two Sum](#0001), [3Sum Closest](#0016), [3Sum Smaller](#0259)
 #<span id="0016">0016 </span> | [3Sum Closest](https://leetcode.com/problems/3sum-closest/) | [View](Array/16.3-sum-closest.java) | Medium | [3Sum](#0015), [3Sum Smaller](#0259)
 #<span id="0027">0027 </span> | [Remove Element](https://leetcode.com/problems/remove-element/) | [View](Array/27.remove-element.java) | Easy | [Remove Duplicates from Sorted Array](#0026), [Remove Linked List Elements](#0203), [Move Zeroes](#0283)
+#<span id="0031">0031 </span> | [Next Permutation](https://leetcode.com/problems/next-permutation/) | [View](Array/31.next-permutation.java) | Medium | [Permutations](#0046), [Permutations II](#0047), [Permutation Sequence](#0060), [Palindrome Permutation II](#0267)
+#<span id="0053">0053 </span> | [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) | [View](Array/53.maximum-subarray.java) | Easy | [Best Time to Buy and Sell Stock](#0121), [Maximum Product Subarray](#0152), [Degree of an Array](#0697), [Longest Turbulent Subarray](#0978) 
 #<span id="0056">0056 </span> | [Merge Intervals](https://leetcode.com/problems/merge-intervals/) | [View](Array/56.merge-intervals.java) | Medium | [Insert Interval](#0057), [Meeting Rooms](#0252), [Meeting Rooms II](#0253), [Teemo Attacking](#0495), [Add Bold Tag in String](#0616), [Range Module](#0715), [Employee Free Time](#0759), [Partition Labels](#0763), [Interval List Intersections](#0986)
 #<span id="0088">0088 </span> | [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/) | [View](Array/88.merge-sorted-array.java) | Easy | [Merge Two Sorted Lists](#0021), [Squares of a Sorted Array](#0977), [Interval List Intersections](#0986)
 #<span id="0121">0121 </span> | [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | [View](Array/121.best-time-to-buy-and-sell-stock.java) | Easy | [Maximum Subarray](#0053), [Best Time to Buy and Sell Stock II](#0122), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309)
+#<span id="0152">0152 </span> | [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/) | [View](Array/152.maximum-product-subarray.java) | Medium | [Maximum Subarray](#0053), [House Robber](#0198), [Product of Array Except Self](#0238), [Maximum Product of Three Numbers](#0628), [Subarray Product Less Than K](#0713)
 #<span id="0167">0167 </span> | [Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) | [View](Array/167.two-sum-ii-input-array-is-sorted.java) | Easy | [Two Sum](#0001), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
 #<span id="0170">0170 </span> | [Two Sum III](https://leetcode.com/problems/two-sum-iii-data-structure-design/) | [View](Array/170.two-sum-iii-data-structure-design.java) | Easy | [Two Sum](#0001), [Unique Word Abbreviation](#0288), [Two Sum IV](#0653)
 #<span id="0189">0189 </span> | [Rotate Array](https://leetcode.com/problems/rotate-array/) | [View](Array/189.rotate-array.java) | Easy | [Rotate List](#0061), [Reverse Words in a String II](#0186) 
+#<span id="0238">0238 </span> | [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | [View](Array/238.product-of-array-except-self.java) | Medium | [Trapping Rain Water](#0042), [Maximum Product Subarray](#0152), [Paint House II](#0265)
 #<span id="0259">0259 </span> | [3Sum Smaller](https://leetcode.com/problems/3sum-smaller/) | [View](Array/259.3-sum-smaller.java) | Medium | [3Sum](#0015), [3Sum Closest](#0016), [Valid Triangle Number](#0611), [Two Sum Less Than K](#1099)
 #<span id="0268">0268 </span> | [Missing Number](https://leetcode.com/problems/missing-number/) | [View](Array/268.missing-number.java) | Easy | [First Missing Positive](#0041), [Single Number](#0136), [Find the Duplicate Number](#0287), [Couples Holding Hands](#0765)
 #<span id="0274">0274 </span> | [H-Index](https://leetcode.com/problems/h-index/) | [View](Array/274.h-index.java) | Medium | [H-Index II](#0275)
 #<span id="0283">0283 </span> | [Move Zeroes](https://leetcode.com/problems/move-zeroes/) | [View](Array/283.move-zeroes.java) | Easy | [Remove Element](#0027)
+#<span id="0380">0380 </span> | [Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/) | [View](Array/380.insert-delete-get-random-o-1.java) | Medium | [Insert Delete GetRandom O(1) - Duplicates allowed](#0381)
+#<span id="0381">0381 </span> | [Insert Delete GetRandom O(1) - Duplicates allowed](https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/) | [View](Array/381.insert-delete-get-random-o-1-duplicates-allowed.java) | Hard | [Insert Delete GetRandom O(1)](#0380)
 #<span id="0485">0485 </span> | [Max Consecutive Ones](https://leetcode.com/problems/max-consecutive-ones/) | [View](Array/485.max-consecutive-ones.java) | Easy | [Max Consecutive Ones II](#0487), [Max Consecutive Ones III](#1004), [Consecutive Characters](#1446)
 #<span id="0487">0487 </span> | [Max Consecutive Ones II](https://leetcode.com/problems/max-consecutive-ones-ii/) | [View](Array/487.max-consecutive-ones-ii.java) | Medium | [Max Consecutive Ones](#0485), [Max Consecutive Ones III](#1004)
+#<span id="0560">0560 </span> | [Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) | [View](Array/560.subarray-sum-equals-k.java) | Medium | [Two Sum](#0001), [Continuous Subarray Sum](#0523), [Subarray Product Less Than K](#0713), [Find Pivot Index](#0724), [Subarray Sums Divisible by K](#0974)
+#<span id="0628">0628 </span> | [Maximum Product of Three Numbers](https://leetcode.com/problems/maximum-product-of-three-numbers/) | [View](Array/628.maximum-product-of-three-numbers.java) | [Maximum Product Subarray](#0152)
 #<span id="1099">1099 </span> | [Two Sum Less Than K](https://leetcode.com/problems/two-sum-less-than-k/) | [View](Array/1099.two-sum-less-than-k.java) | Easy | [Two Sum](#0001), [Two Sum II](#0167), [3Sum Smaller](#0259), [Subarray Product Less Than K](#0713)
 
 #<span id="0442"> 0442 </span> | [Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/) | [View](./Array/FindAllDuplicatesInAnArray.cpp) | Medium |||
@@ -45,11 +53,9 @@
 0496 | [Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/) | [View](./Array/NextGreaterElementI.cpp) | Easy |||
 0503 | [Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/) | [View](./Array/NextGreaterElementII.cpp) | Medium |||
 0556 | [Next Greater Element III](https://leetcode.com/problems/next-greater-element-iii/) | [View](./Array/NextGreaterElementIII.cpp) | Medium |||
-0238 | [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | [View](./Array/ProductOfArrayExceptSelf.cpp) | Medium |||
 1338 | [Reduce Array Size to The Half](https://leetcode.com/problems/reduce-array-size-to-the-half/) | [View](./Array/ReduceArraySizeToTheHalf.cpp) | Medium |||
 0905 | [Sort Array By Parity](https://leetcode.com/problems/sort-array-by-parity/) | [View](./Array/SortArrayByParityI.cpp) | Easy |||
 0922 | [Sort Array By Parity II](https://leetcode.com/problems/sort-array-by-parity-ii/) | [View](./Array/SortArrayByParityII.cpp) | Easy |||
-0713 | [Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | [View](./Array/SubarrayProductLessThank.cpp) | Medium |||
 1476 | [Subrectangle Queries](https://leetcode.com/problems/subrectangle-queries/) | [View](./Array/SubrectangleQueries.cpp) | Medium |||
 1471 | [The k Strongest Values in an Array](https://leetcode.com/problems/the-k-strongest-values-in-an-array/) | [View](./Array/TheKStrongestValuesInAnArray.cpp) | Medium |||
 0941 | [Valid Mountain Array](https://leetcode.com/problems/valid-mountain-array/) | [View](./Array/ValidMountainArray.cpp) | Medium |||
@@ -97,6 +103,11 @@
 1020 | [Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/) | [View](./DFS/NumberOfEnclaves.cpp) | Medium |||
 0130 | [Surrounded Regions](https://leetcode.com/problems/surrounded-regions/) | [View](./DFS/SurroundedRegions.cpp) | Medium |||
 
+## Divide And Conquer 
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0315">0315 </span> | [Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/) | [View](Divide%20And%20Conquer/315.count-of-smaller-numbers-after-self.java) | Hard | [Count of Range Sum](#0327), [Queue Reconstruction by Height](#0406), [Reverse Pairs](#0493), [How Many Numbers Are Smaller Than the Current Number](#1365)
+#<span id="0493">0493 </span> | 
 ## DP (Dynamic Programming)
 |  #  | Title           |  Solution       | Difficulty    |
 |-----|---------------- | --------------- |------------- |
