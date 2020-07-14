@@ -115,8 +115,8 @@
 #<span id="0070">0070 </span> | [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/) | [View](DP/70.climbing-stairs.java) | Easy | [Fibonacci Number](#0509), [Min Cost Climbing Stairs](#0746), [N-th Tribonacci Number](#1137)
 #<span id="0120">0120 </span> | [Triangle](https://leetcode.com/problems/triangle/) | [View](DP/120.triangle.java) | Medium |
 #<span id="0509">0509 </span> | [Fibonacci Number](https://leetcode.com/problems/fibonacci-number/) | [View](DP/509.fibonacci-number.java) | Easy | [Climbing Stairs](#0070), [Split Array into Fibonacci Sequence](#0842), [Length of Longest Fibonacci Subsequence](#0873), [N-th Tribonacci Number](#1137)
+#<span id="0746">0746 </span> | [Min Cost Climbing Stairs](https://leetcode.com/problems/min-cost-climbing-stairs/) | [View](DP/746.min-cost-climbing-stairs.java) | Easy | [Climbing Stairs](#0070)
 #<span id="1143">1143 </span> | [Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/) | [View]
-
 0322 | [Coin Change](https://leetcode.com/problems/coin-change/) | [View](./DP/CoinChange.cpp) | Medium |||
 0518 | [Coin Change 2](https://leetcode.com/problems/coin-change-2/) | [View](./DP/CoinChange2.cpp) | Medium |||
 0338 | [Counting Bits](https://leetcode.com/problems/counting-bits/) | [View](./DP/CountingBits.cpp) | Medium |||
