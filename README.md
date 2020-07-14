@@ -112,7 +112,8 @@
 ## DP (Dynamic Programming)
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
-#<span id="0120">0120 </span> | [Triangle](https://leetcode.com/problems/triangle/) | [View](DP/120.triangle.java) | Medium | 
+#<span id="0070">0070 </span> | [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/) | [View](DP/70.climbing-stairs.java) | Easy | [Fibonacci Number](#0509), [Min Cost Climbing Stairs](#0746), [N-th Tribonacci Number](#1137)
+#<span id="0120">0120 </span> | [Triangle](https://leetcode.com/problems/triangle/) | [View](DP/120.triangle.java) | Medium |
 #<span id="0509">0509 </span> | [Fibonacci Number](https://leetcode.com/problems/fibonacci-number/) | [View](DP/509.fibonacci-number.java) | Easy | [Climbing Stairs](#0070), [Split Array into Fibonacci Sequence](#0842), [Length of Longest Fibonacci Subsequence](#0873), [N-th Tribonacci Number](#1137)
 #<span id="1143">1143 </span> | [Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/) | [View]
 
