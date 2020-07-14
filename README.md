@@ -108,9 +108,14 @@
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0315">0315 </span> | [Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/) | [View](Divide%20And%20Conquer/315.count-of-smaller-numbers-after-self.java) | Hard | [Count of Range Sum](#0327), [Queue Reconstruction by Height](#0406), [Reverse Pairs](#0493), [How Many Numbers Are Smaller Than the Current Number](#1365)
 #<span id="0493">0493 </span> | 
+
 ## DP (Dynamic Programming)
-|  #  | Title           |  Solution       | Difficulty    |
-|-----|---------------- | --------------- |------------- |
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0120">0120 </span> | [Triangle](https://leetcode.com/problems/triangle/) | [View](DP/120.triangle.java) | Medium | 
+#<span id="0509">0509 </span> | [Fibonacci Number](https://leetcode.com/problems/fibonacci-number/) | [View](DP/509.fibonacci-number.java) | Easy | [Climbing Stairs](#0070), [Split Array into Fibonacci Sequence](#0842), [Length of Longest Fibonacci Subsequence](#0873), [N-th Tribonacci Number](#1137)
+#<span id="1143">1143 </span> | [Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/) | [View]
+
 0322 | [Coin Change](https://leetcode.com/problems/coin-change/) | [View](./DP/CoinChange.cpp) | Medium |||
 0518 | [Coin Change 2](https://leetcode.com/problems/coin-change-2/) | [View](./DP/CoinChange2.cpp) | Medium |||
 0338 | [Counting Bits](https://leetcode.com/problems/counting-bits/) | [View](./DP/CountingBits.cpp) | Medium |||
