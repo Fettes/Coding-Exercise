@@ -11,24 +11,23 @@ class Solution {
         if (nums.length == 0 || nums == null) {
             return 0;
         }
-
         int max = nums[0];
         int min = nums[0];
         int result = nums[0];
 
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] >= 0) {
-                max = Math.max(nums[i], nums[i] * max);
-                min = Math.min(nums[i], nums[i] * min);
+                max = Math.max(nums[i], max * nums[i]);
+                min = Math.min(nums[i], min * nums[i]);
             } else {
                 //when multiple with a minus number, the minimum is the maximum absolute number
                 int temp = max;
-                max = Math.max(nums[i], nums[i] * min);
-                min = Math.min(nums[i], nums[i] * temp);
+                max = Math.max(nums[i], min * nums[i]);
+                min = Math.min(nums[i], temp * nums[i]);
             }
-            result = Math.max(max, result);
+            result = Math.max(result, max);
         }
-        return result;
+        return result;  
     }
 }
 // @lc code=end

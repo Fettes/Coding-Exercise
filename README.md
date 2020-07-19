@@ -18,18 +18,16 @@
 #<span id="0016">0016 </span> | [3Sum Closest](https://leetcode.com/problems/3sum-closest/) | [View](Array/16.3-sum-closest.java) | Medium | [3Sum](#0015), [3Sum Smaller](#0259)
 #<span id="0027">0027 </span> | [Remove Element](https://leetcode.com/problems/remove-element/) | [View](Array/27.remove-element.java) | Easy | [Remove Duplicates from Sorted Array](#0026), [Remove Linked List Elements](#0203), [Move Zeroes](#0283)
 #<span id="0031">0031 </span> | [Next Permutation](https://leetcode.com/problems/next-permutation/) | [View](Array/31.next-permutation.java) | Medium | [Permutations](#0046), [Permutations II](#0047), [Permutation Sequence](#0060), [Palindrome Permutation II](#0267)
-#<span id="0053">0053 </span> | [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) | [View](Array/53.maximum-subarray.java) | Easy | [Best Time to Buy and Sell Stock](#0121), [Maximum Product Subarray](#0152), [Degree of an Array](#0697), [Longest Turbulent Subarray](#0978) 
 #<span id="0056">0056 </span> | [Merge Intervals](https://leetcode.com/problems/merge-intervals/) | [View](Array/56.merge-intervals.java) | Medium | [Insert Interval](#0057), [Meeting Rooms](#0252), [Meeting Rooms II](#0253), [Teemo Attacking](#0495), [Add Bold Tag in String](#0616), [Range Module](#0715), [Employee Free Time](#0759), [Partition Labels](#0763), [Interval List Intersections](#0986)
 #<span id="0088">0088 </span> | [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/) | [View](Array/88.merge-sorted-array.java) | Easy | [Merge Two Sorted Lists](#0021), [Squares of a Sorted Array](#0977), [Interval List Intersections](#0986)
 #<span id="0121">0121 </span> | [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | [View](Array/121.best-time-to-buy-and-sell-stock.java) | Easy | [Maximum Subarray](#0053), [Best Time to Buy and Sell Stock II](#0122), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309)
-#<span id="0152">0152 </span> | [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/) | [View](Array/152.maximum-product-subarray.java) | Medium | [Maximum Subarray](#0053), [House Robber](#0198), [Product of Array Except Self](#0238), [Maximum Product of Three Numbers](#0628), [Subarray Product Less Than K](#0713)
 #<span id="0167">0167 </span> | [Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) | [View](Array/167.two-sum-ii-input-array-is-sorted.java) | Easy | [Two Sum](#0001), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
 #<span id="0170">0170 </span> | [Two Sum III](https://leetcode.com/problems/two-sum-iii-data-structure-design/) | [View](Array/170.two-sum-iii-data-structure-design.java) | Easy | [Two Sum](#0001), [Unique Word Abbreviation](#0288), [Two Sum IV](#0653)
 #<span id="0189">0189 </span> | [Rotate Array](https://leetcode.com/problems/rotate-array/) | [View](Array/189.rotate-array.java) | Easy | [Rotate List](#0061), [Reverse Words in a String II](#0186) 
 #<span id="0238">0238 </span> | [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | [View](Array/238.product-of-array-except-self.java) | Medium | [Trapping Rain Water](#0042), [Maximum Product Subarray](#0152), [Paint House II](#0265)
 #<span id="0259">0259 </span> | [3Sum Smaller](https://leetcode.com/problems/3sum-smaller/) | [View](Array/259.3-sum-smaller.java) | Medium | [3Sum](#0015), [3Sum Closest](#0016), [Valid Triangle Number](#0611), [Two Sum Less Than K](#1099)
 #<span id="0268">0268 </span> | [Missing Number](https://leetcode.com/problems/missing-number/) | [View](Array/268.missing-number.java) | Easy | [First Missing Positive](#0041), [Single Number](#0136), [Find the Duplicate Number](#0287), [Couples Holding Hands](#0765)
-#<span id="0274">0274 </span> | [H-Index](https://leetcode.com/problems/h-index/) | [View](Array/274.h-index.java) | Medium | [H-Index II](#0275)
+#<span id="0274">0274 </span> | [H-z](https://leetcode.com/problems/h-index/) | [View](Array/274.h-index.java) | Medium | [H-Index II](#0275)
 #<span id="0283">0283 </span> | [Move Zeroes](https://leetcode.com/problems/move-zeroes/) | [View](Array/283.move-zeroes.java) | Easy | [Remove Element](#0027)
 #<span id="0380">0380 </span> | [Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/) | [View](Array/380.insert-delete-get-random-o-1.java) | Medium | [Insert Delete GetRandom O(1) - Duplicates allowed](#0381)
 #<span id="0381">0381 </span> | [Insert Delete GetRandom O(1) - Duplicates allowed](https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/) | [View](Array/381.insert-delete-get-random-o-1-duplicates-allowed.java) | Hard | [Insert Delete GetRandom O(1)](#0380)
@@ -112,11 +110,20 @@
 ## DP (Dynamic Programming)
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0053">0053 </span> | [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) | [View](DP/53.maximum-subarray.java) | Easy | [Best Time to Buy and Sell Stock](#0121), [Maximum Product Subarray](#0152), [Degree of an Array](#0697), [Longest Turbulent Subarray](#0978) 
+#<span id="0062">0062 </span> | [Unique Paths](https://leetcode.com/problems/unique-paths/) | [View](DP/62.unique-paths.java) | Medium | [Unique Paths II](#0063), [Minimum Path Sum](#0064), [Dungeon Game](#0174)
+#<span id="0063">0063 </span> | [Unique Paths II](https://leetcode.com/problems/unique-paths-ii/) | [View](DP/63.unique-paths-ii.java) | Medium | [Unique Paths](#0062), [Unique Paths III](#0980)
+#<span id="0064">0064 </span> | [Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/) | [View](DP/64.minimum-path-sum.java) | Medium | [Unique Paths](#0062), [Dungeon Game](#0174), [Cherry Pickup](#0714)
 #<span id="0070">0070 </span> | [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/) | [View](DP/70.climbing-stairs.java) | Easy | [Fibonacci Number](#0509), [Min Cost Climbing Stairs](#0746), [N-th Tribonacci Number](#1137)
+#<span id="0091">0091 </span> | [Decode Ways](https://leetcode.com/problems/decode-ways/) | [View](DP/91.decode-ways.java) | Medium | [Decode Ways II](#0639)
 #<span id="0120">0120 </span> | [Triangle](https://leetcode.com/problems/triangle/) | [View](DP/120.triangle.java) | Medium |
+#<span id="0152">0152 </span> | [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/) | [View](DP/152.maximum-product-subarray.java) | Medium | [Maximum Subarray](#0053), [House Robber](#0198), [Product of Array Except Self](#0238), [Maximum Product of Three Numbers](#0628), [Subarray Product Less Than K](#0713)
+#<span id="0221">0221 </span> | [Maximal Square](https://leetcode.com/problems/maximal-square/) | [View](DP/221.maximal-square.java) | Medium | [Maximal Rectangle](#0085), [Largest Plus Sign](#0764)
+#<span id="0322">0322 </span> | [Coin Change](https://leetcode.com/problems/coin-change/) | [View](DP/322.coin-change.java) | Medium | [Minimum Cost For Tickets](#0983)
 #<span id="0509">0509 </span> | [Fibonacci Number](https://leetcode.com/problems/fibonacci-number/) | [View](DP/509.fibonacci-number.java) | Easy | [Climbing Stairs](#0070), [Split Array into Fibonacci Sequence](#0842), [Length of Longest Fibonacci Subsequence](#0873), [N-th Tribonacci Number](#1137)
+#<span id="0647">0647 </span> | [Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/) | [View](DP/647.palindromic-substrings.java) | Medium | [Longest Palindromic Substring](#0005), [Longest Palindromic Subsequence](#0516)
 #<span id="0746">0746 </span> | [Min Cost Climbing Stairs](https://leetcode.com/problems/min-cost-climbing-stairs/) | [View](DP/746.min-cost-climbing-stairs.java) | Easy | [Climbing Stairs](#0070)
-#<span id="1143">1143 </span> | [Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/) | [View]
+#<span id="1143">1143 </span> | [Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/) | [View](DP/1143.longest-common-subsequence.java) | Medium | [Longest Palindromic Subsequence](#0516), [Delete Operation for Two Strings](#0583), [Shortest Common Supersequence](#1092)
 0322 | [Coin Change](https://leetcode.com/problems/coin-change/) | [View](./DP/CoinChange.cpp) | Medium |||
 0518 | [Coin Change 2](https://leetcode.com/problems/coin-change-2/) | [View](./DP/CoinChange2.cpp) | Medium |||
 0338 | [Counting Bits](https://leetcode.com/problems/counting-bits/) | [View](./DP/CountingBits.cpp) | Medium |||
@@ -140,6 +147,11 @@
 #<span id="0455">0455 </span> | [Assign Cookies](https://leetcode.com/problems/assign-cookies/) | [View](Greedy%20Algorithm/455.assign-cookies.java) | Easy |
 #<span id="0860">0860 </span> | [Lemonade Change](https://leetcode.com/problems/lemonade-change/) | [View](Greedy%20Algorithm/860.lemonade-change.java) | Easy | [Best Time to Buy and Sell Stock](#0121), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309), [Best Time to Buy and Sell Stock with Transaction Fee](#0714)
 #<span id="0874">0874 </span> | [Walking Robot Simulation](https://leetcode.com/problems/walking-robot-simulation/) | [View](Greedy%20Algorithm/874.walking-robot-simulation.java) | Easy | 
+
+## Heap
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0621">0621 </span> | [Task Scheduler](https://leetcode.com/problems/task-scheduler/) | [View](Heap/621.task-scheduler.java) |  Medium | [Rearrange String k Distance Apart](#0358), [Reorganize String](#0767)
 
 ## Linked List
 |  #  | Title           |  Solution       | Difficulty    |
