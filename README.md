@@ -20,7 +20,6 @@
 #<span id="0031">0031 </span> | [Next Permutation](https://leetcode.com/problems/next-permutation/) | [View](Array/31.next-permutation.java) | Medium | [Permutations](#0046), [Permutations II](#0047), [Permutation Sequence](#0060), [Palindrome Permutation II](#0267)
 #<span id="0056">0056 </span> | [Merge Intervals](https://leetcode.com/problems/merge-intervals/) | [View](Array/56.merge-intervals.java) | Medium | [Insert Interval](#0057), [Meeting Rooms](#0252), [Meeting Rooms II](#0253), [Teemo Attacking](#0495), [Add Bold Tag in String](#0616), [Range Module](#0715), [Employee Free Time](#0759), [Partition Labels](#0763), [Interval List Intersections](#0986)
 #<span id="0088">0088 </span> | [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/) | [View](Array/88.merge-sorted-array.java) | Easy | [Merge Two Sorted Lists](#0021), [Squares of a Sorted Array](#0977), [Interval List Intersections](#0986)
-#<span id="0121">0121 </span> | [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | [View](Array/121.best-time-to-buy-and-sell-stock.java) | Easy | [Maximum Subarray](#0053), [Best Time to Buy and Sell Stock II](#0122), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309)
 #<span id="0167">0167 </span> | [Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) | [View](Array/167.two-sum-ii-input-array-is-sorted.java) | Easy | [Two Sum](#0001), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
 #<span id="0170">0170 </span> | [Two Sum III](https://leetcode.com/problems/two-sum-iii-data-structure-design/) | [View](Array/170.two-sum-iii-data-structure-design.java) | Easy | [Two Sum](#0001), [Unique Word Abbreviation](#0288), [Two Sum IV](#0653)
 #<span id="0189">0189 </span> | [Rotate Array](https://leetcode.com/problems/rotate-array/) | [View](Array/189.rotate-array.java) | Easy | [Rotate List](#0061), [Reverse Words in a String II](#0186) 
@@ -110,14 +109,20 @@
 ## DP (Dynamic Programming)
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0032">0032 </span> | [Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) | [View](DP/32.longest-valid-parentheses.java) | Hard | [Valid Parentheses](#0020) 
 #<span id="0053">0053 </span> | [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) | [View](DP/53.maximum-subarray.java) | Easy | [Best Time to Buy and Sell Stock](#0121), [Maximum Product Subarray](#0152), [Degree of an Array](#0697), [Longest Turbulent Subarray](#0978) 
 #<span id="0062">0062 </span> | [Unique Paths](https://leetcode.com/problems/unique-paths/) | [View](DP/62.unique-paths.java) | Medium | [Unique Paths II](#0063), [Minimum Path Sum](#0064), [Dungeon Game](#0174)
 #<span id="0063">0063 </span> | [Unique Paths II](https://leetcode.com/problems/unique-paths-ii/) | [View](DP/63.unique-paths-ii.java) | Medium | [Unique Paths](#0062), [Unique Paths III](#0980)
 #<span id="0064">0064 </span> | [Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/) | [View](DP/64.minimum-path-sum.java) | Medium | [Unique Paths](#0062), [Dungeon Game](#0174), [Cherry Pickup](#0714)
 #<span id="0070">0070 </span> | [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/) | [View](DP/70.climbing-stairs.java) | Easy | [Fibonacci Number](#0509), [Min Cost Climbing Stairs](#0746), [N-th Tribonacci Number](#1137)
+#<span id="0072">0072 </span> | [Edit Distance](https://leetcode.com/problems/edit-distance/) | [View](DP/72.edit-distance.java) | [One Edit Distance](#0161), [Delete Operation for Two Strings](#0583), [Minimum ASCII Delete Sum for Two Strings](#0712), [Uncrossed Lines](#1035)
 #<span id="0091">0091 </span> | [Decode Ways](https://leetcode.com/problems/decode-ways/) | [View](DP/91.decode-ways.java) | Medium | [Decode Ways II](#0639)
 #<span id="0120">0120 </span> | [Triangle](https://leetcode.com/problems/triangle/) | [View](DP/120.triangle.java) | Medium |
+#<span id="0121">0121 </span> | [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | [View](DP/121.best-time-to-buy-and-sell-stock.java) | Easy | [Maximum Subarray](#0053), [Best Time to Buy and Sell Stock II](#0122), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309)
+#<span id="0122">0122 </span> | [Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/) | [View](DP/122.best-time-to-buy-and-sell-stock-ii.java) | Easy | 
 #<span id="0152">0152 </span> | [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/) | [View](DP/152.maximum-product-subarray.java) | Medium | [Maximum Subarray](#0053), [House Robber](#0198), [Product of Array Except Self](#0238), [Maximum Product of Three Numbers](#0628), [Subarray Product Less Than K](#0713)
+#<span id="0198">0198 </span> | [House Robber](https://leetcode.com/problems/house-robber/) | [View](DP/198.house-robber.java) | Easy | [Maximum Product Subarray](#0152), [House Robber II](#0213), [Paint House](#0256), [Paint Fence](#0276), [House Robber III](#0337), [Non-negative Integers without Consecutive Ones](#0600), [Coin Path](#0656), [Delete and Earn](#0740)
+#<span id="0213">0213 </span> | [House Robber II](https://leetcode.com/problems/house-robber-ii/) | [View](DP/213.house-robber-ii.java) | Medium | [House Robber](#0198), [Paint House](#0256), [Paint Fence](#0276), [House Robber III](#0337), [Non-negative Integers without Consecutive Ones](#0600), [Coin Path](#0656)
 #<span id="0221">0221 </span> | [Maximal Square](https://leetcode.com/problems/maximal-square/) | [View](DP/221.maximal-square.java) | Medium | [Maximal Rectangle](#0085), [Largest Plus Sign](#0764)
 #<span id="0322">0322 </span> | [Coin Change](https://leetcode.com/problems/coin-change/) | [View](DP/322.coin-change.java) | Medium | [Minimum Cost For Tickets](#0983)
 #<span id="0509">0509 </span> | [Fibonacci Number](https://leetcode.com/problems/fibonacci-number/) | [View](DP/509.fibonacci-number.java) | Easy | [Climbing Stairs](#0070), [Split Array into Fibonacci Sequence](#0842), [Length of Longest Fibonacci Subsequence](#0873), [N-th Tribonacci Number](#1137)
@@ -143,6 +148,7 @@
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0045">0045 </span> | [Jump Game II](https://leetcode.com/problems/jump-game-ii/) | [View](Greedy%20Algorithm/45.jump-game-ii.java) | Hard | [Jump Game](#0055), [Jump Game III](#1306)
 #<span id="0055">0055 </span> | [Jump Game](https://leetcode.com/problems/jump-game/) | [View](Greedy%20Algorithm/55.jump-game.java) | Medium | [Jump Game II](#0045), [Jump Game III](#1306)
+#<span id="0121">0121 </span> | [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | [View](Greedy%20Algorithm/121.best-time-to-buy-and-sell-stock.java) | Easy | [Maximum Subarray](#0053), [Best Time to Buy and Sell Stock II](#0122), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309)
 #<span id="0122">0122 </span> | [Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/) | [View](Greedy%20Algorithm/122.best-time-to-buy-and-sell-stock-ii.java) | Easy | 
 #<span id="0455">0455 </span> | [Assign Cookies](https://leetcode.com/problems/assign-cookies/) | [View](Greedy%20Algorithm/455.assign-cookies.java) | Easy |
 #<span id="0860">0860 </span> | [Lemonade Change](https://leetcode.com/problems/lemonade-change/) | [View](Greedy%20Algorithm/860.lemonade-change.java) | Easy | [Best Time to Buy and Sell Stock](#0121), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309), [Best Time to Buy and Sell Stock with Transaction Fee](#0714)
@@ -188,8 +194,9 @@
 1487 | [Making File Names Unique](https://leetcode.com/problems/making-file-names-unique/) | [View](./Strings/MakingFileNamesUnique.cpp) | Medium |||
 
 ## Stack
-|  #  | Title           |  Solution       | Difficulty    |
-|-----|---------------- | --------------- |------------- |
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0032">0032 </span> | [Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) | [View](Stack/32.longest-valid-parentheses%20copy.java) | Hard | [Valid Parentheses](#0020) 
 1381 | [Design a Stack With Increment Operation](https://leetcode.com/problems/design-a-stack-with-increment-operation/) | [View](./Stack/DesignAStackWithIncrementOperation.cpp) | Medium |||
 0146 | [LRU Cache](https://leetcode.com/problems/lru-cache/) | [View](./Stack/LRUCache.cpp) | Medium |||
 0232 | [Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/) | [View](./Stack/ImplementQueueUsingStacks.cpp) | Easy |||
