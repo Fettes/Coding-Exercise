@@ -246,6 +246,11 @@
 0230 | [Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/) | [View](./Tree/KthSmallestElementInABST.cpp) | Medium |||
 0096 | [Unique Binary Search Trees](https://leetcode.com/problems/unique-binary-search-trees/) | [View](./Tree/UniqueBinarySearchTrees.cpp) | Medium |||
 
+## Trie
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+<span id="0208">0208 </span> | [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/) | [View](Trie/208.implement-trie-prefix-tree.java) | [Add and Search Word - Data structure design](#0211), [Design Search Autocomplete System](#0642), [Replace Words](#0648), [Implement Magic Dictionary](#0676)
+
 ## Union Find
 |  #  | Title           |  Solution       | Difficulty    |
 |-----|---------------- | --------------- |------------- |
