@@ -249,7 +249,8 @@
 ## Trie
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
-<span id="0208">0208 </span> | [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/) | [View](Trie/208.implement-trie-prefix-tree.java) | [Add and Search Word - Data structure design](#0211), [Design Search Autocomplete System](#0642), [Replace Words](#0648), [Implement Magic Dictionary](#0676)
+#<span id="0208">0208 </span> | [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/) | [View](Trie/208.implement-trie-prefix-tree.java) | Medium | [Add and Search Word - Data structure design](#0211), [Design Search Autocomplete System](#0642), [Replace Words](#0648), [Implement Magic Dictionary](#0676)
+#<span id="0212">0212 </span> | [Word Search II](https://leetcode.com/problems/word-search-ii/) | [View](Trie/212.word-search-ii.java) | Hard | [Word Search](#0079), [Unique Paths III](#0980)
 
 ## Union Find
 |  #  | Title           |  Solution       | Difficulty    |
