@@ -253,9 +253,11 @@
 #<span id="0212">0212 </span> | [Word Search II](https://leetcode.com/problems/word-search-ii/) | [View](Trie/212.word-search-ii.java) | Hard | [Word Search](#0079), [Unique Paths III](#0980)
 
 ## Union Find
-|  #  | Title           |  Solution       | Difficulty    |
-|-----|---------------- | --------------- |------------- |
-0547 | [Friend Circles](https://leetcode.com/problems/friend-circles/) | [View](./UnionFind/FriendCircles.cpp) | Medium |||
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0130">0130 </span> | [Surrounded Regions](https://leetcode.com/problems/surrounded-regions/) | [View](Union%20Find/130.surrounded-regions.java) | Medium | [Number of Islands](#0200), [Walls and Gates](#0286)
+#<span id="0200">0200 </span> | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](Union%20Find/200.number-of-islands.java) | Medium | [Surrounded Regions](#0130), [Walls and Gates](#0286), [Number of Islands II](#0305), [Number of Connected Components in an Undirected Graph](#0323), [Number of Distinct Islands](#0694), [Max Area of Island](#0695)
+#<span id="0547">0547 </span>  | [Friend Circles](https://leetcode.com/problems/friend-circles/) | [View](Union%20Find/547.friend-circles.java) | Medium | [Number of Connected Components in an Undirected Graph](#0323), [Robot Return to Origin](#0657), [Sentence Similarity](#0734), [Sentence Similarity II](#0737), [The Earliest Moment When Everyone Become Friends](#1101)
 1319 | [Number of Operations to Make Network Connected](https://leetcode.com/problems/number-of-operations-to-make-network-connected/) | [View](./UnionFind/NumberOfOperationsToMakeNetworkConnected.cpp) | Medium |||
 0684 | [Redundant Connection](https://leetcode.com/problems/redundant-connection/) | [View](./UnionFind/RedundantConnection.cpp) | Medium |||
-0990 | [Satisfiability of Equality Equations](https://leetcode.com/problems/satisfiability-of-equality-equations/) | [View](./UnionFind/SatisfiabilityOfEqualityEquations.cpp) | Medium |||
+0990 | [Satisfiability of Equality Equations](https://leetcode.com/problems/satisfiability-of-equality-equations/) | [View](./UnionFind/SatisfiabilityOfEqualityEquations.cpp) | Medium |||nu
