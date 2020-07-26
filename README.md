@@ -95,6 +95,7 @@
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0022">0022 </span> | [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/) | [View](DFS/22.generate-parentheses.java) | Medium | [Letter Combinations of a Phone Number](#0017), [Valid Parentheses](#0020)
+#<span id="0037">0037 </span> | [Sudoku Solver](https://leetcode.com/problems/sudoku-solver/) | [View](DFS/37.sudoku-solver.java) | Hard | [Valid Sudoku](#0036), [Unique Paths III](#0980)
 #<span id="0200">0200 </span> | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](DFS/200.number-of-islands.java) | Medium | [Surrounded Regions](#0130), [Walls and Gates](#0286), [Number of Islands II](#0305), [Number of Connected Components in an Undirected Graph](#0323), [Number of Distinct Islands](#0694), [Max Area of Island](#0695)
 #<span id="0529">0529 </span> | [Minesweeper](https://leetcode.com/problems/minesweeper/) | [View](DFS/529.minesweeper.java) | Medium | 
 1020 | [Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/) | [View](./DFS/NumberOfEnclaves.cpp) | Medium |||
@@ -158,6 +159,11 @@
 #<span id="0455">0455 </span> | [Assign Cookies](https://leetcode.com/problems/assign-cookies/) | [View](Greedy%20Algorithm/455.assign-cookies.java) | Easy |
 #<span id="0860">0860 </span> | [Lemonade Change](https://leetcode.com/problems/lemonade-change/) | [View](Greedy%20Algorithm/860.lemonade-change.java) | Easy | [Best Time to Buy and Sell Stock](#0121), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309), [Best Time to Buy and Sell Stock with Transaction Fee](#0714)
 #<span id="0874">0874 </span> | [Walking Robot Simulation](https://leetcode.com/problems/walking-robot-simulation/) | [View](Greedy%20Algorithm/874.walking-robot-simulation.java) | Easy | 
+
+## HashMap
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0036">0036 </span> | [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/) | [View](Hashmap/36.valid-sudoku.java) | Medium | [Sudoku Solver](#0037)
 
 ## Heap
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
