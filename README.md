@@ -96,6 +96,7 @@
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0022">0022 </span> | [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/) | [View](DFS/22.generate-parentheses.java) | Medium | [Letter Combinations of a Phone Number](#0017), [Valid Parentheses](#0020)
 #<span id="0037">0037 </span> | [Sudoku Solver](https://leetcode.com/problems/sudoku-solver/) | [View](DFS/37.sudoku-solver.java) | Hard | [Valid Sudoku](#0036), [Unique Paths III](#0980)
+#<span id="0130">0130 </span> | [Surrounded Regions](https://leetcode.com/problems/surrounded-regions/) | [View](DFS/130.surrounded-regions.java) | Medium | [Number of Islands](#0200), [Walls and Gates](#0286)
 #<span id="0200">0200 </span> | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](DFS/200.number-of-islands.java) | Medium | [Surrounded Regions](#0130), [Walls and Gates](#0286), [Number of Islands II](#0305), [Number of Connected Components in an Undirected Graph](#0323), [Number of Distinct Islands](#0694), [Max Area of Island](#0695)
 #<span id="0529">0529 </span> | [Minesweeper](https://leetcode.com/problems/minesweeper/) | [View](DFS/529.minesweeper.java) | Medium | 
 1020 | [Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/) | [View](./DFS/NumberOfEnclaves.cpp) | Medium |||
@@ -134,6 +135,7 @@
 #<span id="0647">0647 </span> | [Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/) | [View](DP/647.palindromic-substrings.java) | Medium | [Longest Palindromic Substring](#0005), [Longest Palindromic Subsequence](#0516)
 #<span id="0714">0714 </span> | [Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/) | [View](DP/714.best-time-to-buy-and-sell-stock-with-transaction-fee.java) | Medium | [Best Time to Buy and Sell Stock II](#0122)
 #<span id="0746">0746 </span> | [Min Cost Climbing Stairs](https://leetcode.com/problems/min-cost-climbing-stairs/) | [View](DP/746.min-cost-climbing-stairs.java) | Easy | [Climbing Stairs](#0070)
+#<span id="0887">**0887** </span> | [**Super Egg Drop**](https://leetcode.com/problems/super-egg-drop/) | [View](DP/887.super-egg-drop.java) | Hard | 
 #<span id="1143">1143 </span> | [Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/) | [View](DP/1143.longest-common-subsequence.java) | Medium | [Longest Palindromic Subsequence](#0516), [Delete Operation for Two Strings](#0583), [Shortest Common Supersequence](#1092)
 0322 | [Coin Change](https://leetcode.com/problems/coin-change/) | [View](./DP/CoinChange.cpp) | Medium |||
 0518 | [Coin Change 2](https://leetcode.com/problems/coin-change-2/) | [View](./DP/CoinChange2.cpp) | Medium |||
