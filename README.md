@@ -100,7 +100,6 @@
 #<span id="0200">0200 </span> | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](DFS/200.number-of-islands.java) | Medium | [Surrounded Regions](#0130), [Walls and Gates](#0286), [Number of Islands II](#0305), [Number of Connected Components in an Undirected Graph](#0323), [Number of Distinct Islands](#0694), [Max Area of Island](#0695)
 #<span id="0529">0529 </span> | [Minesweeper](https://leetcode.com/problems/minesweeper/) | [View](DFS/529.minesweeper.java) | Medium | 
 1020 | [Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/) | [View](./DFS/NumberOfEnclaves.cpp) | Medium |||
-0130 | [Surrounded Regions](https://leetcode.com/problems/surrounded-regions/) | [View](./DFS/SurroundedRegions.cpp) | Medium |||
 
 ## Divide And Conquer 
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
@@ -130,6 +129,7 @@
 #<span id="0221">0221 </span> | [Maximal Square](https://leetcode.com/problems/maximal-square/) | [View](DP/221.maximal-square.java) | Medium | [Maximal Rectangle](#0085), [Largest Plus Sign](#0764)
 #<span id="0279">0279 </span> | [Perfect Squares](https://leetcode.com/problems/perfect-squares/) | [View](DP/279.perfect-squares.java) | Medium | [Count Primes](#0204), [Ugly Number II](#0264)
 #<span id="0309">0309 </span> | [Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/) | [View](DP/309.best-time-to-buy-and-sell-stock-with-cooldown.java) | Medium | [Best Time to Buy and Sell Stock](#0121), [Best Time to Buy and Sell Stock II](#0122)
+#<span id="0312">0312 </span> | [Burst Balloons](https://leetcode.com/problems/burst-balloons/) | [View](DP/312.burst-balloons.java) | Hard | [Minimum Cost to Merge Stones](#1000)
 #<span id="0322">0322 </span> | [Coin Change](https://leetcode.com/problems/coin-change/) | [View](DP/322.coin-change.java) | Medium | [Minimum Cost For Tickets](#0983)
 #<span id="0509">0509 </span> | [Fibonacci Number](https://leetcode.com/problems/fibonacci-number/) | [View](DP/509.fibonacci-number.java) | Easy | [Climbing Stairs](#0070), [Split Array into Fibonacci Sequence](#0842), [Length of Longest Fibonacci Subsequence](#0873), [N-th Tribonacci Number](#1137)
 #<span id="0647">0647 </span> | [Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/) | [View](DP/647.palindromic-substrings.java) | Medium | [Longest Palindromic Substring](#0005), [Longest Palindromic Subsequence](#0516)
@@ -206,6 +206,23 @@
 0686 | [Repeated String Match - KMP Algorithm](https://leetcode.com/problems/repeated-string-match/) | [View](./Strings/RepeatedStringMatch.cpp) | Easy |||
 1487 | [Making File Names Unique](https://leetcode.com/problems/making-file-names-unique/) | [View](./Strings/MakingFileNamesUnique.cpp) | Medium |||
 
+## Sliding Window
+|  #  | Title           |  Solution       | Difficulty    | Similar Questions |
+|-----|---------------- | --------------- |-------------- | ----------------- |
+#<span id="0076">0076 </span> | [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | [View](Sliding%20Window/76.minimum-window-substring.java) | Hard | [Substring with Concatenation of All Words](#0030), [Minimum Size Subarray Sum](#0209), [Sliding Window Maximum](#0239), [Permutation in String](#0567), [Smallest Range Covering Elements from K Lists](#0632), [Minimum Window Subsequence](#0727)
+#<span id="0713">0713 </span> | [Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | [View](Sliding%20Window/713.subarray-product-less-than-k.java) | Medium | [Maximum Product Subarray](#0152), [Maximum Size Subarray Sum Equals k](#0352), [Subarray Sum Equals K](#0560), [Two Sum Less Than K](#1099)
+#<span id="1004">1004 </span> | [Max Consecutive Ones III](https://leetcode.com/problems/max-consecutive-ones-iii/) | [View](Sliding%20Window/1004.max-consecutive-ones-iii.java) | Medium | [Longest Substring with At Most K Distinct Characters](#0340), [Longest Repeating Character Replacement](#0424), [Max Consecutive Ones](#0485), [Max Consecutive Ones II](#0487) 
+#<span id="1248">1248 </span> | [Count Number of Nice Subarrays](https://leetcode.com/problems/count-number-of-nice-subarrays/) | [View](Sliding%20Window/1248.count-number-of-nice-subarrays.java) | Medium | 
+0904 | [Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/) | [View](./SlidingWindow/FruitsIntoBaskets.cpp) | Medium |||
+1052 | [Grumpy Bookstore Owner](https://leetcode.com/problems/grumpy-bookstore-owner/) | [View](./SlidingWindow/GrumpyBookstoreOwner.cpp) | Medium |||
+1358 | [Number of Substrings Containing All Three Characters](https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/) | [View](./SlidingWindow/NumberOfSubstringsContainingAllThreeCharacters.cpp) | Medium |||
+1234 | [Replace the Substring for Balanced String](https://leetcode.com/problems/replace-the-substring-for-balanced-string/) | [View](./SlidingWindow/ReplaceTheSubstringForBalancedString.cpp) | Medium |||
+
+## Sort
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="1122">1122 </span> | [Relative Sort Array](https://leetcode.com/problems/relative-sort-array/) | [View](Sort/1122.relative-sort-array.java) | Easy | 
+
 ## Stack
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
@@ -214,18 +231,6 @@
 0146 | [LRU Cache](https://leetcode.com/problems/lru-cache/) | [View](./Stack/LRUCache.cpp) | Medium |||
 0232 | [Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/) | [View](./Stack/ImplementQueueUsingStacks.cpp) | Easy |||
 0155 | [Min Stack](https://leetcode.com/problems/min-stack/) | [View](./Stack/MinStack.cpp) | Easy |||
-
-## Sliding Window
-|  #  | Title           |  Solution       | Difficulty    | Similar Questions |
-|-----|---------------- | --------------- |-------------- | ----------------- |
-#<span id="0076">0076 </span> | [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | [View](Sliding%20Window/76.minimum-window-substring.java) | Hard | [Substring with Concatenation of All Words](#0030), [Minimum Size Subarray Sum](#0209), [Sliding Window Maximum](#0239), [Permutation in String](#0567), [Smallest Range Covering Elements from K Lists](#0632), [Minimum Window Subsequence](#0727)
-#<span id="0713">0713 </span> | [Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | [View](Sliding%20Window/713.subarray-product-less-than-k.java) | Medium | [Maximum Product Subarray](#0152), [Maximum Size Subarray Sum Equals k](#0352), [Subarray Sum Equals K](#0560), [Two Sum Less Than K](#1099)
-#<span id="1004">1004 </span> | [Max Consecutive Ones III](https://leetcode.com/problems/max-consecutive-ones-iii/) | [View](Sliding%20Window/1004.max-consecutive-ones-iii.java) | Medium | [Longest Substring with At Most K Distinct Characters](#0340), [Longest Repeating Character Replacement](#0424), [Max Consecutive Ones](#0485), [Max Consecutive Ones II](#0487) 
-0904 | [Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/) | [View](./SlidingWindow/FruitsIntoBaskets.cpp) | Medium |||
-1052 | [Grumpy Bookstore Owner](https://leetcode.com/problems/grumpy-bookstore-owner/) | [View](./SlidingWindow/GrumpyBookstoreOwner.cpp) | Medium |||
-1004 | [Max Consecutive Ones III](https://leetcode.com/problems/max-consecutive-ones-iii/) | [View](./SlidingWindow/MaxConsecutiveOnesIII.cpp) | Medium |||
-1358 | [Number of Substrings Containing All Three Characters](https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/) | [View](./SlidingWindow/NumberOfSubstringsContainingAllThreeCharacters.cpp) | Medium |||
-1234 | [Replace the Substring for Balanced String](https://leetcode.com/problems/replace-the-substring-for-balanced-string/) | [View](./SlidingWindow/ReplaceTheSubstringForBalancedString.cpp) | Medium |||
 
 ## Tree
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
