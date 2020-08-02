@@ -105,7 +105,8 @@
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0315">0315 </span> | [Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/) | [View](Divide%20And%20Conquer/315.count-of-smaller-numbers-after-self.java) | Hard | [Count of Range Sum](#0327), [Queue Reconstruction by Height](#0406), [Reverse Pairs](#0493), [How Many Numbers Are Smaller Than the Current Number](#1365)
-#<span id="0493">0493 </span> | 
+#<span id="0374">0327 </span> | [Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/) | [View](Divide%20And%20Conquer/327.count-of-range-sum.java) | Hard | [Count of Smaller Numbers After Self](#0315), [Reverse Pairs](#0493)
+#<span id="0493">0493 </span> | [Reverse Pairs](https://leetcode.com/problems/reverse-pairs/) | [View](Divide%20And%20Conquer/493.reverse-pairs.java) | Hard | [Count of Smaller Numbers After Self](#0315), [Count of Range Sum](#0327)
 
 ## DP (Dynamic Programming)
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
@@ -166,11 +167,13 @@
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0036">0036 </span> | [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/) | [View](Hashmap/36.valid-sudoku.java) | Medium | [Sudoku Solver](#0037)
+#<span id="0242">0242 </span> | [Valid Anagram](https://leetcode.com/problems/valid-anagram/) | [View](Hashmap/242.valid-anagram.java) | Easy | [Group Anagrams](#0049), [Palindrome Permutation](#0266), [Find All Anagrams in a String](#0438)
 
 ## Heap
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0621">0621 </span> | [Task Scheduler](https://leetcode.com/problems/task-scheduler/) | [View](Heap/621.task-scheduler.java) |  Medium | [Rearrange String k Distance Apart](#0358), [Reorganize String](#0767)
+#<span id="1244">1244 </span> | [Design A Leaderboard](https://leetcode.com/problems/design-a-leaderboard/) | [View](Heap/1244.design-a-leaderboard.java) | Meidum | 
 
 ## Linked List
 |  #  | Title           |  Solution       | Difficulty    |
