@@ -7,6 +7,7 @@
 // @lc code=start
 class Solution {
     public int numDecodings(String s) {
+        //dp[i] = dp[i-1] + dp[i-2]
         if (s == null || s.length() == 0) {
             return 0;
         }
