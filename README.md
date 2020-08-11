@@ -66,6 +66,7 @@
 #<span id="0200">0200 </span> | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](BFS/200.number-of-islands.java) | Medium | [Surrounded Regions](#0130), [Walls and Gates](#0286), [Number of Islands II](#0305), [Number of Connected Components in an Undirected Graph](#0323), [Number of Distinct Islands](#0694), [Max Area of Island](#0695)
 #<span id="0286">0286 </span> | [Walls and Gates](https://leetcode.com/problems/walls-and-gates/) | [View](BFS/286.walls-and-gates.java) | Medium | [Surrounded Regions](#0130), [Number of Islands](#0200), [Shortest Distance from All Buildings](#0317), [Robot Room Cleaner](#0489), [Rotting Oranges](#0994)
 #<span id="0433">0433 </span> | [Minimum Genetic Mutation](https://leetcode.com/problems/minimum-genetic-mutation/) | [View](BFS/433.minimum-genetic-mutation.java) | Medium | [Word Ladder](#0127)
+#<span id="0505">0505 </span> | [The Maze II](https://leetcode.com/problems/the-maze-ii/) | [View](BFS/505.the-maze-ii.java) | Medium | [The Maze](#0490), [The Maze III](#0499) 
 #<span id="0515">0515 </span> | [Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/) | [View](BFS/515.find-largest-value-in-each-tree-row.java) | Medium | 
 #<span id="0818">0818 </span> | [Race Car](https://leetcode.com/problems/race-car/) | [View](BFS/818.race-car.java) | Hard | 
 #<span id="0994">0994 </span> | [Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | [View](BFS/994.rotting-oranges.java) | Medium | [Walls and Gates](#0286)
@@ -99,6 +100,7 @@
 #<span id="0037">0037 </span> | [Sudoku Solver](https://leetcode.com/problems/sudoku-solver/) | [View](DFS/37.sudoku-solver.java) | Hard | [Valid Sudoku](#0036), [Unique Paths III](#0980)
 #<span id="0130">0130 </span> | [Surrounded Regions](https://leetcode.com/problems/surrounded-regions/) | [View](DFS/130.surrounded-regions.java) | Medium | [Number of Islands](#0200), [Walls and Gates](#0286)
 #<span id="0200">0200 </span> | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](DFS/200.number-of-islands.java) | Medium | [Surrounded Regions](#0130), [Walls and Gates](#0286), [Number of Islands II](#0305), [Number of Connected Components in an Undirected Graph](#0323), [Number of Distinct Islands](#0694), [Max Area of Island](#0695)
+#<span id="0490">0490 </span> | [The Maze](https://leetcode.com/problems/the-maze/) | [View](DFS/490.the-maze.java) | Medium | [The Maze II](#0505), [The Maze III](#0499) 
 #<span id="0529">0529 </span> | [Minesweeper](https://leetcode.com/problems/minesweeper/) | [View](DFS/529.minesweeper.java) | Medium | 
 1020 | [Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/) | [View](./DFS/NumberOfEnclaves.cpp) | Medium |||
 
@@ -201,8 +203,13 @@
 #<span id="0050">0050 </span> | [Pow(x, n)](https://leetcode.com/problems/powx-n/) | [View](Recursion/50.pow-x-n.java) | Medium | [Sqrt(x)](#0069), [Super Pow](#0372)
 
 ## Strings
-|  #  | Title           |  Solution       | Difficulty    |
-|-----|---------------- | --------------- |------------- |
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0058">0058 </span> | [Length of Last Word](https://leetcode.com/problems/length-of-last-word/) | [View](String/58.length-of-last-word.java) | Easy |
+#<span id="0387">0387 </span> | [First Unique Character in a String](https://leetcode.com/problems/first-unique-character-in-a-string/) | [View](String/387.first-unique-character-in-a-string.java) | Easy | [Sort Characters By Frequency](#0451)
+#<span id="0709">0709 </span> | [To Lower Case](https://leetcode.com/problems/to-lower-case/) | [View](String/709.to-lower-case.java) | Easy | 
+#<span id="0771">0771 </span> | [Jewels and Stones](https://leetcode.com/problems/jewels-and-stones/) | [View](String/771.jewels-and-stones.java) | Easy | 
+
 1433 | [Check If a String Can Break Another String](https://leetcode.com/problems/check-if-a-string-can-break-another-string/) | [View](./Strings/CheckIfAStringCanBreakAnotherString.cpp) | Medium |||
 0028 | [Implement strStr() - KMP Algorithm](https://leetcode.com/problems/implement-strstr/) | [View](./Strings/ImplementstrStr-KMP.cpp) | Easy |||
 0028 | [Implement strStr() - Rabin Karp Algorithm](https://leetcode.com/problems/implement-strstr/) | [View](./Strings/ImplementstrStr-Rabin-Karp.cpp) | Easy |||
@@ -277,4 +284,4 @@
 #<span id="0547">0547 </span>  | [Friend Circles](https://leetcode.com/problems/friend-circles/) | [View](Union%20Find/547.friend-circles.java) | Medium | [Number of Connected Components in an Undirected Graph](#0323), [Robot Return to Origin](#0657), [Sentence Similarity](#0734), [Sentence Similarity II](#0737), [The Earliest Moment When Everyone Become Friends](#1101)
 1319 | [Number of Operations to Make Network Connected](https://leetcode.com/problems/number-of-operations-to-make-network-connected/) | [View](./UnionFind/NumberOfOperationsToMakeNetworkConnected.cpp) | Medium |||
 0684 | [Redundant Connection](https://leetcode.com/problems/redundant-connection/) | [View](./UnionFind/RedundantConnection.cpp) | Medium |||
-0990 | [Satisfiability of Equality Equations](https://leetcode.com/problems/satisfiability-of-equality-equations/) | [View](./UnionFind/SatisfiabilityOfEqualityEquations.cpp) | Medium |||nu
+0990 | [Satisfiability of Equality Equations](https://leetcode.com/problems/satisfiability-of-equality-equations/) | [View](./UnionFind/SatisfiabilityOfEqualityEquations.cpp) | Medium |||
