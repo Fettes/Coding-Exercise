@@ -1,7 +1,7 @@
 # [LeetCode Exercise](https://leetcode.com/problemset/all/)
 
 
-![Language](https://img.shields.io/badge/Language-JAVA-important)&nbsp;
+![Arrays and Strings](https://img.shields.io/badge/Language-JAVA-important)&nbsp;
 ![Programs](https://img.shields.io/badge/Programs-180-blueviolet)&nbsp;
 ![Update](https://img.shields.io/badge/Update-Daily-informational)&nbsp;
 
@@ -13,13 +13,15 @@
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0001">0001 </span> | [Two Sum](https://leetcode.com/problems/two-sum/) | [View](Array/1.two-sum.java) | Easy | [3Sum](#0015), [Two Sum II](#0167), [Two Sum III](#0170), [Subarray Sum Equals K](#0560), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
-#<span id="0004">**0004** </span> | [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/) | [View](Array/4.median-of-two-sorted-arrays.java) | Hard | 
+#<span id="0004">**0004** </span> | [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/) | [View](Array/4.median-of-two-sorted-arrays.java) | Hard |
+#<span id="0011">0011 </span> | [Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | [View](Array/11.container-with-most-water.java) | Meidum | [Trapping Rain Water](#0042)
 #<span id="0015">0015 </span> | [3Sum](https://leetcode.com/problems/3sum/) | [View](Array/15.3-sum.java) | Medium | [Two Sum](#0001), [3Sum Closest](#0016), [3Sum Smaller](#0259)
 #<span id="0016">0016 </span> | [3Sum Closest](https://leetcode.com/problems/3sum-closest/) | [View](Array/16.3-sum-closest.java) | Medium | [3Sum](#0015), [3Sum Smaller](#0259)
 #<span id="0027">0027 </span> | [Remove Element](https://leetcode.com/problems/remove-element/) | [View](Array/27.remove-element.java) | Easy | [Remove Duplicates from Sorted Array](#0026), [Remove Linked List Elements](#0203), [Move Zeroes](#0283)
 #<span id="0031">0031 </span> | [Next Permutation](https://leetcode.com/problems/next-permutation/) | [View](Array/31.next-permutation.java) | Medium | [Permutations](#0046), [Permutations II](#0047), [Permutation Sequence](#0060), [Palindrome Permutation II](#0267)
 #<span id="0056">0056 </span> | [Merge Intervals](https://leetcode.com/problems/merge-intervals/) | [View](Array/56.merge-intervals.java) | Medium | [Insert Interval](#0057), [Meeting Rooms](#0252), [Meeting Rooms II](#0253), [Teemo Attacking](#0495), [Add Bold Tag in String](#0616), [Range Module](#0715), [Employee Free Time](#0759), [Partition Labels](#0763), [Interval List Intersections](#0986)
 #<span id="0088">0088 </span> | [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/) | [View](Array/88.merge-sorted-array.java) | Easy | [Merge Two Sorted Lists](#0021), [Squares of a Sorted Array](#0977), [Interval List Intersections](#0986)
+#<span id="0165">0165 </span> | [Compare Version Numbers](https://leetcode.com/problems/compare-version-numbers/) | [View](Array/165.compare-version-numbers.java) | Medium | 
 #<span id="0167">0167 </span> | [Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) | [View](Array/167.two-sum-ii-input-array-is-sorted.java) | Easy | [Two Sum](#0001), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
 #<span id="0170">0170 </span> | [Two Sum III](https://leetcode.com/problems/two-sum-iii-data-structure-design/) | [View](Array/170.two-sum-iii-data-structure-design.java) | Easy | [Two Sum](#0001), [Unique Word Abbreviation](#0288), [Two Sum IV](#0653)
 #<span id="0189">0189 </span> | [Rotate Array](https://leetcode.com/problems/rotate-array/) | [View](Array/189.rotate-array.java) | Easy | [Rotate List](#0061), [Reverse Words in a String II](#0186) 
@@ -158,6 +160,7 @@
 ## Greedy Algorithm
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0012">0012 </span> | [Integer to Roman](https://leetcode.com/problems/integer-to-roman/) | [View](Greedy%20Algorithm/12.integer-to-roman.java) | Medium | [Roman to Integer](#0013), [Integer to English Words](#0273)
 #<span id="0045">0045 </span> | [Jump Game II](https://leetcode.com/problems/jump-game-ii/) | [View](Greedy%20Algorithm/45.jump-game-ii.java) | Hard | [Jump Game](#0055), [Jump Game III](#1306)
 #<span id="0055">0055 </span> | [Jump Game](https://leetcode.com/problems/jump-game/) | [View](Greedy%20Algorithm/55.jump-game.java) | Medium | [Jump Game II](#0045), [Jump Game III](#1306)
 #<span id="0121">0121 </span> | [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | [View](Greedy%20Algorithm/121.best-time-to-buy-and-sell-stock.java) | Easy | [Maximum Subarray](#0053), [Best Time to Buy and Sell Stock II](#0122), [Best Time to Buy and Sell Stock III](#0123), [Best Time to Buy and Sell Stock IV](#0188), [Best Time to Buy and Sell Stock with Cooldown](#0309)
@@ -170,6 +173,7 @@
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0036">0036 </span> | [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/) | [View](Hashmap/36.valid-sudoku.java) | Medium | [Sudoku Solver](#0037)
+#<span id="0049">0049 </span> | [Group Anagrams](https://leetcode.com/problems/group-anagrams/) | [View](Hashmap/49.group-anagrams.java) | Medium | [Valid Anagram](#0242), [Group Shifted Strings](#0249)
 #<span id="0242">0242 </span> | [Valid Anagram](https://leetcode.com/problems/valid-anagram/) | [View](Hashmap/242.valid-anagram.java) | Easy | [Group Anagrams](#0049), [Palindrome Permutation](#0266), [Find All Anagrams in a String](#0438)
 
 ## Heap
@@ -205,11 +209,19 @@
 ## Strings
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0003">0003 </span> | [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | [View](String/3.longest-substring-without-repeating-characters.java) | Medium | [Longest Substring with At Most Two Distinct Characters](#0159), [Longest Substring with At Most K Distinct Characters](#0340), [Subarrays with K Different Integers](#0992)
+#<span id="0008">0008 </span> | [String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/) | [View](String/8.string-to-integer-atoi.java) | Medium | [Reverse Integer](#0007), [Valid Number](#0065)
+#<span id="0013">0013 </span> | [Roman to Integer](https://leetcode.com/problems/roman-to-integer/) | [View](String/13.roman-to-integer.java) | Easy | [Integer to Roman](#0012)
+#<span id="0028">0028 </span> | [Implement strStr()](https://leetcode.com/problems/implement-strstr/) | [View](String/28.implement-str-str.java) | Easy | [Shortest Palindrome](#0214), [Repeated Substring Pattern](#0459)
+#<span id="0048">0048 </span> | [Rotate Image](https://leetcode.com/problems/rotate-image/) | [View](String/48.rotate-image.java) | Medium | 
 #<span id="0058">0058 </span> | [Length of Last Word](https://leetcode.com/problems/length-of-last-word/) | [View](String/58.length-of-last-word.java) | Easy |
+#<span id="0273">0273 </span> | [Integer to English Words](https://leetcode.com/problems/integer-to-english-words/) | [View](String/273.integer-to-english-words.java) | Hard | [Integer to Roman](#0012)
 #<span id="0387">0387 </span> | [First Unique Character in a String](https://leetcode.com/problems/first-unique-character-in-a-string/) | [View](String/387.first-unique-character-in-a-string.java) | Easy | [Sort Characters By Frequency](#0451)
+#<span id="0541">0541 </span> | [Reverse String II](https://leetcode.com/problems/reverse-string-ii/) | [View](String/541.reverse-string-ii.java) | Easy | [Reverse String](#0344), [Reverse Words in a String III](#0557)
 #<span id="0709">0709 </span> | [To Lower Case](https://leetcode.com/problems/to-lower-case/) | [View](String/709.to-lower-case.java) | Easy | 
 #<span id="0771">0771 </span> | [Jewels and Stones](https://leetcode.com/problems/jewels-and-stones/) | [View](String/771.jewels-and-stones.java) | Easy | 
-
+#<span id="0819">0819 </span> | [Most Common Word](https://leetcode.com/problems/most-common-word/) | [View](String/819.most-common-word.java) | Easy | 
+#<span id="0937">0937 </span> | [Reorder Data in Log Files](https://leetcode.com/problems/reorder-data-in-log-files/) | [View](String/937.reorder-data-in-log-files.java) | Easy 
 1433 | [Check If a String Can Break Another String](https://leetcode.com/problems/check-if-a-string-can-break-another-string/) | [View](./Strings/CheckIfAStringCanBreakAnotherString.cpp) | Medium |||
 0028 | [Implement strStr() - KMP Algorithm](https://leetcode.com/problems/implement-strstr/) | [View](./Strings/ImplementstrStr-KMP.cpp) | Easy |||
 0028 | [Implement strStr() - Rabin Karp Algorithm](https://leetcode.com/problems/implement-strstr/) | [View](./Strings/ImplementstrStr-Rabin-Karp.cpp) | Easy |||
@@ -237,7 +249,9 @@
 ## Stack
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0020">0020 </span> | [Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | [View](Stack/20.valid-parentheses.java) | Easy | [Generate Parentheses](#0022), [Longest Valid Parentheses](#0032), [Remove Invalid Parentheses](#0301), [Check If Word Is Valid After Substitutions](#1003)
 #<span id="0032">0032 </span> | [Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) | [View](Stack/32.longest-valid-parentheses%20copy.java) | Hard | [Valid Parentheses](#0020) 
+#<span id="0042">0042 </span> | [Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | [View](Stack/42.trapping-rain-water.java) | Hard | [Container With Most Water](#0011), [Product of Array Except Self](#0238), [Trapping Rain Water II](#0407), [Pour Water](#0755)
 1381 | [Design a Stack With Increment Operation](https://leetcode.com/problems/design-a-stack-with-increment-operation/) | [View](./Stack/DesignAStackWithIncrementOperation.cpp) | Medium |||
 0146 | [LRU Cache](https://leetcode.com/problems/lru-cache/) | [View](./Stack/LRUCache.cpp) | Medium |||
 0232 | [Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/) | [View](./Stack/ImplementQueueUsingStacks.cpp) | Easy |||

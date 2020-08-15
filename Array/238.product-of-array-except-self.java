@@ -7,8 +7,6 @@
 // @lc code=start
 class Solution {
     public int[] productExceptSelf(int[] nums) {
-        int left = 0;
-        int right = nums.length;
         //initialize the array
         int[] leftPro = new int[nums.length];
         int[] rightPro = new int[nums.length];
