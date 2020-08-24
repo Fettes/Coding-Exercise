@@ -99,7 +99,6 @@
 ## DFS (Depth First Search)
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
-#<span id="0022">0022 </span> | [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/) | [View](DFS/22.generate-parentheses.java) | Medium | [Letter Combinations of a Phone Number](#0017), [Valid Parentheses](#0020)
 #<span id="0037">0037 </span> | [Sudoku Solver](https://leetcode.com/problems/sudoku-solver/) | [View](DFS/37.sudoku-solver.java) | Hard | [Valid Sudoku](#0036), [Unique Paths III](#0980)
 #<span id="0130">0130 </span> | [Surrounded Regions](https://leetcode.com/problems/surrounded-regions/) | [View](DFS/130.surrounded-regions.java) | Medium | [Number of Islands](#0200), [Walls and Gates](#0286)
 #<span id="0200">0200 </span> | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View](DFS/200.number-of-islands.java) | Medium | [Surrounded Regions](#0130), [Walls and Gates](#0286), [Number of Islands II](#0305), [Number of Connected Components in an Undirected Graph](#0323), [Number of Distinct Islands](#0694), [Max Area of Island](#0695)
@@ -211,7 +210,10 @@
 ## Recursion
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0017">0017 </span> | [Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/) | [View](Recursion/17.letter-combinations-of-a-phone-number.java) | Medium | [Generate Parentheses](#0022), [Combination Sum](#0039), [Binary Watch](#0401)
+#<span id="0022">0022 </span> | [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/) | [View](Recursion/22.generate-parentheses.java) | Medium | [Letter Combinations of a Phone Number](#0017), [Valid Parentheses](#0020)
 #<span id="0050">0050 </span> | [Pow(x, n)](https://leetcode.com/problems/powx-n/) | [View](Recursion/50.pow-x-n.java) | Medium | [Sqrt(x)](#0069), [Super Pow](#0372)
+#<span id="0079">0079 | [Word Search](https://leetcode.com/problems/word-search/) | [View](Recursion/79.word-search.java) | Medium | [Word Search II](#0212)
 
 ## Strings
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |

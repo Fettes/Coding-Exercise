@@ -63,3 +63,10 @@
 0543 | [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | [View](../Tree/543.diameter-of-binary-tree.java) | Easy |
 0645 | [Cut Off Trees for Golf Event](https://leetcode.com/problems/cut-off-trees-for-golf-event/) | [View](../Heap/675.cut-off-trees-for-golf-event.java) | Hard | 
 0733 | [Flood Fill](https://leetcode.com/problems/flood-fill/) | [View](../BFS/733.flood-fill.java) | Easy |
+
+## Recursion
+|  ID  | Title           |  Solution       | Difficulty    |
+|----- |---------------- | --------------- |-------------- |
+0017 | [Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/) | [View](../Recursion/17.letter-combinations-of-a-phone-number.java) | Medium |
+0022 | [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/) | [View](../Recursion/22.generate-parentheses.java) | Medium |
+0079 | [Word Search](https://leetcode.com/problems/word-search/) | [View](../Recursion/79.word-search.java) | Medium |
