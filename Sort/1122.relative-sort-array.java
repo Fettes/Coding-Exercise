@@ -7,6 +7,7 @@
 // @lc code=start
 class Solution {
     public int[] relativeSortArray(int[] arr1, int[] arr2) {
+        //Bucket sort
         int[] bucket = new int[1001];
         //count the number
         for (int num : arr1) {

@@ -70,6 +70,7 @@
 #<span id="0433">0433 </span> | [Minimum Genetic Mutation](https://leetcode.com/problems/minimum-genetic-mutation/) | [View](BFS/433.minimum-genetic-mutation.java) | Medium | [Word Ladder](#0127)
 #<span id="0505">0505 </span> | [The Maze II](https://leetcode.com/problems/the-maze-ii/) | [View](BFS/505.the-maze-ii.java) | Medium | [The Maze](#0490), [The Maze III](#0499) 
 #<span id="0515">0515 </span> | [Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/) | [View](BFS/515.find-largest-value-in-each-tree-row.java) | Medium | 
+#<span id="0733">0733 </span> | [Flood Fill](https://leetcode.com/problems/flood-fill/) | [View](BFS/733.flood-fill.java) | Easy | [Island Perimeter](#0463)
 #<span id="0818">0818 </span> | [Race Car](https://leetcode.com/problems/race-car/) | [View](BFS/818.race-car.java) | Hard | 
 #<span id="0994">0994 </span> | [Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | [View](BFS/994.rotting-oranges.java) | Medium | [Walls and Gates](#0286)
 
@@ -179,13 +180,19 @@
 ## Heap
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0023">0023 </span> | [Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/) | [View](Heap/23.merge-k-sorted-lists.java) | Hard | [Merge Two Sorted Lists](#0021), [Ugly Number II](#0264)
 #<span id="0621">0621 </span> | [Task Scheduler](https://leetcode.com/problems/task-scheduler/) | [View](Heap/621.task-scheduler.java) |  Medium | [Rearrange String k Distance Apart](#0358), [Reorganize String](#0767)
+#<span id="0675">0675 </span> | [Cut Off Trees for Golf Event](https://leetcode.com/problems/cut-off-trees-for-golf-event/) | [View](Heap/675.cut-off-trees-for-golf-event.java) | Hard | 
 #<span id="1244">1244 </span> | [Design A Leaderboard](https://leetcode.com/problems/design-a-leaderboard/) | [View](Heap/1244.design-a-leaderboard.java) | Meidum | 
 
 ## Linked List
-|  #  | Title           |  Solution       | Difficulty    |
-|-----|---------------- | --------------- |------------- |
-0002 | [Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) | [View](./LinkedList/AddTwoNumbers.cpp) | Medium |||
+|  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
+|----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0002">0002 </span> | [Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) | [View](Linked%20List/2.add-two-numbers.java) | Medium | [Multiply Strings](#0043), [Add Binary](#0067), [Sum of Two Integers](#0371), [Add Strings](#0415), [Add Two Numbers II](#0445), [Add to Array-Form of Integer](#0989)
+#<span id="0021">0021 </span> | [Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) | [View](Linked%20List/21.merge-two-sorted-lists.java) | Easy | [Merge k Sorted Lists](#0023), [Merge Sorted Array](#0088), [Sort List](#0148), [Shortest Word Distance II](#0244)
+#<span id="0025">0025 </span> | [Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/) | [View](Linked%20List/25.reverse-nodes-in-k-group.java) | Hard | [Swap Nodes in Pairs](#0024)
+#<span id="0138">0138 </span> | [Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/) | [View](Linked%20List/138.copy-list-with-random-pointer.java) | Medium | [Clone Graph](#0133), [Clone Binary Tree With Random Pointer](#1485), [Clone N-ary Tree](#1490)
+#<span id="0206">0206 </span> | [Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | [View](Linked%20List/206.reverse-linked-list.java) | Easy | [Reverse Linked List II](#0092), [Binary Tree Upside Down](#0156), [Palindrome Linked List](#0234)
 0445 | [Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/) | [View](./LinkedList/AddTwoNumbersII.cpp) | Medium |||
 0707 | [Design Linked List](https://leetcode.com/problems/design-linked-list/) | [View](./LinkedList/DesignLinkedList.cpp) | Medium |||
 0141 | [Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/) | [View](./LinkedList/LinkedListCycleI.cpp) | Easy |||
@@ -244,6 +251,8 @@
 ## Sort
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0207">0207 </span> | [Course Schedule](https://leetcode.com/problems/course-schedule/) | [View](Sort/207.course-schedule.java) | Medium | [Course Schedule II](#0210), [Graph Valid Tree](#0261), [Minimum Height Trees](#0310), [Course Schedule III](#0630) 
+#<span id="0210">0210 </span> | [Course Schedule II](https://leetcode.com/problems/course-schedule-ii/) | [View](Sort/210.course-schedule-ii.java) | Medium | [Course Schedule](#0207), [Alien Dictionary](#0269), [Minimum Height Trees](#0310), [Sequence Reconstruction](#0444), [Course Schedule III](#0630)
 #<span id="1122">1122 </span> | [Relative Sort Array](https://leetcode.com/problems/relative-sort-array/) | [View](Sort/1122.relative-sort-array.java) | Easy | 
 
 ## Stack
@@ -260,8 +269,14 @@
 ## Tree
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0098">0098 </span> | [Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/) | [View](Tree/98.validate-binary-search-tree.java) | Medium | [Binary Tree Inorder Traversal](#0094), [Find Mode in Binary Search Tree](#0501)
+#<span id="0101">0101 </span> | [Symmetric Tree](https://leetcode.com/problems/symmetric-tree/) | [View](Tree/101.symmetric-tree.java) | Easy | 
 #<span id="0102">0102 </span> | [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/) | [View](Tree/102.binary-tree-level-order-traversal.java) | Medium | [Minimum Depth of Binary Tree](#0111), [Average of Levels in Binary Tree](#0637), [Cousins in Binary Tree](#0993)
+#<span id="0103">0103 </span> | [Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/) | [View](Tree/103.binary-tree-zigzag-level-order-traversal.java) |  Medium | [Binary Tree Level Order Traversal](#0102) 
+#<span id="0124">0124 </span> | [Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/) | [View](Tree/124.binary-tree-maximum-path-sum.java) | Hard | [Path Sum](#0112), [Sum Root to Leaf Numbers](#0129), [Path Sum IV](#0666), [Longest Univalue Path](#0687), [Time Needed to Inform All Employees](#1376)
+#<span id="0236">0236 </span> | [Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/) | [View](Tree/236.lowest-common-ancestor-of-a-binary-tree.java) | Medium | [Lowest Common Ancestor of a Binary Search Tree](#0235), [Smallest Common Region](#1257)
 #<span id="0515">0515 </span> | [Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/) | [View](Tree/515.find-largest-value-in-each-tree-row.java) | Medium | 
+#<span id="0543">0543 </span> | [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | [View](Tree/543.diameter-of-binary-tree.java) | Easy | [Diameter of N-Ary Tree](#1522)
 #<span id="0653">0653 </span> | [Two Sum IV](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/) | [View](Tree/653.two-sum-iv-input-is-a-bst.java) | Easy | [Two Sum](#0001), [Two Sum II](#0167), [Two Sum III](#0170), [Two Sum BSTs](#1214)
 0938 | [Range Sum of BST](https://leetcode.com/problems/range-sum-of-bst/) | [View](./Tree/RangeSumOfBST.cpp) | Easy |||
 0617 | [Merge Two Binary Trees](https://leetcode.com/problems/merge-two-binary-trees/) | [View](./Tree/MergeTwoBinaryTree.cpp) | Easy |||

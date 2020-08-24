@@ -9,15 +9,15 @@ class Solution {
     public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
         List<List<String>> result = new ArrayList<>();
         Set<String> wordSet = new HashSet<>(wordList);
+
         if (!wordSet.contains(endWord)) {
             return result;
         }
 
-        //Get the minimum path 
         Set<String> visited = new HashSet<>();
-        //Save the currpath in the queue
         Queue<List<String>> queue = new LinkedList<>();
-        //Begin with the first word
+
+        //first list
         List<String> firstWord = new ArrayList<>(Arrays.asList(beginWord));
         queue.add(firstWord);
         visited.add(beginWord);
@@ -25,36 +25,38 @@ class Solution {
 
         while (!queue.isEmpty() && !end) {
             int size = queue.size();
-            Set<String> levelVisitSet = new HashSet<>();
+            Set<String> currLevelVisited = new HashSet<>();
+
             for (int i = 0; i < size; i++) {
-                List<String> currPath = queue.poll();
-                String lastWord = currPath.get(currPath.size() - 1);
-                //terminate
-                if (lastWord.equals(endWord)) {
-                    result.add(currPath);
+                List<String> currList = queue.poll();
+                String currWord = currList.get(currList.size() - 1);
+
+                if (currWord.equals(endWord)) {
+                    result.add(currList);
                     end = true;
                 }
 
-                char[] wordArr = lastWord.toCharArray();
+                char[] wordArr = currWord.toCharArray();
                 for (int j = 0; j < wordArr.length; j++) {
                     char temp = wordArr[j];
-                    
+
                     for (char c = 'a'; c <= 'z'; c++) {
                         wordArr[j] = c;
                         String newWord = new String(wordArr);
-                        if (c == temp) continue;
+
                         if (wordSet.contains(newWord) && !visited.contains(newWord)) {
-                            List<String> newPath = new ArrayList<>(currPath);
-                            newPath.add(newWord);
-                            queue.add(newPath);
-                            levelVisitSet.add(newWord);
+                            List<String> newList = new ArrayList<>(currList);
+                            newList.add(newWord);
+                            queue.add(newList);
+                            currLevelVisited.add(newWord);
                         }
                     }
                     wordArr[j] = temp;
-                }
+                }                
             }
-            visited.addAll(levelVisitSet);
+            visited.addAll(currLevelVisited);
         }
+
         return result;
     }
 }

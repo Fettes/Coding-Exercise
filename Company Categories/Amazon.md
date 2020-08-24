@@ -1,8 +1,9 @@
- [Amazon Top Leetcode Questions](https://leetcode.com/explore/interview/card/amazon/)
+ # [Amazon Top Leetcode Questions](https://leetcode.com/explore/interview/card/amazon/)
 
 
 ![Arrays and Strings](https://img.shields.io/badge/Arrays%20and%20Strings-21-important)&nbsp;
 ![Linked List](https://img.shields.io/badge/Linked%20List-6-important)&nbsp;
+![Trees and Graphs](https://img.shields.io/badge/Trees%20and%20Graphs-13-important)&nbsp;
 ![Programs](https://img.shields.io/badge/Programs-180-blueviolet)&nbsp;
 ![Update](https://img.shields.io/badge/Update-Daily-informational)&nbsp;
 
@@ -11,7 +12,7 @@
 ![Hard](https://img.shields.io/badge/Hard-3-red)
 
 
-## Arrays and Strings
+## Arrays and Strings(8-10-3)
 |  ID  | Title           |  Solution       | Difficulty    |
 |----- |---------------- | --------------- |-------------- |
 0001 | [Two Sum](https://leetcode.com/problems/two-sum/) | [View](../Array/1.two-sum.java) | Easy |
@@ -35,3 +36,30 @@
 0387 | [First Unique Character in a String](https://leetcode.com/problems/first-unique-character-in-a-string/) | [View](../String/387.first-unique-character-in-a-string.java) | Easy |
 0819 | [Most Common Word](https://leetcode.com/problems/most-common-word/) | [View](../String/819.most-common-word.java) | Easy | 
 0937 | [Reorder Data in Log Files](https://leetcode.com/problems/reorder-data-in-log-files/) | [View](../String/937.reorder-data-in-log-files.java) | Easy
+
+## Linked Lists(2-2-2)
+|  ID  | Title           |  Solution       | Difficulty    |
+|----- |---------------- | --------------- |-------------- |
+0002 | [Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) | [View](../Linked%20List/2.add-two-numbers.java) | Medium |
+0021 | [Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) | [View](../Linked%20List/21.merge-two-sorted-lists.java) | Easy |
+0023 | [Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/) | [View](../Heap/23.merge-k-sorted-lists.java) | Hard |
+0024 | [Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/) | [View](../Linked%20List/25.reverse-nodes-in-k-group.java) | Hard |
+0138 | [Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/) | [View](../Linked%20List/138.copy-list-with-random-pointer.java) | Medium |
+0206 | [Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | [View](../Linked%20List/206.reverse-linked-list.java) | Easy |
+
+## Trees and Graphs (3-7-3)
+|  ID  | Title           |  Solution       | Difficulty    |
+|----- |---------------- | --------------- |-------------- |
+0098 | [Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/) | [View](../Tree/98.validate-binary-search-tree.java) | Medium |
+0101 | [Symmetric Tree](https://leetcode.com/problems/symmetric-tree/) | [View](../Tree/101.symmetric-tree.java) | Easy |
+0102 | [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/) | [View](../Tree/102.binary-tree-level-order-traversal.java) | Medium |
+0103 | [Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/) | [View](../Tree/103.binary-tree-zigzag-level-order-traversal.java) |  Medium |
+0124 | [Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/) | [View](../Tree/124.binary-tree-maximum-path-sum.java) | Hard |
+0126 | [Word Ladder II](https://leetcode.com/problems/word-ladder-ii/) | [View](../BFS/126.word-ladder-ii.java) | Hard |
+0127 | [Word Ladder](https://leetcode.com/problems/word-ladder/) | [View](../BFS/127.word-ladder.java) | Medium |
+0200 | [Number of Islands](https://leetcode.com/problems/number-of-islands/) | [View(BFS)](../BFS/200.number-of-islands.java), [View(DFS)](../DFS/200.number-of-islands.java), [View(UF)](../Union%20Find/200.number-of-islands.java) | Medium |
+0207 | [Course Schedule](https://leetcode.com/problems/course-schedule/) | [View](../Sort/207.course-schedule.java) | Medium |
+0236 | [Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/) | [View](../Tree/236.lowest-common-ancestor-of-a-binary-tree.java) | Medium |
+0543 | [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | [View](../Tree/543.diameter-of-binary-tree.java) | Easy |
+0645 | [Cut Off Trees for Golf Event](https://leetcode.com/problems/cut-off-trees-for-golf-event/) | [View](../Heap/675.cut-off-trees-for-golf-event.java) | Hard | 
+0733 | [Flood Fill](https://leetcode.com/problems/flood-fill/) | [View](../BFS/733.flood-fill.java) | Easy |
