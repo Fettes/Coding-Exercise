@@ -38,9 +38,7 @@ Method 1: Inspired by https://leetcode.com/problems/merge-intervals/discuss/2145
 
 We need to have two functions for the tree [add interval and query tree]. (https://leetcode.com/problems/merge-intervals/solution/)
 
-Method 2: Use heap to control the stream. (Personal Idea). As we have an incoming stream of intervals, we just need to keep them sorted and pop the smallest two intervals and check if we can merge them.
-
-However, we still need to pop a new smallest interval and check whether the newly resulted interval can be merged with the popped interval.
+Method 2: Use heap to control the stream. (Personal Idea).
 
 */
 // @lc code=end

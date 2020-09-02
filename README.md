@@ -13,13 +13,14 @@
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
 #<span id="0001">0001 </span> | [Two Sum](https://leetcode.com/problems/two-sum/) | [View](Array/1.two-sum.java) | Easy | [3Sum](#0015), [Two Sum II](#0167), [Two Sum III](#0170), [Subarray Sum Equals K](#0560), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
-#<span id="0004">**0004** </span> | [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/) | [View](Array/4.median-of-two-sorted-arrays.java) | Hard |
+#<span id="0003">0003 </span> | [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | [View](Array/3.longest-substring-without-repeating-characters.java) | Medium | [Longest Substring with At Most Two Distinct Characters](#0159), [Longest Substring with At Most K Distinct Characters](#0340), [Subarrays with K Different Integers](#0992)
+#<span id="0005">0005 </span> | [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | [View](Array/5.longest-palindromic-substring.java) | Medium | [Shortest Palindrome](#0214), [Palindrome Permutation](#0266), [Palindrome Pairs](#0336), [Longest Palindromic Subsequence](#0516), [Palindromic Substrings](#0647)
+#<span id="0007">0007 </span> | [Reverse Integer](https://leetcode.com/problems/reverse-integer/) | [View](Array/7.reverse-integer.java) | Easy | [String to Integer (atoi)](#0008), [Reverse Bits](#0190)
 #<span id="0011">0011 </span> | [Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | [View](Array/11.container-with-most-water.java) | Meidum | [Trapping Rain Water](#0042)
 #<span id="0015">0015 </span> | [3Sum](https://leetcode.com/problems/3sum/) | [View](Array/15.3-sum.java) | Medium | [Two Sum](#0001), [3Sum Closest](#0016), [3Sum Smaller](#0259)
 #<span id="0016">0016 </span> | [3Sum Closest](https://leetcode.com/problems/3sum-closest/) | [View](Array/16.3-sum-closest.java) | Medium | [3Sum](#0015), [3Sum Smaller](#0259)
 #<span id="0027">0027 </span> | [Remove Element](https://leetcode.com/problems/remove-element/) | [View](Array/27.remove-element.java) | Easy | [Remove Duplicates from Sorted Array](#0026), [Remove Linked List Elements](#0203), [Move Zeroes](#0283)
 #<span id="0031">0031 </span> | [Next Permutation](https://leetcode.com/problems/next-permutation/) | [View](Array/31.next-permutation.java) | Medium | [Permutations](#0046), [Permutations II](#0047), [Permutation Sequence](#0060), [Palindrome Permutation II](#0267)
-#<span id="0056">0056 </span> | [Merge Intervals](https://leetcode.com/problems/merge-intervals/) | [View](Array/56.merge-intervals.java) | Medium | [Insert Interval](#0057), [Meeting Rooms](#0252), [Meeting Rooms II](#0253), [Teemo Attacking](#0495), [Add Bold Tag in String](#0616), [Range Module](#0715), [Employee Free Time](#0759), [Partition Labels](#0763), [Interval List Intersections](#0986)
 #<span id="0088">0088 </span> | [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/) | [View](Array/88.merge-sorted-array.java) | Easy | [Merge Two Sorted Lists](#0021), [Squares of a Sorted Array](#0977), [Interval List Intersections](#0986)
 #<span id="0165">0165 </span> | [Compare Version Numbers](https://leetcode.com/problems/compare-version-numbers/) | [View](Array/165.compare-version-numbers.java) | Medium | 
 #<span id="0167">0167 </span> | [Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) | [View](Array/167.two-sum-ii-input-array-is-sorted.java) | Easy | [Two Sum](#0001), [Two Sum IV](#0653), [Two Sum Less Than K](#1099)
@@ -77,6 +78,7 @@
 ## Binary Search
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0004">**0004** </span> | [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/) | [View](Binary%20Seach/4.median-of-two-sorted-arrays.java) | Hard |
 #<span id="0033">0033 </span> | [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | [View](Binary%20Seach/33.search-in-rotated-sorted-array.java) | Medium | [Search in Rotated Sorted Array II](#0081), [Find Minimum in Rotated Sorted Array](#0153)
 #<span id="0034">0034 </span> | [Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) | [View](Binary%20Seach/34.find-first-and-last-position-of-element-in-sorted-array.java) | Medium | [First Bad Version](#0278)
 #<span id="0069">0069 </span> | [Sqrt(x)](https://leetcode.com/problems/sqrtx/) | [View](Binary%20Seach/69.sqrt-x.java) | Easy | [Pow(x, n)](#0050), [Valid Perfect Square](#0367)
@@ -253,8 +255,10 @@
 ## Sort
 |  ID  | Title           |  Solution       | Difficulty    | Similar Questions |
 |----- |---------------- | --------------- |-------------- | ----------------- |
+#<span id="0056">0056 </span> | [Merge Intervals](https://leetcode.com/problems/merge-intervals/) | [View](Sort/56.merge-intervals.java) | Medium | [Insert Interval](#0057), [Meeting Rooms](#0252), [Meeting Rooms II](#0253), [Teemo Attacking](#0495), [Add Bold Tag in String](#0616), [Range Module](#0715), [Employee Free Time](#0759), [Partition Labels](#0763), [Interval List Intersections](#0986)
 #<span id="0207">0207 </span> | [Course Schedule](https://leetcode.com/problems/course-schedule/) | [View](Sort/207.course-schedule.java) | Medium | [Course Schedule II](#0210), [Graph Valid Tree](#0261), [Minimum Height Trees](#0310), [Course Schedule III](#0630) 
 #<span id="0210">0210 </span> | [Course Schedule II](https://leetcode.com/problems/course-schedule-ii/) | [View](Sort/210.course-schedule-ii.java) | Medium | [Course Schedule](#0207), [Alien Dictionary](#0269), [Minimum Height Trees](#0310), [Sequence Reconstruction](#0444), [Course Schedule III](#0630)
+#<span id="0215">0215 </span> | [Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/) | [View](Sort/215.kth-largest-element-in-an-array.java) | Medium | [Wiggle Sort II](#0324), [Top K Frequent Elements](#0347), [Third Maximum Number](#0414), [Kth Largest Element in a Stream](#0703), [K Closest Points to Origin](#0973)
 #<span id="1122">1122 </span> | [Relative Sort Array](https://leetcode.com/problems/relative-sort-array/) | [View](Sort/1122.relative-sort-array.java) | Easy | 
 
 ## Stack

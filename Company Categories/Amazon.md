@@ -64,9 +64,19 @@
 0645 | [Cut Off Trees for Golf Event](https://leetcode.com/problems/cut-off-trees-for-golf-event/) | [View](../Heap/675.cut-off-trees-for-golf-event.java) | Hard | 
 0733 | [Flood Fill](https://leetcode.com/problems/flood-fill/) | [View](../BFS/733.flood-fill.java) | Easy |
 
-## Recursion
+## Recursion (0-3-1)
 |  ID  | Title           |  Solution       | Difficulty    |
 |----- |---------------- | --------------- |-------------- |
 0017 | [Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/) | [View](../Recursion/17.letter-combinations-of-a-phone-number.java) | Medium |
 0022 | [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/) | [View](../Recursion/22.generate-parentheses.java) | Medium |
 0079 | [Word Search](https://leetcode.com/problems/word-search/) | [View](../Recursion/79.word-search.java) | Medium |
+0212 | [Word Search II](https://leetcode.com/problems/word-search-ii/) | [View](../Trie/212.word-search-ii.java) | Hard |
+
+## Sorting and Searching (1-3-1)
+|  ID  | Title           |  Solution       | Difficulty    |
+|----- |---------------- | --------------- |-------------- |
+0004 | [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/) | [View](../Binary%20Seach/4.median-of-two-sorted-arrays.java) | Hard |
+0033 | [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | [View](../Binary%20Seach/33.search-in-rotated-sorted-array.java) | Medium |
+0056 | [Merge Intervals](https://leetcode.com/problems/merge-intervals/) | [View](../Sort/56.merge-intervals.java) | Medium |
+0167 | [Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) | [View](../Array/167.two-sum-ii-input-array-is-sorted.java) | Easy |
+0215 | [Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/) | [View](../Sort/215.kth-largest-element-in-an-array.java) | Medium |
