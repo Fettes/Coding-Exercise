@@ -423,4 +423,175 @@ TCP 主要通过四个算法来进行拥塞控制：**慢开始、拥塞避免�
 
 ![get](../Assets/get.png)
 
-## 7.
+## 7. HTTP状态码
+
+![http_status](../Assets/http_status.png)
+
+常见的状态码有如下几种：
+
+- 200 OK 客户端请求成功
+- 301 Moved Permanently 请求永久重定向
+- 302 Moved Temporarily 请求临时重定向
+- 304 Not Modified 文件未修改，可以直接使用缓存的文件。
+- 400 Bad Request 由于客户端请求有语法错误，不能被服务器所理解。
+- 401 Unauthorized 请求未经授权。这个状态代码必须和WWW-Authenticate报头域一起使用
+- 403 Forbidden 服务器收到请求，但是拒绝提供服务。服务器通常会在响应正文中给出不提供服务的原因
+- 404 Not Found 请求的资源不存在，例如，输入了错误的URL
+- 500 Internal Server Error 服务器发生不可预期的错误，导致无法完成客户端的请求。
+- 503 Service Unavailable 服务器当前不能够处理客户端的请求，在一段时间之后，服务器可能会恢复正常。
+
+### 8. HTTP1.0 vs HTTP 1.1 vs HTTP2.0
+#### 8.1 HTTP1.0和HTTP1.1的区别
+
+- 长连接
+    - HTTP1.0默认使用短连接，每次请求都需要建立新的TCP连接，连接不能复用。
+    - HTTP1.1支持持久连接和请求的流水线处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少建立和关闭TCP连接的消耗和延迟，提高效率。HTTP1.1默认开启“Connection:Keep-Alive”，使用长连接，加入“Connection:close”才关闭。
+
+- host字段
+    - 在HTTP1.0中为每台服务器绑定一个唯一的IP地址，因此，请求消息中的URL并没有传递主机名（hostname）。但是随着虚拟主机技术的发展，在一台物理服务器上可以存在多个虚机主机，并且它们共享一个IP地址。
+    - HTTP1.1的请求消息和响应消息都应支持Host头域，且请求消息中如果没有Host头域，会报400 Bad Request错误。
+
+- 缓存处理
+    - 在HTTP1.0中主要使用header里的If-Modified-Since，Expires来做为缓存判断的标准。
+    - HTTP1.1则引入了更多的缓存控制策略例如Entity tag，If-Unmodified-Since, If-Match, If-None-Match等更多可供选择的缓存头来控制缓存策略。
+
+- 带宽优化及网络连接的使用
+    - HTTP1.0中存在一些浪费带宽的现象，不支持断点续传例如：（1）客户端只需要某个对象的一部分，而服务器却将整个对象发送过来；(2)下载大文件不支持断点续传功能，在发生断连后需要重新下载完整的包。
+    - HTTP1.1则在请求头中引入range头域，它允许只请求资源的某个部分，即返回码是206（Partial Content），这样就方便了开发者自由的选择以便于充分利用带宽和连接。
+
+- 新增一些错误通知状态码
+    - HTTP1.1中新增了24个错误状态响应码，如409（Conflict）表示请求的资源与资源的当前状态发生冲突。
+
+#### 8.2 HTTP1.1和HTTP2.0的区别
+
+![http2](../Assets/http2.0.png)
+
+### 9. HTTP 缓存
+
+#### 9.1 缓存的分类
+
+缓存分为**服务端侧**（server side，比如 Nginx、Apache）和**客户端侧**（client side，比如 web browser）。
+
+服务端缓存又分为**代理服务器缓存**和**反向代理服务器缓存**（也叫网关缓存，比如 Nginx反向代理、Squid等），其实广泛使用的 CDN 也是一种服务端缓存，目的都是让用户的请求走”捷径“，并且都是缓存图片、文件等静态资源。
+
+客户端侧缓存一般指的是**浏览器缓存**，目的就是加速各种静态资源的访问，想想现在的大型网站，随便一个页面都是一两百个请求，每天 pv 都是亿级别，如果没有缓存，用户体验会急剧下降、同时服务器压力和网络带宽都面临严重的考验。
+
+#### 9.2 缓存的机制
+浏览器缓存机制，其实主要就是HTTP协议定义的缓存机制（如： Expires； Cache-control等）。
+
+浏览器第一次请求流程图和浏览器再次请求时：
+
+<img src="../Assets/cache1.png" width="300">
+<img src="../Assets/cache2.png" width="400">
+
+
+- Expires策略：
+
+    Expires是Web服务器响应消息头字段，在响应http请求时告诉浏览器在过期时间前浏览器可以直接从浏览器缓存取数据，而无需再次请求。不过Expires 是HTTP 1.0的东西，现在默认浏览器均默认使用HTTP 1.1，所以它的作用基本忽略。Expires 的一个缺点就是，返回的到期时间是服务器端的时间，这样存在一个问题，如果客户端的时间与服务器的时间相差很大（比如时钟不同步，或者跨时区），那么误差就很大，所以在HTTP 1.1版开始，使用Cache-Control: max-age=秒替代。
+
+- **Cache-control策略**：
+  
+    Cache-Control与Expires的作用一致，都是指明当前资源的有效期，控制浏览器是否直接从浏览器缓存取数据还是重新发请求到服务器取数据。只不过Cache-Control的选择更多，设置更细致，如果同时设置的话，其优先级高于Expires。
+
+>值可以是public、private、no-cache、no- store、no-transform、must-revalidate、proxy-revalidate、max-age
+>
+>各个消息中的指令含义如下：
+>
+>Public指示响应可被任何缓存区缓存。
+>
+>Private指示对于单个用户的整个或部分响应消息，不能被共享缓存处理。这允许服务器仅仅描述当用户的部分响应消息，此响应消息对于其他用户的请求无效。
+>
+>no-cache指示请求或响应消息不能缓存，该选项并不是说可以设置”不缓存“，容易望文生义~
+>
+>no-store用于防止重要的信息被无意的发布。在请求消息中发送将使得请求和响应消息都不使用缓存，完全不存下來。
+>
+>max-age指示客户机可以接收生存期不大于指定时间（以秒为单位）的响应。
+>
+>min-fresh指示客户机可以接收响应时间小于当前时间加上指定时间的响应。
+>
+>max-stale指示客户机可以接收超出超时期间的响应消息。如果指定max-stale消息的值，那么客户机可以接收超出超时期指定值之内的响应消息。
+
+- Last-Modified/If-Modified-Since：Last-Modified/If-Modified-Since要配合Cache-Control使用。
+
+    Last-Modified：标示这个响应资源的最后修改时间。web服务器在响应请求时，告诉浏览器资源的最后修改时间。
+
+    If-Modified-Since：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Last-Modified声明，则再次向web服务器请求时带上头 If-Modified-Since，表示请求时间。web服务器收到请求后发现有头If-Modified-Since 则与被请求资源的最后修改时间进行比对。若最后修改时间较新，说明资源又被改动过，则响应整片资源内容（写在响应消息包体内），HTTP 200；若最后修改时间较旧，说明资源无新修改，则响应HTTP 304 (无需包体，节省浏览)，告知浏览器继续使用所保存的cache。
+
+- Etag/If-None-Match：Etag/If-None-Match也要配合Cache-Control使用。
+    
+    Etag：web服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识（生成规则由服务器决定）。Apache中，ETag的值，默认是对文件的索引节（INode），大小（Size）和最后修改时间（MTime）进行Hash后得到的。
+
+    If-None-Match：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Etage声明，则再次向web服务器请求时带上头If-None-Match （Etag的值）。web服务器收到请求后发现有头If-None-Match 则与被请求资源的相应校验串进行比对，决定返回200或304。
+
+>既生Last-Modified何生Etag？你可能会觉得使用Last-Modified已经足以让浏览器知道本地的缓存副本是否足够新，为什么还需要Etag（实体标识）呢？HTTP1.1中Etag的出现主要是为了解决几个Last-Modified比较难解决的问题：
+>
+>Last-Modified标注的最后修改只能精确到秒级，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的修改时间
+>如果某些文件会被定期生成，当有时内容并没有任何变化，但Last-Modified却改变了，导致文件没法使用缓存
+>有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形
+>Etag是服务器自动生成或者由开发者生成的对应资源在服务器端的唯一标识符，能够更加准确的控制缓存。Last-Modified与ETag一起使用时，服务器会优先验证ETag。
+
+- Pragma行是为了兼容HTTP1.0，作用与Cache-Control: no-cache是一样的。
+
+- 最后总结下几种状态码的区别:
+
+    <img src="../Assets/cache3.jpg" width="500">
+
+#### 9.2 用户行为与缓存
+|  用户操作  | Expires/Cache-Control | Last-Modified/Etag |
+| -------- |------------------- | ------|
+| 地址栏回车 | 有效 | 有效
+| 页面链接跳转 | 有效 | 有效
+| 新开窗口 | 有效 | 有效
+| 前进、后退 | 有效 | 有效
+| F5/按钮刷新 | 无效（浏览器重置max-age=0) | 有效
+| Ctrl+F5刷新 | 无效（重置CC=no-cache）| 无效（请求头丢弃该选项）
+
+### 10. Cookies 和 Session的区别
+HTTP 协议是一种无状态协议，即每次服务端接收到客户端的请求时，都是一个全新的请求，服务器并不知道客户端的历史请求记录；Session 和 Cookie 的主要目的就是为了弥补 HTTP 的无状态特性。
+
+>Session 是什么?
+>客户端请求服务端，服务端会为这次请求开辟一块内存空间，这个对象便是 Session 对象，存储结构为 ConcurrentHashMap。Session 弥补了 HTTP 无状态特性，服务器可以利用 Session 存储客户端在同一个会话期间的一些操作记录。
+
+>HTTP 协议中的 Cookie 包括 Web Cookie 和浏览器 Cookie，它是服务器发送到 Web 浏览器的一小块数据。服务器发送到浏览器的 Cookie，浏览器会进行存储，并与下一个请求一起发送到服务器。通常，它用于判断两个请求是否来自于同一个浏览器，例如用户保持登录状态。
+
+- cookie 是一种发送到客户浏览器的文本串句柄，并保存在客户机硬盘上，可以用来在某个WEB站点会话间持久的保持数据。
+  
+- session其实指的就是访问者从到达某个特定主页到离开为止的那段时间。 Session其实是利用Cookie进行信息处理的，当用户首先进行了请求后，服务端就在用户浏览器上创建了一个Cookie，当这个Session结束时，其实就是意味着这个Cookie就过期了。
+
+- cookie数据保存在客户端，session数据保存在服务器端
+
+- cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗。考虑到安全应当使用session。
+
+>禁用cookie怎么办？
+>客户端禁用cookie以后 session还是可以用，此时session的id值是基于cookie传递的，所以session就不能共享传递了，可以通过在url中附加PHPSESSID的值进行传递，这个就是session的id值。
+>
+>禁用cookie，sessionid就不能直接传递了，因为http请求时sessionid就是放在cookie里的。你说的通过url传递的，那是变通的方法，服务器端通过session_id()函数可以获知当前session的sessionid，然后在用PHP生成页面的时候，把sessionid作为参数附加到url里，确实可以实现在禁用cookie的情况下传递sessionid。
+>
+>例子：在每个超链接上添加一个PHPSESSID=$sid 或者 使用session.use_trans_sid=1，php.ini中配置
+
+### 11. DNS解析过程
+![port](../Assets/dns.jpg)
+1、DNS客户端（DNS_Client）检查HOSTS文件及本地DNS缓存，没有找到对应的记录；
+
+2、DNS_Client 联系本地的DNS服务器（DNS_Server），查询域名www.google.com；
+
+3、DNS_Server 联系根提示中的某个根域服务器（Root_Server），查询域名www.google.com；
+
+4、根域名服务器（Root_Server）也不知道www.google.com的对应值，于是向 DNS_Server 返回一个参考答复，告诉其.com顶级域的权威DNS服务器（.com_DNS_Server）;
+
+5、DNS_Server 联系 .com_DNS_Server ，查询域名 www.google.com；
+
+6、.com_DNS_Server 也不知道www.google.com的对应值，于是就向 DNS_Server 返回一个参考答复，告诉它google.com域的权威DNS服务器（google.com_DNS_Server）地址；
+
+7、DNS_Server 联系 google.com_DNS_Server，查询域名 www.google.com；
+
+8、google.com_DNS_Server 知道对应IP地址（IP_Address），并将其返回给DNS_Server；
+
+9、DNS_Server 向 DNS_Client 返回 www.google.com 的 IP_Address；
+
+10、DNS_Client 向 IP_Address 的服务器发送数据传输请求，建立连接，解析完毕。
+
+### 12. 常用协议的端口
+![port](../Assets/port.png)
+
+
