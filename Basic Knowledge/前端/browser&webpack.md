@@ -9,6 +9,9 @@
 - [7. Webpack打包原理](#7-webpack打包原理)
 - [8. Webpack热更新原理](#8-webpack热更新原理)
 - [9. Webpack构建速度优化](#9-webpack构建速度优化)
+- [10. 防抖与节流](#10-防抖与节流)
+  - [10.1 防抖代码](#101-防抖代码)
+  - [10.2 节流代码](#102-节流代码)
 
 ## 1. webpack与grunt、gulp的不同
 
@@ -166,5 +169,52 @@ HMR的核心就是客户端从服务端拉去更新后的文件，准确的说�
 所以，这时候，我们就要用到 防抖与节流 了。
 
 ### 10.1 防抖代码
-[完整代码](../Code/防抖.html)
+[完整代码](https://github.com/Fettes/Coding-Exercise/blob/master/Basic%20Knowledge/Code/%E9%98%B2%E6%8A%96.html)
 
+```
+    // 2、防抖功能函数，接受传参
+    function debounce(fn) {
+      // 4、创建一个标记用来存放定时器的返回值
+      let timeout = null;
+      return function() {
+        // 5、每次当用户点击/输入的时候，把前一个定时器清除
+        clearTimeout(timeout);
+        // 6、然后创建一个新的 setTimeout，
+        // 这样就能保证点击按钮后的 interval 间隔内
+        // 如果用户还点击了的话，就不会执行 fn 函数
+        timeout = setTimeout(() => {
+          fn.call(this, arguments);
+        }, 1000);
+      };
+    }
+```
+
+**防抖：任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行。**
+
+结合上面的代码，我们可以了解到，在触发点击事件后，如果用户再次点击了，我们会清空之前的定时器，重新生成一个定时器。意思就是：这件事儿需要等待，如果你反复催促，我就重新计时！
+
+实例：有个输入框，输入之后会调用接口，获取联想词。但是，因为频繁调用接口不太好，所以我们在代码中使用防抖功能，只有在用户输入完毕的一段时间后，才会调用接口，出现联想词。
+
+### 10.2 节流代码
+
+```
+    // 2、节流函数体
+    function throttle(fn) {
+      // 4、通过闭包保存一个标记
+      let canRun = true;
+      return function() {
+        // 5、在函数开头判断标志是否为 true，不为 true 则中断函数
+        if(!canRun) {
+          return;
+        }
+        // 6、将 canRun 设置为 false，防止执行之前再被执行
+        canRun = false;
+        // 7、定时器
+        setTimeout( () => {
+          fn.call(this, arguments);
+          // 8、执行完事件（比如调用完接口）之后，重新将这个标志设置为 true
+          canRun = true;
+        }, 1000);
+      };
+    }
+```
