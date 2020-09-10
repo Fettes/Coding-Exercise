@@ -28,6 +28,7 @@
 - [5. 在浏览器中输入url地址 ->> 显示主页的过程](#5-在浏览器中输入url地址---显示主页的过程)
 - [6. Get和Post的区别](#6-get和post的区别)
 - [7. HTTP状态码](#7-http状态码)
+  - [7.1 200 OK (from cache) vs 304 Not Modified](#71-200-ok-from-cache-vs-304-not-modified)
 - [8. HTTP1.0 vs HTTP 1.1 vs HTTP2.0](#8-http10-vs-http-11-vs-http20)
   - [8.1 HTTP1.0和HTTP1.1的区别](#81-http10和http11的区别)
   - [8.2 HTTP1.1和HTTP2.0的区别](#82-http11和http20的区别)
@@ -485,6 +486,11 @@ TCP 主要通过四个算法来进行拥塞控制：**慢开始、拥塞避免�
 - 404 Not Found 请求的资源不存在，例如，输入了错误的URL
 - 500 Internal Server Error 服务器发生不可预期的错误，导致无法完成客户端的请求。
 - 503 Service Unavailable 服务器当前不能够处理客户端的请求，在一段时间之后，服务器可能会恢复正常。
+
+### 7.1 200 OK (from cache) vs 304 Not Modified
+
+- 200 OK (from cache)  是浏览器没有跟服务器确认，直接用了浏览器缓存，最快。一般在expires/max-age头部有效时不会发送请求。因为请求根本没有产生，所以在chrome下请求头部会显示：Provisional headers are shown。
+- 304 Not Modified 是浏览器和服务器确认了一次缓存的有效性，再使用缓存，多一次确认（If-Modified-Since/etag）请求。
 
 ## 8. HTTP1.0 vs HTTP 1.1 vs HTTP2.0
 ### 8.1 HTTP1.0和HTTP1.1的区别
