@@ -27,20 +27,34 @@
       - [4.1.6.8 拥塞控制](#4168-拥塞控制)
 - [5. 在浏览器中输入url地址 ->> 显示主页的过程](#5-在浏览器中输入url地址---显示主页的过程)
 - [6. Get和Post的区别](#6-get和post的区别)
-- [7. HTTP状态码](#7-http状态码)
-  - [7.1 200 OK (from cache) vs 304 Not Modified](#71-200-ok-from-cache-vs-304-not-modified)
-- [8. HTTP1.0 vs HTTP 1.1 vs HTTP2.0](#8-http10-vs-http-11-vs-http20)
-  - [8.1 HTTP1.0和HTTP1.1的区别](#81-http10和http11的区别)
-  - [8.2 HTTP1.1和HTTP2.0的区别](#82-http11和http20的区别)
-- [9. HTTP 缓存](#9-http-缓存)
-  - [9.1 缓存的分类](#91-缓存的分类)
-  - [9.2 缓存的机制](#92-缓存的机制)
-  - [9.3 用户行为与缓存](#93-用户行为与缓存)
-- [10. Cookies 和 Session的区别](#10-cookies-和-session的区别)
-- [11. DNS解析过程](#11-dns解析过程)
-- [12. 常用协议的端口](#12-常用协议的端口)
-- [13. HTTP和HTTPs的区别](#13-http和https的区别)
-- [14. 使用HTTPS方式与Web服务器通信时有以下几个步骤(HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，要比http协议安全)](#14-使用https方式与web服务器通信时有以下几个步骤https协议是由sslhttp协议构建的可进行加密传输身份认证的网络协议要比http协议安全)
+- [7. HTTP报文](#7-http报文)
+  - [7.1 HTTP 请求方法](#71-http-请求方法)
+  - [7.2 HTTP 请求 URL](#72-http-请求-url)
+  - [7.3 请求头部](#73-请求头部)
+    - [7.3.1 通用标头](#731-通用标头)
+    - [7.3.2 请求标头](#732-请求标头)
+    - [7.3.3 响应标头](#733-响应标头)
+    - [7.3.4 实体标头](#734-实体标头)
+- [8. HTTP状态码](#8-http状态码)
+  - [8.1 200 OK (from cache) vs 304 Not Modified](#81-200-ok-from-cache-vs-304-not-modified)
+- [9. HTTP1.0 vs HTTP 1.1 vs HTTP2.0](#9-http10-vs-http-11-vs-http20)
+  - [9.1 HTTP1.0和HTTP1.1的区别](#91-http10和http11的区别)
+  - [9.2 HTTP1.1和HTTP2.0的区别](#92-http11和http20的区别)
+- [10. HTTP 缓存](#10-http-缓存)
+  - [10.1 缓存的分类](#101-缓存的分类)
+  - [10.2 缓存的机制](#102-缓存的机制)
+  - [10.3 用户行为与缓存](#103-用户行为与缓存)
+- [11. Cookies 和 Session的区别](#11-cookies-和-session的区别)
+  - [11.1 cookie、sessionStorage、localStorage 异同点](#111-cookiesessionstoragelocalstorage-异同点)
+  - [11.2 web storage和cookie的区别](#112-web-storage和cookie的区别)
+- [12. DNS解析过程](#12-dns解析过程)
+- [13. 常用协议的端口](#13-常用协议的端口)
+- [14. HTTP和HTTPs的区别](#14-http和https的区别)
+- [15. HTTPS方式与Web服务器通信步骤](#15-https方式与web服务器通信步骤)
+- [16. CDN](#16-cdn)
+  - [16.1 CDN 优势](#161-cdn-优势)
+  - [16.2 流程](#162-流程)
+- [17. websocket](#17-websocket)
 
 
 ## 1. OSI七层模型 
@@ -451,7 +465,7 @@ TCP 主要通过四个算法来进行拥塞控制：**慢开始、拥塞避免�
 ## 5. 在浏览器中输入url地址 ->> 显示主页的过程
 <img src="../Assets/http_1.jpg" width="500">
 
-1.  先从本地缓存中查找 URL 对应的 IP 地址，如果本地缓存没有，会使用 DNS 协议，先从当地的根域名服务器查找对应的 IP 地址，如果没有则去对应的顶级 DNS 服务器查找，如果还没有则会去权威 DNS 服务器查找。
+1.  先从本地缓存中查找 URL 对应的 IP 地址，如果本地缓存没有，会使用 [DNS 协议](#12-dns解析过程) IP 地址，如果没有则去对应的顶级 DNS 服务器查找，如果还没有则会去权威 DNS 服务器查找。
 
 2.  一般具体的查询顺序是( 浏览器缓存，系统缓存，路由器缓存，IPS服务器缓存，根域名服务器缓存，顶级域名服务器缓存，权威域名服务器缓存 )
 
@@ -470,7 +484,129 @@ TCP 主要通过四个算法来进行拥塞控制：**慢开始、拥塞避免�
 
 ![get](../Assets/get.png)
 
-## 7. HTTP状态码
+（1)、get 是从服务器上获取数据，post是向服务器传送数据。 get 请求返回 request - URL 所指出的任意信息。Post 请求用来发送电子邮件、新闻或发送能由交互用户填写的表格。这是唯一需要在请求中发送body的请求。使用Post请求时需要在报文首部 Content - Length 字段中指出body的长度。**GET产生一个TCP数据包；POST产生两个TCP数据包。**
+
+(2)、get 是把参数数据队列加到提交表单的ACTION属性所指的URL中，值和表单内各个字段一一对应，在URL中可以看到。post是通过HTTP post机制，将表单内各个字段与其内容放置在HTML HEADER内一起传送到ACTION属性所指的URL地址，用户看不到这个过程。
+
+(3)、对于 get 方式，服务器端用Request.QueryString获取变量的值，对于 post 方式，服务器端用Request.Form获取提交的数据。
+
+(4)、get 传送的数据量较小，不能大于2KB。post 传送的数据量较大，一般被默认为不受限制。但理论上，IIS4中最大量为80KB，IIS5中为100KB。 用IIS过滤器的只接受get参数，所以一般大型搜索引擎都是用get方式。
+
+(5)get安全性非常低，post 安全性相对较高。如果这些数据是中文数据而且是非敏感数据，那么使用get；如果用户输入的数据不是中文字符而且包含敏感数据，那么还是使用 post 为好。
+
+## 7. HTTP报文
+
+HTTP 协议主要由三大部分组成：
+
+- 起始行（start line）：描述请求或响应的基本信息；
+- 头部字段（header）：使用 key-value 形式更详细地说明报文；
+- 消息正文（entity）：实际传输的数据，它不一定是纯文本，可以是图片、视频等二进制数据。
+
+其中起始行和头部字段并成为**请求头**或者**响应头**，统称为**Header**；消息正文也叫做实体，称为**body**。
+
+HTTP 协议规定每次发送的报文必须要有 Header，但是可以没有 body，也就是说头信息是必须的，实体信息可以没有。而且在 header 和 body 之间必须要有一个空行（CRLF）
+
+<img src="../Assets/http_header.png" width="300">
+<img src="../Assets/http_header2.png" width="300">
+
+每个报文的起始行都是由三个字段组成：方法、URL 字段和 HTTP 版本字段。
+
+### 7.1 HTTP 请求方法
+- GET 获取资源，GET 方法用来请求访问已被 URI 识别的资源。指定的资源经服务器端解析后返回响应内容。也就是说，如果请求的资源是文本，那就保持原样返回；
+- POST 传输实体，虽然 GET 方法也可以传输主体信息，但是便于区分，我们一般不用 GET 传输实体信息，反而使用 POST 传输实体信息，
+- PUT 传输文件，PUT 方法用来传输文件。就像 FTP 协议的文件上传一样，要求在请求报文的主体中包含文件内容，然后保存到请求 URI 指定的位置。
+    >但是，鉴于 HTTP 的 PUT 方法自身不带验证机制，任何人都可以上传文件 , 存在安全性问题，因此一般的 W eb 网站不使用该方法。若配合 W eb 应用程序的验证机制，或架构设计采用REST（REpresentational State Transfer，表征状态转移）标准的同类 Web 网站，就可能会开放使用 PUT 方法。
+- HEAD 获得响应首部，HEAD 方法和 GET 方法一样，只是不返回报文主体部分。用于确认 URI 的有效性及资源更新的日期时间等。
+- DELETE 删除文件，DELETE 方法用来删除文件，是与 PUT 相反的方法。DELETE 方法按请求 URI 删除指定的资源。
+- OPTIONS 询问支持的方法，OPTIONS 方法用来查询针对请求 URI 指定的资源支持的方法。
+- TRACE 追踪路径，TRACE 方法是让 Web 服务器端将之前的请求通信环回给客户端的方法。
+- CONNECT 要求用隧道协议连接代理，CONNECT 方法要求在与代理服务器通信时建立隧道，实现用隧道协议进行 TCP 通信。主要使用 SSL（Secure Sockets Layer，安全套接层）和 TLS（Transport Layer Security，传输层安全）协议把通信内容加 密后经网络隧道传输。
+
+版本对比：
+
+<img src="../Assets/httprequest.png" width="500">
+
+### 7.2 HTTP 请求 URL
+
+例子：
+```
+http://www.example.com:80/path/to/myfile.html?key1=value1&key2=value2#SomewhereInTheDocument
+```
+
+- **http://** 告诉浏览器使用何种协议。对于大部分 Web 资源，通常使用 HTTP 协议或其安全版本，HTTPS 协议。另外，浏览器也知道如何处理其他协议。例如， mailto: 协议指示浏览器打开邮件客户端；ftp:协议指示浏览器处理文件传输。
+-**www.example.com** 既是一个域名，也代表管理该域名的机构。它指示了需要向网络上的哪一台**主机**发起请求。当然，也可以直接向主机的 IP address 地址发起请求。但直接使用 IP 地址的场景并不常见。
+- **80** 端口。如果访问的该 Web 服务器使用HTTP协议的标准端口（HTTP为80，HTTPS为443）授予对其资源的访问权限，则通常省略此部分。否则端口就是 URI 必须的部分。
+- **/path/to/myfile.html** 是 Web 服务器上资源的路径。以端口后面的第一个 / 开始，到 ? 号之前结束，中间的 每一个/ 都代表了层级（上下级）关系。这个 URL 的请求资源是一个 html 页面。
+- **?key1=value1&key2=value2** 是提供给 Web 服务器的额外参数。如果是 GET 请求，一般带有请求 URL 参数，如果是 POST 请求，则不会在路径后面直接加参数。这些参数是用 & 符号分隔的键/值对列表。key1 = value1 是第一对，key2 = value2 是第二对参数
+- **#SomewhereInTheDocument** 是资源本身的某一部分的一个锚点。锚点代表资源内的一种“书签”，它给予浏览器显示位于该“加书签”点的内容的指示。 例如，在HTML文档上，浏览器将滚动到定义锚点的那个点上；在视频或音频文档上，浏览器将转到锚点代表的那个时间。**值得注意的是 # 号后面的部分，也称为片段标识符**，永远不会与请求一起发送到服务器。
+  
+### 7.3 请求头部
+HTTP 的请求标头分为四种： 通用标头、请求标头、响应标头 和 实体标头，依次来进行详解。
+
+#### 7.3.1 通用标头
+通用标头主要有三个，分别是 Date、Cache-Control 和 Connection
+
+- Date: 格林威治时间
+- [Cache-Control](#Cache-control策略) 是一个通用标头，他可以出现在请求标头和响应标头中，Cache-Control 的种类比较多，虽然说这是一个通用标头，但是又一些特性是请求标头具有的，有一些是响应标头才有的。主要大类有 可缓存性、阈值性、 重新验证并重新加载 和其他特性。
+- [Connection](#91-http10和http11的区别) 决定当前事务（一次三次握手和四次挥手）完成后，是否会关闭网络连接。Connection 有两种，一种是持久性连接，即一次事务完成后不关闭网络连接 Connection: keep-alive。另一种是非持久性连接，即一次事务完成后关闭网络连接 Connection: close。
+- HTTP1.1 其他通用标头如下
+  
+    <img src="../Assets/http_header3.png" width="300">
+
+#### 7.3.2 请求标头
+```
+GET /home.html HTTP/1.1
+Host: developer.mozilla.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://developer.mozilla.org/testpage.html
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+If-Modified-Since: Mon, 18 Jul 2016 02:36:04 GMT
+If-None-Match: "c561c68d0ba92bbeb8b0fff2a9199f722e3a621a"
+Cache-Control: max-age=0 
+```
+
+- Host 请求头指明了服务器的域名（对于虚拟主机来说），以及（可选的）服务器监听的TCP端口号。如果没有给定端口号，会自动使用被请求服务的默认端口（比如请求一个 HTTP 的 URL 会自动使用80作为端口）。
+
+- HTTP Referer 属性是请求标头的一部分，当浏览器向 web 服务器发送请求的时候，一般会带上 Referer，告诉服务器该网页是从哪个页面链接过来的，服务器因此可以获得一些信息用于处理。
+
+- Upgrade-Insecure-Requests 是一个请求标头，用来向服务器端发送信号，表示客户端优先选择加密及带有身份验证的响应。
+  
+- If-Modified-Since 使其成为条件请求：
+  - 返回200，只有在给定日期的最后一次修改资源后，服务器才会以200状态发送回请求的资源。
+  - 如果请求从开始以来没有被修改过，响应会返回304并且没有任何响应体
+
+- If-None-Match 使请求成为条件请求。 对于 GET 和 HEAD 方法，仅当服务器没有与给定资源匹配的 ETag 时，服务器才会以200状态发送回请求的资源。 对于其他方法，仅当最终现有资源的ETag与列出的任何值都不匹配时，才会处理请求。
+
+- 内容协商
+  - Accept 接受请求 HTTP 标头会通告客户端其能够理解的 MIME 类型
+    >MIME: MIME (Multipurpose Internet Mail Extensions) 是描述消息内容类型的因特网标准。MIME 消息能包含文本、图像、音频、视频以及其他应用程序专用的数据。
+  - Accept-Charsetaccept-charset 属性规定服务器处理表单数据所接受的字符集。
+  - 首部字段 Accept-Language 用来告知服务器用户代理能够处理的自然语言集（指中文或英文等），以及自然语言集的相对优先级。可一次指定多种自然语言集。
+
+#### 7.3.3 响应标头
+
+- [响应状态码](#8-http状态码)
+- Access-Control-Allow-Origin 一个返回的 HTTP 标头可能会具有 Access-Control-Allow-Origin ，Access-Control-Allow-Origin 指定一个来源，它告诉浏览器允许该来源进行资源访问。 否则-对于没有凭据的请求 *通配符，告诉浏览器允许任何源访问资源。
+- Keep-Alive 表示的是 Connection 非持续连接的存活时间
+  - timeout：指示空闲连接必须保持打开状态的最短时间（以秒为单位）。
+  - max：指示在关闭连接之前可以在此连接上发送的最大请求数。
+- Server 服务器标头包含有关原始服务器用来处理请求的软件的信息。
+- Set-Cookie
+- Transfer-Encoding 首部字段 Transfer-Encoding 规定了传输报文主体时采用的编码方式。
+- X-Frame-Options HTTP 首部字段是可以自行扩展的。所以在 Web 服务器和浏览器的应用上，会出现各种非标准的首部字段。
+
+#### 7.3.4 实体标头
+
+- Content-Length 实体报头指示实体主体的大小，以字节为单位，发送到接收方。
+- Content-Language 实体报头描述了客户端或者服务端能够接受的语言，例如
+- Content-Encoding 这个实体报头用来压缩媒体类型。Content-Encoding 指示对实体应用了何种编码。
+  - 常见的内容编码有这几种： gzip、compress、deflate、identity ，这个属性可以应用在请求报文和响应报文中
+
+## 8. HTTP状态码
 
 ![http_status](../Assets/http_status.png)
 
@@ -487,13 +623,13 @@ TCP 主要通过四个算法来进行拥塞控制：**慢开始、拥塞避免�
 - 500 Internal Server Error 服务器发生不可预期的错误，导致无法完成客户端的请求。
 - 503 Service Unavailable 服务器当前不能够处理客户端的请求，在一段时间之后，服务器可能会恢复正常。
 
-### 7.1 200 OK (from cache) vs 304 Not Modified
+### 8.1 200 OK (from cache) vs 304 Not Modified
 
 - 200 OK (from cache)  是浏览器没有跟服务器确认，直接用了浏览器缓存，最快。一般在expires/max-age头部有效时不会发送请求。因为请求根本没有产生，所以在chrome下请求头部会显示：Provisional headers are shown。
 - 304 Not Modified 是浏览器和服务器确认了一次缓存的有效性，再使用缓存，多一次确认（If-Modified-Since/etag）请求。
 
-## 8. HTTP1.0 vs HTTP 1.1 vs HTTP2.0
-### 8.1 HTTP1.0和HTTP1.1的区别
+## 9. HTTP1.0 vs HTTP 1.1 vs HTTP2.0
+### 9.1 HTTP1.0和HTTP1.1的区别
 
 - 长连接
     - HTTP1.0默认使用短连接，每次请求都需要建立新的TCP连接，连接不能复用。
@@ -514,13 +650,13 @@ TCP 主要通过四个算法来进行拥塞控制：**慢开始、拥塞避免�
 - 新增一些错误通知状态码
     - HTTP1.1中新增了24个错误状态响应码，如409（Conflict）表示请求的资源与资源的当前状态发生冲突。
 
-### 8.2 HTTP1.1和HTTP2.0的区别
+### 9.2 HTTP1.1和HTTP2.0的区别
 
 ![http2](../Assets/http2.0.png)
 
-## 9. HTTP 缓存
+## 10. HTTP 缓存
 
-### 9.1 缓存的分类
+### 10.1 缓存的分类
 
 缓存分为**服务端侧**（server side，比如 Nginx、Apache）和**客户端侧**（client side，比如 web browser）。
 
@@ -528,7 +664,7 @@ TCP 主要通过四个算法来进行拥塞控制：**慢开始、拥塞避免�
 
 客户端侧缓存一般指的是**浏览器缓存**，目的就是加速各种静态资源的访问，想想现在的大型网站，随便一个页面都是一两百个请求，每天 pv 都是亿级别，如果没有缓存，用户体验会急剧下降、同时服务器压力和网络带宽都面临严重的考验。
 
-### 9.2 缓存的机制
+### 10.2 缓存的机制
 浏览器缓存机制，其实主要就是HTTP协议定义的缓存机制（如： Expires； Cache-control等）。
 
 浏览器第一次请求流程图和浏览器再次请求时：
@@ -541,7 +677,7 @@ TCP 主要通过四个算法来进行拥塞控制：**慢开始、拥塞避免�
 
     Expires是Web服务器响应消息头字段，在响应http请求时告诉浏览器在过期时间前浏览器可以直接从浏览器缓存取数据，而无需再次请求。不过Expires 是HTTP 1.0的东西，现在默认浏览器均默认使用HTTP 1.1，所以它的作用基本忽略。Expires 的一个缺点就是，返回的到期时间是服务器端的时间，这样存在一个问题，如果客户端的时间与服务器的时间相差很大（比如时钟不同步，或者跨时区），那么误差就很大，所以在HTTP 1.1版开始，使用Cache-Control: max-age=秒替代。
 
-- **Cache-control策略**：
+- #### Cache-control策略：
   
     Cache-Control与Expires的作用一致，都是指明当前资源的有效期，控制浏览器是否直接从浏览器缓存取数据还是重新发请求到服务器取数据。只不过Cache-Control的选择更多，设置更细致，如果同时设置的话，其优先级高于Expires。
 
@@ -588,7 +724,7 @@ TCP 主要通过四个算法来进行拥塞控制：**慢开始、拥塞避免�
 
     <img src="../Assets/cache3.jpg" width="500">
 
-### 9.3 用户行为与缓存
+### 10.3 用户行为与缓存
 |  用户操作  | Expires/Cache-Control | Last-Modified/Etag |
 | -------- |------------------- | ------|
 | 地址栏回车 | 有效 | 有效
@@ -598,7 +734,7 @@ TCP 主要通过四个算法来进行拥塞控制：**慢开始、拥塞避免�
 | F5/按钮刷新 | 无效（浏览器重置max-age=0) | 有效
 | Ctrl+F5刷新 | 无效（重置CC=no-cache）| 无效（请求头丢弃该选项）
 
-## 10. Cookies 和 Session的区别
+## 11. Cookies 和 Session的区别
 HTTP 协议是一种无状态协议，即每次服务端接收到客户端的请求时，都是一个全新的请求，服务器并不知道客户端的历史请求记录；Session 和 Cookie 的主要目的就是为了弥补 HTTP 的无状态特性。
 
 >Session 是什么?
@@ -621,7 +757,39 @@ HTTP 协议是一种无状态协议，即每次服务端接收到客户端的请
 >
 >例子：在每个超链接上添加一个PHPSESSID=$sid 或者 使用session.use_trans_sid=1，php.ini中配置
 
-## 11. DNS解析过程
+### 11.1 cookie、sessionStorage、localStorage 异同点
+
+在html5 中 webStorage 包含 sessionStorage 和 localStorage
+
+共同点：
+
+- 都保存在浏览器端，且是同源的
+
+区别：
+
+- cookie 数据始终在同源的http请求中携带，而 webStorage 不会再请求中携带，仅仅在本地存储
+
+- 存储大小区别，cookie 是4k，webStorage 可以达到5M甚至更大
+
+- 数据有效时间区别： sessionStorage 仅仅是会话级别的存储，它只在当前浏览器关闭前有效，不能持久保持；localStorage 始终有效，即使窗口或浏览器关闭也一直有效，除非用户手动删除，其才会失效；cookie 只在设置的 cookie 过期时间之前一直有效。
+
+- 作用域区别：sessionStorage 不在不同的浏览器窗口中共享，即使是同一个页面； localStorage 和 cookie 在所有同源窗口是共享的
+
+- Web Storage 支持事件通知机制，可以将数据更新的通知发送给监听者。Web Storage 的 api 接口使用更方便。
+
+### 11.2 web storage和cookie的区别
+
+Web Storage的概念和cookie相似，区别是它是为了**更大容量存储设计**的。Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。
+
+除此之外，Web Storage拥有setItem,getItem,removeItem,clear等js自带的方法，不像cookie需要前端开发者自己封装setCookie，getCookie。
+
+但是Cookie也是不可以或缺的：Cookie的作用是与服务器进行交互，作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生。
+
+Cookies:服务器和客户端都可以访问；大小只有4KB左右；有有效期，过期后将会删除；
+
+本地存储：只有本地浏览器端可访问数据，服务器不能访问本地存储直到故意通过POST或者GET的通道发送到服务器；每个域5MB；没有过期数据，它将保留直到用户从浏览器清除或者使用Javascript代码移除。
+
+## 12. DNS解析过程
 ![port](../Assets/dns.jpg)
 1、DNS客户端（DNS_Client）检查HOSTS文件及本地DNS缓存，没有找到对应的记录；
 
@@ -643,16 +811,17 @@ HTTP 协议是一种无状态协议，即每次服务端接收到客户端的请
 
 10、DNS_Client 向 IP_Address 的服务器发送数据传输请求，建立连接，解析完毕。
 
-## 12. 常用协议的端口
+## 13. 常用协议的端口
 ![port](../Assets/port.png)
 
-## 13. HTTP和HTTPs的区别
+## 14. HTTP和HTTPs的区别
 - https协议需要到CA申请证书，一般免费证书较少，因而需要一定费用。
 - http是超文本传输协议，协议运行在TCP之上，信息是明文传输，https则是具有安全性的ssl加密传输协议，运行在SSL/TLS之上，SSL/TLS运行在TCP之上，信息是加密传输。
 - http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。
 - http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。
 
-## 14. 使用HTTPS方式与Web服务器通信时有以下几个步骤(HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，要比http协议安全)
+## 15. HTTPS方式与Web服务器通信步骤
+(HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，要比http协议安全)
 - 客户使用https的URL访问Web服务器，要求与Web服务器建立SSL连接（通知可加密的算法）。
 - Web服务器收到客户端请求后，会将网站的电子证书（证书中包含公钥）传送一份给客户端。
 - 客户端确认电子证书是否刚才访问网站所属
@@ -660,4 +829,105 @@ HTTP 协议是一种无状态协议，即每次服务端接收到客户端的请
 - Web服务器利用自己的私钥解密出会话密钥（客户端发来的对称加密密钥）。
 - Web服务器利用对称密钥加密与客户端之间的通信。
 
+## 16. CDN
 
+CDN：Content Delivery Network/Content Ddistribute Network，即内容分发网络。客户端访问网站的过程：
+
+没有 CDN：
+用户在浏览器访问栏中输入要访问的域名。浏览器向 DNS 服务器请求对该域名的解析。DNS 服务器返回该域名的 IP 地址给浏览器。浏览器使用该 IP 地址向服务器请求内容。服务器将用户请求的内容返回给浏览器。
+
+使用了 CDN：
+
+- 用户在浏览器中输入要访问的域名。
+
+- 浏览器向 DNS 服务器请求对域名进行解析。由于 CDN 对域名解析进行了调整，DNS 服务器会最终将域名的解析权交给 CNAME 指向的 CDN 专用 DNS 服务器。
+
+- CDN 的 DNS 服务器将 CDN 的负载均衡设备 IP 地址返回给用户。
+
+- 用户向 CDN 的负载均衡设备发起内容 URL 访问请求。
+
+- CDN 负载均衡设备会为用户选择一台合适的缓存服务器提供服务，选择的依据包括：根据用户 IP 地址，判断哪一台服务器距离用户最近；根据用户所请求的 URL 中携带的内容名称，判断哪一台服务器上有用户所需内容；查询各个服务器的负载情况，判断哪一台服务器的负载较小。基于以上这些依据的综合分析之后，负载均衡设置会把缓存服务器的 IP 地址返回给用户。
+
+- 用户向缓存服务器发出请求。
+
+- 缓存服务器响应用户请求，将用户所需内容传送到用户。如果这台缓存服务器上并没有用户想要的内容，而负载均衡设备依然将它分配给了用户，那么这台服务器就要向它的上一级缓存服务器请求内容，直至追溯到网站的源服务器将内容拉取到本地。
+
+### 16.1 CDN 优势
+
+CDN 节点解决了跨运营商和跨地域访问的问题，访问延时大大降低。大部分请求在CDN边缘节点完成，CDN起到了分流作用，减轻了源服务器的负载。
+
+### 16.2 流程
+关于缓存
+没有 CDN：浏览器缓存
+
+使用了 CDN：浏览器缓存 + CDN缓存
+
+在用户第一次访问网站后，网站的一些静态资源如图片等就会被下载到本地，作为缓存，当用户第二次访问该网站的时候，浏览器就会从缓存中加载资源，不用向服务器请求资源，从而提高了网站的访问速度。
+
+而若使用了 CDN，当浏览器本地缓存的资源过期之后，浏览器不是直接向源站点请求资源，而是向 CDN 边缘节点请求资源，CDN 边缘节点中也存在缓存，若 CDN 中的缓存也过期，那就由 CDN 边缘节点向源站点发出回源请求来获取最新资源。请求数据流程图如下：
+
+<img src="../Assets/httprequest_2.png" width="500">
+
+## 17. websocket
+websocket是HTML5的一个新协议，它允许服务端向客户端传递信息，实现浏览器和客户端双工通信故事因为 HTTP 协议有一个缺陷：通信只能由客户端发起。
+
+举例来说，我们想了解今天的天气，只能是客户端向服务器发出请求，服务器返回查询结果。HTTP 协议做不到服务器主动向客户端推送信息。这种单向请求的特点，注定了如果服务器有连续的状态变化，客户端要获知就非常麻烦。我们只能使用"轮询"：每隔一段时候，就发出一个询问,轮询的效率低，非常浪费资源（因为必须不停连接，或者 HTTP 连接始终打开）。因此，工程师们一直在思考，有没有更好的方法。
+
+特点：
+
+websocket的特点服务器可以主动向客户端推送信息，客户端也可以主动向服务器发送信息，是真正的双向平等对话，属于服务器推送技术的一种。
+
+- 与 HTTP 协议有着良好的兼容性。默认端口也是 80 和 443 ，并且握手阶段采用 HTTP 协议，因此握手时不容易屏蔽，能通过各种 HTTP 代理服务器。 
+- 建立在TCP协议基础之上，和http协议同属于应用层
+- 数据格式比较轻量，性能开销小，通信高效。 
+- 可以发送文本，也可以发送二进制数据。 
+- 没有同源限制，客户端可以与任意服务器通信协议标识符是ws（如果加密，则为wss），服务器网址就是 URL,如ws://localhost:8023
+
+```
+//client
+<body>
+   <div id="myname"></div>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+   <script>
+      var count = 0;
+      const socket = io.connect('http://localhost:3000')
+      socket.on('mynameEv', (data)=>{
+          document.getElementById("myname").innerHTML = data.name;
+         console.log(data.name)
+         setInterval(()=>{
+                count++
+                socket.emit('yournameEv', { name:"飞旋"+count})
+         },1000)
+
+      })
+   </script>
+</body>
+```
+```
+//server
+var app = require('express')();
+var http = require('http');
+var socketio  = require("socket.io");
+const server = http.createServer(app)
+const io = socketio(server)
+var count = 0;
+// WebSocket 连接服务器
+io.on('connection', (socket)=> {
+    //// 所有的事件触发响应都写在这里
+    setInterval(()=>{
+        count++
+        //向建立该连接的客户端发送消息
+        socket.emit('mynameEv', { name:"你我贷"+count})
+    },1000)
+    //监听客户端发送信息
+    socket.on('yournameEv', function (data) {
+        console.log(data)
+    })
+})
+
+app.get('/', function (req, res) {
+    res.sendfile(__dirname + '/index.html');
+});
+// 启用3000端口
+server.listen(3000)
+```
