@@ -25,10 +25,12 @@
       - [4.1.6.6 校验和](#4166-校验和)
       - [4.1.6.7 序列号和确认应答(和前面一样)](#4167-序列号和确认应答和前面一样)
       - [4.1.6.8 拥塞控制](#4168-拥塞控制)
+    - [4.1.7 维护TCP连接](#417-维护tcp连接)
 - [5. 在浏览器中输入url地址 ->> 显示主页的过程](#5-在浏览器中输入url地址---显示主页的过程)
 - [6. Get和Post的区别](#6-get和post的区别)
 - [7. HTTP报文](#7-http报文)
   - [7.1 HTTP 请求方法](#71-http-请求方法)
+    - [7.1.1 Post数据类型](#711-post数据类型)
   - [7.2 HTTP 请求 URL](#72-http-请求-url)
   - [7.3 请求头部](#73-请求头部)
     - [7.3.1 通用标头](#731-通用标头)
@@ -43,10 +45,13 @@
 - [10. HTTP 缓存](#10-http-缓存)
   - [10.1 缓存的分类](#101-缓存的分类)
   - [10.2 缓存的机制](#102-缓存的机制)
-  - [10.3 用户行为与缓存](#103-用户行为与缓存)
+  - [10.3 强缓存和协商缓存的区别](#103-强缓存和协商缓存的区别)
+  - [10.4 用户行为与缓存](#104-用户行为与缓存)
 - [11. Cookies 和 Session的区别](#11-cookies-和-session的区别)
-  - [11.1 cookie、sessionStorage、localStorage 异同点](#111-cookiesessionstoragelocalstorage-异同点)
-  - [11.2 web storage和cookie的区别](#112-web-storage和cookie的区别)
+  - [11.1 cookie介绍](#111-cookie介绍)
+    - [11.1.1 cookie属性](#1111-cookie属性)
+  - [11.2 cookie、sessionStorage、localStorage 异同点](#112-cookiesessionstoragelocalstorage-异同点)
+  - [11.3 web storage和cookie的区别](#113-web-storage和cookie的区别)
 - [12. DNS解析过程](#12-dns解析过程)
 - [13. 常用协议的端口](#13-常用协议的端口)
 - [14. HTTP和HTTPs的区别](#14-http和https的区别)
@@ -458,9 +463,11 @@ TCP 主要通过四个算法来进行拥塞控制：**慢开始、拥塞避免�
 
     如果网络中发生发送方没有及时接收到 ACK 确认，也就是超时的情况，则认为在本网络中当前发送窗口过大了，于是 ssthresh 重新设定为当前窗口的一半，同时当前窗口大小降为 1 ，并执行慢开始算法。
 
+#### 4.1.7 维护TCP连接
 
-
-
+- KeepAlive通过定时发送探测包来探测连接的对端是否存活
+- 启动定时器来检查
+- sleep+定时发送数据
 
 ## 5. 在浏览器中输入url地址 ->> 显示主页的过程
 <img src="../Assets/http_1.jpg" width="500">
@@ -518,13 +525,25 @@ HTTP 协议规定每次发送的报文必须要有 Header，但是可以没有 b
     >但是，鉴于 HTTP 的 PUT 方法自身不带验证机制，任何人都可以上传文件 , 存在安全性问题，因此一般的 W eb 网站不使用该方法。若配合 W eb 应用程序的验证机制，或架构设计采用REST（REpresentational State Transfer，表征状态转移）标准的同类 Web 网站，就可能会开放使用 PUT 方法。
 - HEAD 获得响应首部，HEAD 方法和 GET 方法一样，只是不返回报文主体部分。用于确认 URI 的有效性及资源更新的日期时间等。
 - DELETE 删除文件，DELETE 方法用来删除文件，是与 PUT 相反的方法。DELETE 方法按请求 URI 删除指定的资源。
-- OPTIONS 询问支持的方法，OPTIONS 方法用来查询针对请求 URI 指定的资源支持的方法。
+- OPTIONS 询问支持的方法，OPTIONS 方法用来查询针对请求 URL 指定的资源支持的方法。用于获取目的资源所支持的通信选项（支持的协议头，扩展的自定义协议头）还有测试到服务器到网络性能，类似于ping命令。
 - TRACE 追踪路径，TRACE 方法是让 Web 服务器端将之前的请求通信环回给客户端的方法。
 - CONNECT 要求用隧道协议连接代理，CONNECT 方法要求在与代理服务器通信时建立隧道，实现用隧道协议进行 TCP 通信。主要使用 SSL（Secure Sockets Layer，安全套接层）和 TLS（Transport Layer Security，传输层安全）协议把通信内容加 密后经网络隧道传输。
 
 版本对比：
 
 <img src="../Assets/httprequest.png" width="500">
+
+#### 7.1.1 Post数据类型
+默认：Content-Type: application/x-www-form-urlencoded
+
+- Content-Type: application/json
+  这个类型一般用来发送json类型的数据。比如 {"title":"test","sub":[1,2,3]}
+
+- Content-Type: multipart/form-data
+  此类型一般用来发送文件/图片
+
+- Content-Type: text/xml
+  这个post发送的data是xml格式
 
 ### 7.2 HTTP 请求 URL
 
@@ -628,6 +647,27 @@ Cache-Control: max-age=0
 - 200 OK (from cache)  是浏览器没有跟服务器确认，直接用了浏览器缓存，最快。一般在expires/max-age头部有效时不会发送请求。因为请求根本没有产生，所以在chrome下请求头部会显示：Provisional headers are shown。
 - 304 Not Modified 是浏览器和服务器确认了一次缓存的有效性，再使用缓存，多一次确认（If-Modified-Since/etag）请求。
 
+304 的标准解释是：Not Modified 客户端有缓冲的文档并发出了一个条件性的请求（一般是提供If-Modified-Since头表示客户只想比指定日期更新的文档）。服务器告诉客户，原来缓冲的文档还可以继续使用。
+
+如果客户端在请求一个文件的时候，发现自己缓存的文件有 Last Modified ，那么在请求中会包含 If Modified Since ，这个时间就是缓存文件的 Last Modified 。
+
+因此，如果请求中包含 If Modified Since，就说明已经有缓存在客户端。只要判断这个时间和当前请求的文件的修改时间就可以确定是返回 304 还是 200 。
+
+对于静态文件，例如：CSS、图片，服务器会自动完成 Last Modified 和 If Modified Since 的比较，完成缓存或者更新。但是对于动态页面，就是动态产生的页面，往往没有包含 Last Modified 信息，这样浏览器、网关等都不会做缓存，也就是在每次请求的时候都完成一个 200 的请求。
+
+因此，对于动态页面做缓存加速，首先要在 Response 的 HTTP Header 中增加 Last Modified 定义，其次根据 Request 中的 If Modified Since 和被请求内容的更新时间来返回 200 或者 304 。虽然在返回 304 的时候已经做了一次数据库查询，但是可以避免接下来更多的数据库查询，并且没有返回页面内容而只是一个 HTTP Header，从而大大的降低带宽的消耗，对于用户的感觉也是提高。
+
+当这些缓存有效的时候，通过 HttpWatch 查看一个请求会得到这样的结果：
+第一次访问 200
+
+鼠标点击二次访问 (Cache)
+
+按F5刷新 304
+
+按Ctrl+F5强制刷新 200
+
+如果是这样的就说明缓存真正有效了。以上就是我对 HTTP 304 的一个理解。
+
 ## 9. HTTP1.0 vs HTTP 1.1 vs HTTP2.0
 ### 9.1 HTTP1.0和HTTP1.1的区别
 
@@ -664,6 +704,10 @@ Cache-Control: max-age=0
 
 客户端侧缓存一般指的是**浏览器缓存**，目的就是加速各种静态资源的访问，想想现在的大型网站，随便一个页面都是一两百个请求，每天 pv 都是亿级别，如果没有缓存，用户体验会急剧下降、同时服务器压力和网络带宽都面临严重的考验。
 
+强缓存简单理解就是:给浏览器缓存设置过期时间，超过这个时间之后缓存就是过期,浏览器需要重新请求
+
+协商缓存解决了无法及时获取更新资源的问题。它利用下面会讲到的两组字段,对资源做标识.然后由服务器做分析，如果**资源未更新，则返回304状态码**。那么浏览器则会从缓存中读取资源，否则重新请求资源。
+
 ### 10.2 缓存的机制
 浏览器缓存机制，其实主要就是HTTP协议定义的缓存机制（如： Expires； Cache-control等）。
 
@@ -673,11 +717,11 @@ Cache-Control: max-age=0
 <img src="../Assets/cache2.png" width="400">
 
 
-- Expires策略：
+- Expires策略(强缓存机制)：
 
     Expires是Web服务器响应消息头字段，在响应http请求时告诉浏览器在过期时间前浏览器可以直接从浏览器缓存取数据，而无需再次请求。不过Expires 是HTTP 1.0的东西，现在默认浏览器均默认使用HTTP 1.1，所以它的作用基本忽略。Expires 的一个缺点就是，返回的到期时间是服务器端的时间，这样存在一个问题，如果客户端的时间与服务器的时间相差很大（比如时钟不同步，或者跨时区），那么误差就很大，所以在HTTP 1.1版开始，使用Cache-Control: max-age=秒替代。
 
-- #### Cache-control策略：
+- #### Cache-control策略(强缓存机制)：
   
     Cache-Control与Expires的作用一致，都是指明当前资源的有效期，控制浏览器是否直接从浏览器缓存取数据还是重新发请求到服务器取数据。只不过Cache-Control的选择更多，设置更细致，如果同时设置的话，其优先级高于Expires。
 
@@ -699,13 +743,13 @@ Cache-Control: max-age=0
 >
 >max-stale指示客户机可以接收超出超时期间的响应消息。如果指定max-stale消息的值，那么客户机可以接收超出超时期指定值之内的响应消息。
 
-- Last-Modified/If-Modified-Since：Last-Modified/If-Modified-Since要配合Cache-Control使用。
+- Last-Modified/If-Modified-Since：Last-Modified/If-Modified-Since要配合Cache-Control使用(协商缓存机制)。
 
     Last-Modified：标示这个响应资源的最后修改时间。web服务器在响应请求时，告诉浏览器资源的最后修改时间。
 
     If-Modified-Since：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Last-Modified声明，则再次向web服务器请求时带上头 If-Modified-Since，表示请求时间。web服务器收到请求后发现有头If-Modified-Since 则与被请求资源的最后修改时间进行比对。若最后修改时间较新，说明资源又被改动过，则响应整片资源内容（写在响应消息包体内），HTTP 200；若最后修改时间较旧，说明资源无新修改，则响应HTTP 304 (无需包体，节省浏览)，告知浏览器继续使用所保存的cache。
 
-- Etag/If-None-Match：Etag/If-None-Match也要配合Cache-Control使用。
+- Etag/If-None-Match：Etag/If-None-Match也要配合Cache-Control使用(协商缓存机制)。
     
     Etag：web服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识（生成规则由服务器决定）。Apache中，ETag的值，默认是对文件的索引节（INode），大小（Size）和最后修改时间（MTime）进行Hash后得到的。
 
@@ -724,15 +768,21 @@ Cache-Control: max-age=0
 
     <img src="../Assets/cache3.jpg" width="500">
 
-### 10.3 用户行为与缓存
-|  用户操作  | Expires/Cache-Control | Last-Modified/Etag |
-| -------- |------------------- | ------|
-| 地址栏回车 | 有效 | 有效
+### 10.3 强缓存和协商缓存的区别
+
+- 强缓存只有首次请求会跟服务端通信，读取缓存资源时不用发送请求。返回200。
+- 协商缓存总会与服务器交互，第一次是拿数据和E-tag的过程，之后每次凭E-tag询问是否更新。命中缓存返回304。
+- 二者之间最大的区别就是：强缓存只通信一次；协商缓存每次都通信询问。
+
+### 10.4 用户行为与缓存
+|  用户操作  | Expires/Cache-Control | Last-Modified/Etag | 具体|
+| -------- |------------------- | ------|----|
+| 地址栏回车 | 有效 | 有效 | 如果值为private或must-revalidate,则只有第一次访问时会访问服务器,以后就不再访问。如果值为no-cache,那么每次都会访问。如果值为max-age,则在过期之前不会重复访问。|
 | 页面链接跳转 | 有效 | 有效
-| 新开窗口 | 有效 | 有效
-| 前进、后退 | 有效 | 有效
-| F5/按钮刷新 | 无效（浏览器重置max-age=0) | 有效
-| Ctrl+F5刷新 | 无效（重置CC=no-cache）| 无效（请求头丢弃该选项）
+| 新开窗口 | 有效 | 有效 |如果指定cache-control的值为private、no-cache、must-revalidate,那么打开新窗口访问时都会重新访问服务器。而如果指定了max-age值,那么在此值内的时间里就不会重新访问服务器,例如：Cache-control: max-age=5 表示当访问此网页后的5秒内不会去再次访问服务器。|
+| 前进、后退 | 有效 | 有效 | 如果值为private、must-revalidate、max-age,则不会重访问,而如果为no-cache,则每次都重复访问。
+| F5/按钮刷新 | 无效（浏览器重置max-age=0) | 有效 | 无论为何值,都会重复访问.（可能返回状态码：200、304，这个不同浏览器处理是不一样的，FireFox正常，Chrome则会启用缓存(200 from cache) |
+| Ctrl+F5刷新 | 无效（重置CC=no-cache）| 无效（请求头丢弃该选项）| 当做首次进入重新请求(返回状态码200)
 
 ## 11. Cookies 和 Session的区别
 HTTP 协议是一种无状态协议，即每次服务端接收到客户端的请求时，都是一个全新的请求，服务器并不知道客户端的历史请求记录；Session 和 Cookie 的主要目的就是为了弥补 HTTP 的无状态特性。
@@ -756,8 +806,29 @@ HTTP 协议是一种无状态协议，即每次服务端接收到客户端的请
 >禁用cookie，sessionid就不能直接传递了，因为http请求时sessionid就是放在cookie里的。你说的通过url传递的，那是变通的方法，服务器端通过session_id()函数可以获知当前session的sessionid，然后在用PHP生成页面的时候，把sessionid作为参数附加到url里，确实可以实现在禁用cookie的情况下传递sessionid。
 >
 >例子：在每个超链接上添加一个PHPSESSID=$sid 或者 使用session.use_trans_sid=1，php.ini中配置
+### 11.1 cookie介绍
+cookie是当你浏览某个网站的时候，由web服务器存储在你的机器硬盘上的一个小的文本文件。它其中记录了你的用户名、密码、浏览的网页、停留的时间等等信息。当你再次来到这个网站时，web服务器会先看看有没有它上次留下来的cookie。如果有的话，会读取cookie中的内容，来判断使用者，并送出相应的网页内容，比如在页面显示欢迎你的标语，或者让你不用输入ID、密码就直接登录等等。
 
-### 11.1 cookie、sessionStorage、localStorage 异同点
+当客户端要发送http请求时，浏览器会先检查下是否有对应的cookie。有的话，则自动地添加在request header中的cookie字段。注意，每一次的http请求时，如果有cookie，浏览器都会自动带上cookie发送给服务端。
+
+那么把什么数据放到cookie中就很重要了，因为很多数据并不是每次请求都需要发给服务端，毕竟会增加网络开销，浪费带宽。所以对于那设置“每次请求都要携带的信息（最典型的就是身份认证信息）”就特别适合放在cookie中，其他类型的数据就不适合了。
+
+浏览器里面可以设置禁用cookie。
+
+#### 11.1.1 cookie属性
+
+每个cookie都有一定的属性，如什么时候失效，要发送到哪个域名，哪个路径等等。
+
+这些属性是通过cookie选项来设置的，cookie选项包括：expires、domain、path、secure、HttpOnly。
+
+在设置任一个cookie时都可以设置相关的这些属性，当然也可以不设置，这时会使用这些属性的默认值。
+
+- Domain是域名，Path是路径，两者加起来就构成了 URL，Domain和Path一起来限制 cookie 能被哪些 URL 访问。
+- Secure选项用来设置cookie只在确保安全的请求中才会发送。当请求是HTTPS或者其他安全协议时，包含 Secure选项的 cookie 才能被发送至服务器。
+- httpOnly这个选项用来设置cookie是否能通过 js 去访问。默认情况下，cookie不会带httpOnly选项(即为空)，所以默认情况下，客户端是可以通过js代码去访问（包括读取、修改、删除等）这个cookie的。当cookie带httpOnly选项时，客户端则无法通过js代码去访问（包括读取、修改、删除等）这个cookie。
+
+
+### 11.2 cookie、sessionStorage、localStorage 异同点
 
 在html5 中 webStorage 包含 sessionStorage 和 localStorage
 
@@ -777,7 +848,7 @@ HTTP 协议是一种无状态协议，即每次服务端接收到客户端的请
 
 - Web Storage 支持事件通知机制，可以将数据更新的通知发送给监听者。Web Storage 的 api 接口使用更方便。
 
-### 11.2 web storage和cookie的区别
+### 11.3 web storage和cookie的区别
 
 Web Storage的概念和cookie相似，区别是它是为了**更大容量存储设计**的。Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。
 

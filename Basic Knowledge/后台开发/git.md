@@ -1,5 +1,6 @@
 目录
 - [1.git rebase vs git merge](#1git-rebase-vs-git-merge)
+- [2.](#2)
 
 ## 1.git rebase vs git merge
   
@@ -17,3 +18,4 @@
   - 每个 commit 都需要解决冲突
   - 修改所有 commit ID
 
+## 2.

@@ -1,0 +1,54 @@
+<body>
+    <canvas id="can" width="400" height="400"></canvas>
+    <div>1 不管是否点中红球，都能拖动； 2 无缩放</div>
+    <script type="text/javascript">
+        var can = document.getElementById("can");
+        var ctx = can.getContext("2d");
+        var isDown = false;
+        var dx = 0, dy = 0; // 鼠标按下位置的坐标
+        var centerx = 50, centery = 50;  // 圆心坐标 
+
+        // 创建圆,  圆心坐标: x,y
+        function createBlock(x, y) {
+            ctx.clearRect(0, 0, can.width, can.height);
+            ctx.beginPath();
+            ctx.fillStyle = "red";
+            ctx.arc(x, y, 30, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // 鼠标按下，将鼠标按下坐标保存在x,y中  
+        createBlock(centerx, centery);
+        can.onmousedown = function(ev) {
+            var e = ev || event;
+            dx = e.clientX;
+            dy = e.clientY;
+            isDown = true;
+            can.onmousemove = function(ev) {
+                if (isDown) {
+                    var e = ev || event;
+                    var mx = e.clientX;
+                    var my = e.clientY;
+
+                    var _x = mx - dx; // 偏移量x
+                    var _y = my - dy; // 偏移量y
+
+                    createBlock((centerx + _x), (centery + _y));
+                }
+            };
+            //鼠标移开事件  
+            can.onmouseup = function(ev) {
+                isDown = false;
+                var e = ev || event;
+                centerx += (e.clientX - dx);
+                centery += (e.clientY - dy);
+
+                // 重置
+                can.onmousemove = null;
+                can.onmouseup = null;
+            };
+        };
+
+    </script>
+
+</body>

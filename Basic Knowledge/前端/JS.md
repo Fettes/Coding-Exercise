@@ -4,16 +4,20 @@
   - [1.2 instanceof](#12-instanceof)
   - [1.3 JS中===和==的区别 和类型转换？](#13-js中和的区别-和类型转换)
   - [1.4 判断 `[] == ![]`](#14-判断---)
+  - [1.5 判断对象是否为空](#15-判断对象是否为空)
 - [2. prototype](#2-prototype)
   - [2.1 原型链](#21-原型链)
   - [2.2 new一个对象的过程](#22-new一个对象的过程)
 - [3. 继承](#3-继承)
   - [3.1 原型继承](#31-原型继承)
   - [3.2 构造继承](#32-构造继承)
+  - [3.4 组合继承（基本）](#34-组合继承基本)
   - [3.3 寄生组合式继承](#33-寄生组合式继承)
   - [3.4 实例继承](#34-实例继承)
 - [4. 闭包](#4-闭包)
-  - [4.1 循环中使用闭包解决`var`定义函数的问题](#41-循环中使用闭包解决var定义函数的问题)
+  - [4.1 循环中使用闭包解决`var`定义函数的问题（setTimeout）](#41-循环中使用闭包解决var定义函数的问题settimeout)
+  - [4.2 每多过一秒一个数字(setInterval)](#42-每多过一秒一个数字setinterval)
+  - [4.3 一定时间内只发生一次（setTimeout）](#43-一定时间内只发生一次settimeout)
 - [5. 作用域](#5-作用域)
   - [5.1 js作用域](#51-js作用域)
   - [5.2 变量的查找是就近原则去寻找，定义的var变量](#52-变量的查找是就近原则去寻找定义的var变量)
@@ -22,8 +26,7 @@
 - [6. this的理解](#6-this的理解)
   - [6.1 setTimeout、setInterval中的this](#61-settimeoutsetinterval中的this)
   - [6.2 严格模式下的this](#62-严格模式下的this)
-  - [6.3 call,apply,bind的区别](#63-callapplybind的区别)
-- [7. 什么是变量提升？什么是暂时性死区？](#7-什么是变量提升什么是暂时性死区)
+- [7. 变量提升和暂时性死区？](#7-变量提升和暂时性死区)
 - [8. arguments](#8-arguments)
 - [9. 循环体](#9-循环体)
   - [9.1 for...of、for...in 和 forEach、map](#91-forofforin-和-foreachmap)
@@ -35,12 +38,14 @@
   - [11.3 常用方法](#113-常用方法)
   - [11.4 数组去重](#114-数组去重)
   - [11.5 数组最大值](#115-数组最大值)
-  - [11.6 数组扁平化](#116-数组扁平化)
+  - [11.6 数组扁平化[Code]](#116-数组扁平化code)
 - [12. parseInt](#12-parseint)
   - [12.1 ["1", "2", "3"].map(parseInt)](#121-1-2-3mapparseint)
   - [12.2 实现](#122-实现)
 - [13. Ajax](#13-ajax)
   - [13.1 自己实现](#131-自己实现)
+  - [13.2 方法解释](#132-方法解释)
+  - [13.3 使用](#133-使用)
 - [14. ES6](#14-es6)
   - [14.1 let、const 以及 var 的区别](#141-letconst-以及-var-的区别)
   - [14.2 Promise](#142-promise)
@@ -55,12 +60,31 @@
     - [14.3.8 resolve()方法](#1438-resolve方法)
     - [14.3.9 reject()方法](#1439-reject方法)
   - [14.4 箭头函数](#144-箭头函数)
+  - [14.5](#145)
 - [15.Set、Map、WeakSet 和 WeakMap 的区别？](#15setmapweakset-和-weakmap-的区别)
 - [16. 事件流和事件委托](#16-事件流和事件委托)
   - [16.1 DOM事件流](#161-dom事件流)
   - [16.2 事件对象](#162-事件对象)
   - [16.3 事件类型](#163-事件类型)
   - [16.4 事件委托](#164-事件委托)
+- [17. call,apply,bind](#17-callapplybind)
+  - [17.1 手写call](#171-手写call)
+  - [17.2 手写apply](#172-手写apply)
+  - [17.3 手写bind](#173-手写bind)
+- [18. 脚本加载](#18-脚本加载)
+- [18.1 async和defer更常用哪个（区别就在于js执行的时间）？](#181-async和defer更常用哪个区别就在于js执行的时间)
+- [19. 懒加载和预加载](#19-懒加载和预加载)
+  - [19.1 什么是懒加载](#191-什么是懒加载)
+  - [19.2 为什么要用懒加载](#192-为什么要用懒加载)
+  - [19.3 懒加载的原理](#193-懒加载的原理)
+  - [19.4 什么是预加载](#194-什么是预加载)
+  - [19.5 为什么要用预加载](#195-为什么要用预加载)
+  - [19.6 实现预加载的几种办法](#196-实现预加载的几种办法)
+- [20. 柯里化](#20-柯里化)
+  - [20.1 什么是柯里化](#201-什么是柯里化)
+  - [20.2 实现](#202-实现)
+  - [20.3 应用](#203-应用)
+  - [20.4 优劣：](#204-优劣)
 
 ## 1. 数据类型
 
@@ -163,6 +187,42 @@ console.log(person1 === person2); //true,注意复杂数据类型，比较的是
 
 0 == 0; 为true
 
+### 1.5 判断对象是否为空
+
+- 利用 for...in 循环
+
+  ```
+  function isEmpty(obj) {
+    for (let i in Object.keys(obj)) {
+      return false // 进入循环即不为空
+    }
+    return true
+  }
+  console.log(isEmpty(obj)) // true
+  console.log(isEmpty(obj1)) // false
+  console.log(isEmpty(obj2)) // true
+  console.log(isEmpty(obj3)) // true
+  ```
+
+- 利用JSON.stringify()转化为字符串
+  ```
+  let isEmpty = (obj) => (JSON.stringify(obj) === '{}') ? true : false
+  
+  console.log(isEmpty(obj)) // true
+  console.log(isEmpty(obj1)) // false
+  console.log(isEmpty(obj2)) // true
+  console.log(isEmpty(obj3)) // true
+  ```
+
+- 使用Object.keys()将取出对象中的键名，再判断长度
+  ```
+  let isEmpty = (obj) => (Object.keys(obj).length === 0) ? true : false
+
+  console.log(isEmpty(obj)) // true
+  console.log(isEmpty(obj1)) // false
+  console.log(isEmpty(obj2)) // true
+  console.log(isEmpty(obj3)) // true
+  ```
 
 ## 2. prototype
 
@@ -317,6 +377,7 @@ console.log(whiteTtom.name)//whiteTtom
 **为了解决这两种问题，我们还有一种方法就是在构造函数继承。**
 
 ### 3.2 构造继承
+
 ```
 function Animal(name) {
   this.name = name; 
@@ -345,30 +406,109 @@ console.log(tom instanceof Animal); // false
 console.log(tom instanceof Cat); // true
 ```
 
+### 3.4 组合继承（基本）
+```
+function Parent (name) {
+    this.name = name;
+    this.colors = ['red', 'blue', 'green'];
+}
+
+Parent.prototype.getName = function () {
+    console.log(this.name)
+}
+
+function Child (name, age) {
+
+    Parent.call(this, name);
+    
+    this.age = age;
+
+}
+
+Child.prototype = new Parent();
+Child.prototype.constructor = Child;
+
+var child1 = new Child('kevin', '18');
+
+child1.colors.push('black');
+
+console.log(child1.name); // kevin
+console.log(child1.age); // 18
+console.log(child1.colors); // ["red", "blue", "green", "black"]
+
+var child2 = new Child('daisy', '20');
+
+console.log(child2.name); // daisy
+console.log(child2.age); // 20
+console.log(child2.colors); // ["red", "blue", "green"]
+```
+
+组合继承最大的缺点是会调用两次父构造函数。
+
+一次是设置子类型实例的原型的时候：
+```
+Child.prototype = new Parent();
+```
+一次在创建子类型实例的时候：
+```
+var child1 = new Child('kevin', '18');
+```
+回想下 new 的模拟实现，其实在这句中，我们会执行：
+```
+Parent.call(this, name);
+```
+在这里，我们又会调用了一次 Parent 构造函数。
+
+所以，在这个例子中，如果我们打印 child1 对象，我们会发现 Child.prototype 和 child1 都有一个属性为colors，属性值为['red', 'blue', 'green']。
+
 ### 3.3 寄生组合式继承
 ```
-function Animal(name = 'animal') {
-  this.name = name ; 
+function Parent (name) {
+    this.name = name;
+    this.colors = ['red', 'blue', 'green'];
 }
-Animal.prototype.eat= function () {
-  console.log(this.name + '正在吃东西')
-};
-function Cat(furColor){ 
-   Animal.call(this,'小花猫');
-   this.furColor = furColor ;
-};
 
-(function (subType,superType){
-	let prototype = Object.create(superType.prototype);//创建对象
-	prototype.constructor = subType;//还原它本身构造指向
-	subType.prototype = prototype;//赋值原型
-})(Cat,Animal)
+Parent.prototype.getName = function () {
+    console.log(this.name)
+}
 
-let tom = new Cat('black');
-console.log(tom);
+function Child (name, age) {
+    Parent.call(this, name);
+    this.age = age;
+}
+
+// 关键的三步
+var F = function () {};
+
+F.prototype = Parent.prototype;
+
+Child.prototype = new F();
+
+
+var child1 = new Child('kevin', '18');
+
+console.log(child1);
 ```
 
-通过再制造一个临时对象的方式，然后把它的私有属性清除，只指向它自己的原型属性，这样就完美了~
+最后我们封装一下这个继承方法：
+```
+function object(o) {
+    function F() {}
+    F.prototype = o;
+    return new F();
+}
+
+function prototype(child, parent) {
+    var prototype = object(parent.prototype);
+    prototype.constructor = child;
+    child.prototype = prototype;
+}
+
+// 当我们使用的时候：
+prototype(Child, Parent);
+```
+
+这种方式的高效率体现它只调用了一次 Parent 构造函数，并且因此避免了在 Parent.prototype 上面创建不必要的、多余的属性。与此同时，原型链还能保持不变；因此，还能够正常使用 instanceof 和 isPrototypeOf。开发人员普遍认为寄生组合式继承是引用类型最理想的继承范式。
 
 ### 3.4 实例继承
 ```
@@ -411,7 +551,7 @@ B();//1
 ```
 **在 JS 中，闭包存在的意义就是让我们可以间接访问函数内部的变量。**
 
-### 4.1 循环中使用闭包解决`var`定义函数的问题
+### 4.1 循环中使用闭包解决`var`定义函数的问题（setTimeout）
 
 需求：每隔一秒输出一个数字，从 0 - 5；
 ```
@@ -421,7 +561,6 @@ for(var i=0;i<=5;i++){
     },i*1000)        
 }        
 console.log(i)
-
 ```
 输出结果：立即输出一个6，然后每隔一秒输出一个6；
 
@@ -463,6 +602,39 @@ for(let i=0;i<=5;i++){
 }
 
 ```
+
+### 4.2 每多过一秒一个数字(setInterval)
+```
+let lastIntervalId, counter = 5;
+const greeting = delay => {
+  if (counter === 5) {
+    clearInterval(lastIntervalId);
+    lastIntervalId = setInterval(() => {
+      console.log('Hello World. ', delay);
+      greeting(delay + 100);
+    }, delay);
+    counter = 0;
+  }
+counter += 1;
+};
+greeting(100);
+```
+
+### 4.3 一定时间内只发生一次（setTimeout）
+
+```
+<script>
+//定时器 异步运行
+function hello(){
+alert("hello");
+}
+//使用方法名字执行方法
+var t1 = window.setTimeout(hello,1000);
+var t2 = window.setTimeout("hello()",3000);//使用字符串执行方法
+window.clearTimeout(t1);//去掉定时器
+</script>
+```
+
 ## 5. 作用域
 ES6 之前 JS 没有块级作⽤域。例如 
 ```
@@ -640,17 +812,8 @@ setInterval( obj.fn,1000 );//Window
 - 对象的方法中的this: 严格模式下，对象的函数中的this指向该对象
 - 构造函数中的this: 严格模式下，构造函数中的this指向new出来的对象
 
-### 6.3 call,apply,bind的区别
-- 相同点：
-  
-  - 三个函数都会改变this的指向（调用这三个函数的函数内部的this）
 
-- 不同点
-  - bind会产生新的函数，（把对象和函数绑定死后，产生新的函数）
-  - call和apply不会产生新的函数，只是在调用时，绑定一下而已。
-  - call和apply的区别，第一个参数都是要绑定的this，apply第二个参数是数组（是函数的所有参数），call把apply的第二个参数单列出来。
-
-## 7. 什么是变量提升？什么是暂时性死区？
+## 7. 变量提升和暂时性死区？
 
 变量提升就是变量在声明之前就可以使用，值为undefined。
 
@@ -747,6 +910,30 @@ function deepClone(obj) { //递归拷贝
     return t;
 }
 ```
+```
+// 只复制第一层的浅拷贝
+function simpleCopy(obj1) {
+   var obj2 = Array.isArray(obj1) ? [] : {};
+   for (let i in obj1) {
+   obj2[i] = obj1[i];
+  }
+   return obj2;
+}
+var obj1 = {
+   a: 1,
+   b: 2,
+   c: {
+   d: 3
+  }
+}
+var obj2 = simpleCopy(obj1);
+obj2.a = 3;
+obj2.c.d = 4;
+alert(obj1.a); // 1
+alert(obj2.a); // 3
+alert(obj1.c.d); // 4
+alert(obj2.c.d); // 4
+```
 
 ## 11. 数组
 
@@ -837,7 +1024,7 @@ return accumulator = accumulator > currentValue ? accumulator : currentValu
 });
 ```
 
-### 11.6 数组扁平化
+### 11.6 数组扁平化[Code]
 ```
 var array = [1, [2], [3, [4, [5]]]]
 
@@ -941,34 +1128,79 @@ c、对搜索引擎的支持不足
 
 ### 13.1 自己实现
 ```
-// 创建对象
-var xhr = new XMLHttpRequest();
-
-// 打开连接GET请求，请求地址，是否同步
-xhr.open('GET', '/JS-Professional/data.json', false);
-
-xhr.onreadyStateChange = function () {
-// readyState状态码：
-    // 0- （未初始化）：还没有调用send（）方法
-    // 1- （载入）：已经调用send（）方法，正在发送请求
-    // 2- （载入完成）：send（）方法执行完成，已经接收到全部响应内容
-    // 3. （交互）正在解析响应的内容
-    // 4. （完成）响应内容解析完成，可以在客户端调用了
-
-    // 2** - 表示成功处理请求，如200
-    // 3** - 需要重定向，浏览器直接跳转，如301
-    // 4** - 客户端请求错误，如404
-    // 5** - 服务端错误，如500
-
-    if (xhr.readyState === 4){
-        //  此时表示请求已经发送成功(已经接受到服务端返回的信息)
-        if (xhr.status === 200){
-            console.log('请求发送成功', xhr.responseText)
-        }
-    }
+var Ajax={
+  get: function(url, fn) {
+    // XMLHttpRequest对象用于在后台与服务器交换数据   
+    var xhr = new XMLHttpRequest();            
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = function() {
+      // readyState == 4说明请求已完成
+      if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) { 
+        // 从服务器获得数据 
+        fn.call(this, xhr.responseText);  
+      }
+    };
+    xhr.send();
+  },
+  // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
+  post: function (url, data, fn) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    // 添加http头，发送信息至服务器时内容编码类型
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");  
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+        fn.call(this, xhr.responseText);
+      }
+    };
+    xhr.send(data);
+  }
 }
-xhr.send(null);
 ```
+### 13.2 方法解释
+1. open(method, url, async) 方法需要三个参数:
+
+method：发送请求所使用的方法（GET或POST）；与POST相比，GET更简单也更快，并且在大部分情况下都能用；然而，在以下情况中，请使用POST请求：
+
+无法使用缓存文件（更新服务器上的文件或数据库）
+向服务器发送大量数据（POST 没有数据量限制）
+发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
+url：规定服务器端脚本的 URL(该文件可以是任何类型的文件，比如 .txt 和 .xml，或者服务器脚本文件，比如 .asp 和 .php （在传回响应之前，能够在服务器上执行任务）)；
+
+async：规定应当对请求进行异步（true）或同步（false）处理；true是在等待服务器响应时执行其他脚本，当响应就绪后对响应进行处理；false是等待服务器响应再执行。
+
+2. send() 方法可将请求送往服务器。
+
+3. onreadystatechange：存有处理服务器响应的函数，每当 readyState 改变时，onreadystatechange 函数就会被执行。
+
+4. readyState：存有服务器响应的状态信息。（更加具体的状态码信息可自行百度）
+
+0: 请求未初始化（代理被创建，但尚未调用 open() 方法）
+1: 服务器连接已建立（open方法已经被调用）
+2: 请求已接收（send方法已经被调用，并且头部和状态已经可获得）
+3: 请求处理中（下载中，responseText 属性已经包含部分数据）
+4: 请求已完成，且响应已就绪（下载操作已完成）
+5. responseText：获得字符串形式的响应数据。
+
+6. setRequestHeader()：POST传数据时，用来添加 HTTP 头，然后send(data)，注意data格式；GET发送信息时直接加参数到url上就可以，比如url?a=a1&b=b1。
+  
+### 13.3 [使用](https://blog.csdn.net/qq_38409944/article/details/81352251)
+```
+$.ajax({
+    url: ,
+    type: '',
+    dataType: '',
+    data: {
+          
+    },
+    success: function(){
+         
+    },
+    error: function(){
+          
+    }
+ })
+ ```
 
 
 ## 14. ES6
@@ -1203,6 +1435,7 @@ Promise.all = function(promises){
  });
 }
 
+//计数法
 function gen(times,cb){
   let result = [],count=0;
   return function(i,data){
@@ -1289,6 +1522,7 @@ var sum = function (a, b){
 
 - 不可以使用yield命令，因此箭头函数不能用作 Generator 函数。
 
+### 14.5 
 ## 15.Set、Map、WeakSet 和 WeakMap 的区别？
 1、Set
 
@@ -1433,4 +1667,280 @@ window.onload = function(){
 - 使用“事件委托”时，并不是说把事件委托给的元素越靠近顶层就越好。
 - 事件冒泡的过程也需要耗时，越靠近顶层，事件的”事件传播链”越长，也就越耗时。
 - 如果DOM嵌套结构很深，事件冒泡通过大量祖先元素会导致性能损失。
+
+## 17. call,apply,bind
+  借助已实现的方法，改变方法中数据的this指向，减少重复代码，节省内存。
+
+- 语法
+  ```
+  fun.call(thisArg, param1, param2, ...)
+  fun.apply(thisArg, [param1,param2,...])
+  fun.bind(thisArg, param1, param2, ...)
+  ```
+
+- 返回值：
+  ```
+  call/apply：fun执行的结果
+  bind：返回fun的拷贝，并拥有指定的this值和初始参数
+  ```
+
+- 参数
+  - thisArg(可选):
+    - fun的this指向thisArg对象
+    -  非严格模式下：thisArg指定为null，undefined，fun中的this指向window对象.
+    - 严格模式下：fun的this为undefined
+    - 值为原始值(数字，字符串，布尔值)的this会指向该原始值的自动包装对象，如 String、Number、Boolean
+  - param1,param2(可选): 传给fun的参数。
+    - 如果param不传或为 null/undefined，则表示不需要传入任何参数.
+    - apply第二个参数为数组，数组内的值为传给fun的参数。
+ 
+- 调用call/apply/bind的必须是个函数
+
+  call、apply和bind是挂在Function对象上的三个方法,只有函数才有这些方法。
+
+  只要是函数就可以，比如: Object.prototype.toString就是个函数，我们经常看到这样的用法：Object.prototype.toString.call(data)
+
+- 作用：
+
+  改变函数执行时的this指向，目前所有关于它们的运用，都是基于这一点来进行的。
+
+- call与apply的唯一区别
+  
+  传给fun的参数写法不同：
+  - apply是第2个参数，这个参数是一个数组：传给fun参数都写在数组中。
+  - call从第2~n的参数都是传给fun的。
+
+  call/apply与bind的区别
+
+  执行：
+  - call/apply改变了函数的this上下文后马上执行该函数
+  - bind则是返回改变了上下文后的函数,不执行该函数
+
+  返回值:
+  - call/apply 返回fun的执行结果
+  - bind返回fun的拷贝，并指定了fun的this指向，保存了fun的参数。
+  
+  返回值这段在下方bind应用中有详细的示例解析。
+
+### 17.1 手写call
+
+- 根据call的规则设置上下文对象,也就是this的指向。
+- 通过设置context的属性,将函数的this指向隐式绑定到context上
+- 通过隐式绑定执行函数并传递参数。
+- 删除临时属性，返回函数执行结果
+
+```
+Function.prototype.myCall = function (context, ...arr) {
+    if (context === null || context === undefined) {
+       // 指定为 null 和 undefined 的 this 值会自动指向全局对象(浏览器中为window)
+        context = window 
+    } else {
+        context = Object(context) // 值为原始值（数字，字符串，布尔值）的 this 会指向该原始值的实例对象
+    }
+    const specialPrototype = Symbol('特殊属性Symbol') // 用于临时储存函数
+    context[specialPrototype] = this; // 函数的this指向隐式绑定到context上
+    let result = context[specialPrototype](...arr); // 通过隐式绑定执行函数并传递参数
+    delete context[specialPrototype]; // 删除上下文对象的属性
+    return result; // 返回函数执行结果
+};
+```
+
+### 17.2 手写apply
+- 传递给函数的参数处理，不太一样，其他部分跟call一样。
+- apply接受第二个参数为类数组对象, 这里用了JavaScript权威指南中判断是否为类数组对象的方法。
+
+```
+Function.prototype.myApply = function (context) {
+    if (context === null || context === undefined) {
+        context = window // 指定为 null 和 undefined 的 this 值会自动指向全局对象(浏览器中为window)
+    } else {
+        context = Object(context) // 值为原始值（数字，字符串，布尔值）的 this 会指向该原始值的实例对象
+    }
+    // JavaScript权威指南判断是否为类数组对象
+    function isArrayLike(o) {
+        if (o &&                                    // o不是null、undefined等
+            typeof o === 'object' &&                // o是对象
+            isFinite(o.length) &&                   // o.length是有限数值
+            o.length >= 0 &&                        // o.length为非负值
+            o.length === Math.floor(o.length) &&    // o.length是整数
+            o.length < 4294967296)                  // o.length < 2^32
+            return true
+        else
+            return false
+    }
+    const specialPrototype = Symbol('特殊属性Symbol') // 用于临时储存函数
+    context[specialPrototype] = this; // 隐式绑定this指向到context上
+    let args = arguments[1]; // 获取参数数组
+    let result
+    // 处理传进来的第二个参数
+    if (args) {
+        // 是否传递第二个参数
+        if (!Array.isArray(args) && !isArrayLike(args)) {
+            throw new TypeError('myApply 第二个参数不为数组并且不为类数组对象抛出错误');
+        } else {
+            args = Array.from(args) // 转为数组
+            result = context[specialPrototype](...args); // 执行函数并展开数组，传递函数参数
+        }
+    } else {
+        result = context[specialPrototype](); // 执行函数 
+    }
+    delete context[specialPrototype]; // 删除上下文对象的属性
+    return result; // 返回函数执行结果
+};
+```
+
+### 17.3 手写bind
+- 拷贝源函数:
+  - 通过变量储存源函数
+  - 使用Object.create复制源函数的prototype给fToBind
+- 返回拷贝的函数
+- 调用拷贝的函数：
+  - new调用判断：通过instanceof判断函数是否通过new调用，来决定绑定的context
+  - 绑定this+传递参数
+  - 返回源函数的执行结果
+
+```
+Function.prototype.myBind = function (objThis, ...params) {
+    const thisFn = this; // 存储源函数以及上方的params(函数参数)
+    // 对返回的函数 secondParams 二次传参
+    let fToBind = function (...secondParams) {
+        const isNew = this instanceof fToBind // this是否是fToBind的实例 也就是返回的fToBind是否通过new调用
+        const context = isNew ? this : Object(objThis) // new调用就绑定到this上,否则就绑定到传入的objThis上
+        return thisFn.call(context, ...params, ...secondParams); // 用call调用源函数绑定this的指向并传递参数,返回执行结果
+    };
+    if (thisFn.prototype) {
+        // 复制源函数的prototype给fToBind 一些情况下函数没有prototype，比如箭头函数
+        fToBind.prototype = Object.create(thisFn.prototype);
+    }
+    return fToBind; // 返回拷贝的函数
+};
+```
+
+## 18. 脚本加载
+
+script标签的使用分为三种情况
+```
+<script src="example.js"></script>
+```
+
+浏览器会立即加载并执行相应的脚本。也就是说在渲染script标签之后的文档之前，不等待后续加载的文档元素，读到就开始加载和执行，此举会阻塞后续文档的加载；
+
+```
+<script async src="example.js"></script>
+```
+
+表示后续文档的加载和渲染与js脚本的加载是并行进行的（异步）；一旦脚本加载完成就立即执行，执行会阻塞后续文档的加载或页面的渲染（若async为true，则忽略defer）
+
+```
+<script defer src="example.js"></script>
+```
+Defer属性指明此元素所含的脚本不会修改DOM，因此代码能够安全地延迟执行。加载页面中其他资源的过程和js脚本的加载是并行进行的(异步)，js脚本的执行需要等到文档所有元素解析完成之后，DOMContentLoaded事件（onload）触发之前。
+
+
+## 18.1 async和defer更常用哪个（区别就在于js执行的时间）？
+defer 是最接近我们对于应用脚本加载和执行的要求的（把js的执行放到了文档所有元素解析完成之后）， async 对于应用脚本的用处不大，因为它完全不考虑依赖（哪怕是最低级的顺序执行），不过它对于那些可以不依赖任何脚本或不被任何脚本依赖的脚本来说却是非常合适的。async谁先加载完毕就先执行，不一定按声明顺序，defer延迟脚本也不一定按顺序执行。
+
+## 19. 懒加载和预加载
+
+### 19.1 什么是懒加载
+
+懒加载也叫延迟加载，指的是在长网页中延迟加载图像，是一种很好优化网页性能的方式。用户滚动到它们之前，可视区域外的图像不会加载。这与图像预加载相反，在长网页上使用延迟加载将使网页加载更快。在某些情况下，它还可以帮助减少服务器负载。常适用图片很多，页面很长的电商网站场景中。
+
+### 19.2 为什么要用懒加载
+
+- 能提升用户的体验，不妨设想下，用户打开像手机淘宝长页面的时候，如果页面上所有的图片都需要加载，由于图片数目较大，等待时间很长，用户难免会心生抱怨，这就严重影响用户体验。
+- 减少无效资源的加载，这样能明显减少了服务器的压力和流量，也能够减小浏览器的负担。
+- 防止并发加载的资源过多会阻塞js的加载，影响网站的正常使用。
+
+### 19.3 懒加载的原理
+
+首先将页面上的图片的 src 属性设为空字符串，而图片的真实路径则设置在data-original属性中，
+
+当页面滚动的时候需要去监听scroll事件，在scroll事件的回调中，判断我们的懒加载的图片是否进入可视区域,如果图片在可视区内将图片的 src 属性设置为data-original 的值，这样就可以实现延迟加载。
+
+### 19.4 什么是预加载
+
+资源预加载是另一个性能优化技术，我们可以使用该技术来预先告知浏览器某些资源可能在将来会被使用到。预加载简单来说就是将所有所需的资源提前请求加载到本地，这样后面在需要用到时就直接从缓存取资源。
+
+### 19.5 为什么要用预加载
+
+在网页全部加载之前，对一些主要内容进行加载，以提供给用户更好的体验，减少等待的时间。否则，如果一个页面的内容过于庞大，没有使用预加载技术的页面就会长时间的展现为一片空白，直到所有内容加载完毕。
+
+### 19.6 实现预加载的几种办法
+
+使用HTML标签
+```
+<img src="http://pic26.nipic.com/20121213/6168183 0044449030002.jpg" style="display:none"/>
+```
+
+使用Image对象
+```
+<script src="./myPreload.js"></script>
+
+//myPreload.js文件
+var image= new Image()
+image.src="http://pic26.nipic.com/20121213/6168183 004444903000 2.jpg"
+```
+
+## 20. 柯里化
+
+### 20.1 什么是柯里化
+
+在编码过程中，身为码农的我们本质上所进行的工作就是——将复杂问题分解为多个可编程的小问题。
+
+Currying 为实现多参函数提供了一个递归降解的实现思路——把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数，在某些编程语言中（如 Haskell），是通过 Currying 技术支持多参函数这一语言特性的。
+
+所以 Currying 原本是一门编译原理层面的技术，用途是实现多参函数。
+
+### 20.2 实现
+
+```
+function curry(fn, ...args) {
+    return (..._arg) => {
+        return fn(...args, ..._arg);
+    }
+}
+```
+
+### 20.3 应用
+- 参数复用
+  固定不变的参数，实现参数复用是 Currying 的主要用途之一。
+- 延迟执行
+
+  延迟执行也是 Currying 的一个重要使用场景，同样 bind 和箭头函数也能实现同样的功能。
+  在前端开发中，一个常见的场景就是为标签绑定 onClick 事件，同时考虑为绑定的方法传递参数。
+  以下列出了几种常见的方法，来比较优劣：
+
+  通过 data 属性
+  ```
+  <div data-name="name" onClick={handleOnClick} />
+  ```通过 data 属性本质只能传递字符串的数据，如果需要传递复杂对象，只能通过 JSON.stringify(data) 来传递满足 JSON 对象格式的数据，但对更加复杂的对象无法支持。（虽然大多数时候也无需传递复杂对象）
+
+
+  通过bind方法
+  ```
+  <div onClick={handleOnClick.bind(null, data)} />
+  ```
+  bind 方法和以上实现的 currying 方法，在功能上有极大的相似，在实现上也几乎差不多。可能唯一的不同就是 bind 方法需要强制绑定 context，也就是 bind 的第一个参数会作为原函数运行时的 this 指向。而 currying 不需要此参数。所以使用 currying 或者 bind 只是一个取舍问题。
+
+
+  箭头函数
+  ```
+  <div onClick={() => handleOnClick(data))} />
+  ```
+  复制代码箭头函数能够实现延迟执行，同时也不像 bind 方法必需指定 context。可能唯一需要顾虑的就是在 react 中，会有人反对在 jsx 标签内写箭头函数，这样子容易导致直接在 jsx 标签内写业务逻辑。
+
+
+  通过currying
+  ```
+  <div onClick={currying(handleOnClick, data)} />
+  ```
+
+### 20.4 优劣：
+
+优点：
+- 为了多参函数复用性
+
+缺点：
+- 性能低
 

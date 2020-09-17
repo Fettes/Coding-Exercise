@@ -25,16 +25,18 @@
   - [7.1 实现原理](#71-实现原理)
   - [7.2 为什么需要？](#72-为什么需要)
   - [7.3 虚拟DOM 优劣？](#73-虚拟dom-优劣)
+  - [7.4 html 转 vdom （diff算法）](#74-html-转-vdom-diff算法)
+  - [7.4.1 patch](#741-patch)
 - [8. compute, watch 和 method](#8-compute-watch-和-method)
   - [8.1 methods 和（watch、computed）的区别](#81-methods-和watchcomputed的区别)
   - [8.2 methods 和 computed 相比，computed 的好处](#82-methods-和-computed-相比computed-的好处)
   - [8.3 watch 和 computed 的区别](#83-watch-和-computed-的区别)
 - [9.双向绑定](#9双向绑定)
   - [9.1 实现思路](#91-实现思路)
-  - [9.2 vue2.0数据劫持](#92-vue20数据劫持)
+  - [9.2 vue2.0数据劫持(依赖收集代码)](#92-vue20数据劫持依赖收集代码)
   - [9.3 Vue3.0数据劫持](#93-vue30数据劫持)
   - [9.4 Proxy与Object.defineProperty的优劣](#94-proxy与objectdefineproperty的优劣)
-  - [9.5 实现过程](#95-实现过程)
+  - [9.5 实现过程(依赖收集)](#95-实现过程依赖收集)
   - [9.6 观察者模式](#96-观察者模式)
   - [9.7 发布订阅模式（EventEmitter）](#97-发布订阅模式eventemitter)
 - [10. vue-router](#10-vue-router)
@@ -42,7 +44,7 @@
   - [10.2 数据获取](#102-数据获取)
     - [10.2.1 导航完成后获取数据](#1021-导航完成后获取数据)
     - [10.2.2 在导航完成前获取数据](#1022-在导航完成前获取数据)
-  - [10.3 hash 和 history](#103-hash-和-history)
+  - [10.3 路由实现 -- hash 和 history](#103-路由实现----hash-和-history)
     - [10.3.1 优劣](#1031-优劣)
 - [11. Vue 指令和它的用法](#11-vue-指令和它的用法)
   - [11.1 常用指令](#111-常用指令)
@@ -53,6 +55,7 @@
 - [14. v-model的原理](#14-v-model的原理)
 - [15. Vue事件绑定](#15-vue事件绑定)
 - [16. vuex](#16-vuex)
+- [17.](#17)
 
 ## 1. Vue.js 是什么
 Vue.js 是一个开源的、用于构建用户界面的渐进式 JavaScript 框架。Vue.js 的核心库只关注于**视图层**，并且易于装载和集成其他的库或现有的项目。
@@ -432,9 +435,9 @@ js是作为浏览器的脚本语言，主要是实现用户与浏览器的交互
 >
 >microtast（微任务）：Promise， process.nextTick， Object.observe， MutationObserver
 >
->macrotask（宏任务）：script整体代码、setTimeout、 setInterval等
+>macrotask（宏任务）：script整体代码, setTimeout, setInterval, setImmediate, I/O, UI rendering等
 
-执行优先级上，先执行宏任务macrotask，再执行微任务mincrotask。
+**执行优先级上，先执行宏任务macrotask，再执行微任务microtask。**
 
 执行过程中需要注意的几点是：
 
@@ -549,6 +552,8 @@ beforeCreate ， created ， beforeMount ，mounted
 
 最后,也是Virtual DOM最初的目的,就是更好的跨平台,比如Node.js就没有DOM,如果想实现SSR(服务端渲染),那么一个方式就是借助Virtual DOM,因为Virtual DOM本身是JavaScript对象.
 
+虚拟DOM就是为了解决浏览器性能问题而被设计出来的。如前，若一次操作中有10次更新DOM的动作，虚拟DOM不会立即操作DOM，而是将这10次更新的diff内容保存到本地一个JS对象中，最终将这个JS对象一次性attch到DOM树上，再进行后续操作，避免大量无谓的计算量。所以，用JS对象模拟DOM节点的好处是，页面的更新可以先全部反映在JS对象(虚拟DOM)上，操作内存中的JS对象的速度显然要更快，等更新完成后，再将最终的JS对象映射成真实的DOM，交由浏览器去绘制。
+
 ### 7.3 虚拟DOM 优劣？
 优点：
 
@@ -559,6 +564,111 @@ beforeCreate ， created ， beforeMount ，mounted
 缺点:
 
 - 无法进行极致优化: 在一些性能要求极高的应用中虚拟DOM无法进行针对性的极致优化,比如VScode采用直接手动操作DOM的方式进行极端的性能优化
+
+### 7.4 html 转 vdom （diff算法）
+
+![diff](../Assets/diff.png)
+
+当数据发生改变时，set方法会让调用Dep.notify通知所有订阅者Watcher，订阅者就会调用patch给真实的DOM打补丁，更新相应的视图。
+
+```
+//真实dom
+<div id="container">
+  <h1 style="color: red">vdom与html相互转换</h1>
+  <p>vdom and html</p>
+  <ul>
+    <li class="item">item1</li>
+    <li class="item">item2</li>
+    <li class="item">item3</li>
+  </ul>
+</div>
+ 
+ 
+//创建虚拟dom树实例  (html-->vdom)
+const vNodeTree = new VNode("div", {id:'container'},[
+  new VNode('h1', {style:'color: red'}, ['vdom与html相互转换']),
+  new VNode('p', {}, ['vdom and html']),
+  new VNode('ul', {}, [
+    new VNode('li', {class:'item'},['item1'])
+	new VNode('li', {class:'item'},['item2'])
+	new VNode('li', {class:'item'},['item2'])
+  ])	
+])
+ 
+const nodeTree = vNodeTree.render();   // 将虚拟dom渲染为真实dom  (vdom-->html)
+document.getElementById('realDom').appendChild(nodeTree);  //将真实dom树插入文档中
+ 
+// 构造函数：创建虚拟dom节点
+function VNode(tagName, props, children){
+  this.tagName = tagName;
+  this.props = props || {};
+  this.children = children || [];
+}
+ 
+// 构造函数原型方法：将虚拟DOM渲染成真实DOM     (vdom-->html)
+VNode.prototype.render = function(){		
+  const el = document.createElement(this.tagName);  // 创建标签
+  const props = this.props;                     // 设置标签props属性
+  for(const propName in props) {
+    setAttr(el, propName, props[propName]);
+  }
+ 
+  this.children.forEach((child) => {      // 递归从创建子节点children
+    //判断是dom节点还是文本节点
+   const childNode=(child instanceof VNode)?child.render():document.createTextNode(child)    
+   el.appendChild(childNode)
+  })
+ 
+  return el;
+}	
+ 
+// 设置对象的属性
+function setAttr(node, key, value){
+  switch (key) {
+    case 'style':
+      node.style.cssText = value
+      break
+    case 'value':
+      var tagName = node.tagName || ''
+      tagName = tagName.toLowerCase()
+      if (tagName === 'input' || tagName === 'textarea') {
+        node.value = value
+      } else {
+        node.setAttribute(key, value)
+      }
+      break
+    default:
+      node.setAttribute(key, value)
+      break
+  }
+}
+```
+
+### 7.4.1 patch
+
+![patch](../Assets/patch.png)
+
+```
+function createElement(vnode){
+    var tag = vnode.tag
+    var attrs = vnode.attrs || {}
+    var children = vnode.children || []
+    if(!tag){
+        return null
+    }
+    var elem = document.createElement(tag)
+    var attrName
+    for(attrName in attrs){
+        if(attrs.hasOwnProperty(attrName)){
+            elem.setAttribute(attrName, attrs[attrName])
+        }
+    }
+    children.forEach(function(childVnode){
+        elem.appendChild(createElement(childVnode))
+    })
+    return elem
+}
+```
 
 ## 8. compute, watch 和 method
 
@@ -602,8 +712,15 @@ vue数据双向绑定是通过**数据劫持结合发布者-订阅者模式**的
 
 如何知道数据变了。
 
-### 9.2 vue2.0数据劫持
+### 9.2 vue2.0数据劫持(依赖收集代码)
+
 Vue2.0 采用的是**Object.defineProperty**进行数据劫持的主要实现原理是使用描述对象中的set方法进行拦截,并发送订阅器信号。
+
+- Observer : 它的作用是给对象的属性添加 getter 和 setter，用于依赖收集和派发更新
+- Dep : 用于收集当前响应式对象的依赖关系,每个响应式对象包括子对象都拥有一个 Dep 实例（里面 subs 是 Watcher 实例数组）,当数据有变更时,会通过 dep.notify()通知各个 watcher。
+- Watcher : 观察者对象 , 实例分为渲染 watcher (render watcher),计算属性 watcher (computed watcher),侦听器 watcher（user watcher）三种
+
+>watcher 中实例化了 dep 并向 dep.subs 中添加了订阅者,dep 通过 notify 遍历了 dep.subs 通知每个 watcher 更新。
 
 ```
 // ... 
@@ -623,6 +740,56 @@ return Object.defineProperty(obj, prop, {
     }
 })
 
+```
+
+getter中，收集依赖，setter中，触发依赖。**收集 Watcher。**
+
+```
+function defineReactive (data, key, val) {
+    let dep = [] // 新增
+    Object.defineProperty(data, key, {
+        enumerable: true,
+        configurable: true,
+        get: function () {
+            dep.push(window.target) // 新增
+            return val
+        },
+        set: function (newVal) {
+            if(val === newVal){
+                return
+            }
+            
+            // 新增
+            for (let i = 0; i < dep.length; i++) {
+            	 dep[i](newVal, val)
+            }
+            val = newVal
+        }
+    })
+}
+```
+实现watcher
+```
+class Watch {
+    constructor (expOrFn, cb) {
+        // 执行 this.getter() 就可以拿到 data.a.b.c
+        this.getter = parsePath(expOrFn)
+        this.cb = cb
+        this.value = this.get()
+    }
+
+    get () {
+        Dep.target = this
+        value = this.getter.call(vm, vm)
+        Dep.target = undefined
+    }
+
+    update () {
+        const oldValue = this.value
+        this.value = this.get()
+        this.cb.call(this.vm, this.value, oldValue)
+    }
+}
 ```
 
 ### 9.3 Vue3.0数据劫持
@@ -653,8 +820,10 @@ Object.defineProperty的优势:
 
 兼容性好,支持IE9
 
-### 9.5 实现过程
+### 9.5 实现过程(依赖收集)
 我们已经知道实现数据的双向绑定，首先要对数据进行劫持监听，所以我们需要设置一个监听器Observer，用来监听所有属性。
+
+所以，Vue要能够知道一个数据是否被使用，实现这种机制的技术叫做**依赖收集**。
 
 如果属性发生变化了，就需要告诉订阅者Watcher看是否需要更新。因为订阅者是有很多个，所以我们需要有一个消息订阅器Dep来专门收集这些订阅者，然后在监听器Observer和订阅者Watcher之间进行统一管理的。
 
@@ -866,7 +1035,7 @@ beforeEnter
 
 通过这种方式，我们在导航转入新的路由前获取数据。我们可以在接下来的组件的 beforeRouteEnter 守卫中获取数据，当数据获取成功后只调用 next 方法。
 
-### 10.3 hash 和 history
+### 10.3 路由实现 -- hash 和 history
 
 对于 Vue 这类渐进式前端开发框架，为了构建 SPA（单页面应用），需要引入前端路由系统，这也就是 Vue-Router 存在的意义。前端路由的核心，就在于 —— **改变视图的同时不会向后端发出请求**。
 
@@ -981,5 +1150,15 @@ v-model本质就是一个语法糖，可以看成是value + input方法的语法
 3. 为什么要用vuex？
 
     由于传参的方法对于多层嵌套的组件将会非常繁琐，并且对于兄弟组件间的状态传递无能为力。我们经常会采用父子组件直接引用或者通过事件来变更和同步状态的多份拷贝。
+    
+    所以他解决了非父子组件的消息传递（将数据存放在state中）
+
+    减少了AJAX请求次数，有些情景可以直接从内存中的state获取
 
     以上的这些模式非常脆弱，通常会导致代码无法维护。所以我们需要把组件的共享状态抽取出来，以一个全局单例模式管理。在这种模式下，我们的组件树构成了一个巨大的“视图”，不管在树的哪个位置，任何组件都能获取状态或者触发行为！另外，通过定义和隔离状态管理中的各种概念并强制遵守一定的规则，我们的代码将会变得更结构化且易维护。
+
+4. 缺点：
+   
+   页面刷新时会使state的数据初始化
+
+## 17.

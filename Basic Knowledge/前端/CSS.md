@@ -1,10 +1,11 @@
 目录
 - [1. CSS 盒模型](#1-css-盒模型)
-  - [1.1 Content-box (W3C)](#11-content-box-w3c)
+  - [1.1 Content-box (W3C)（标准盒模型）](#11-content-box-w3c标准盒模型)
   - [1.2 Border-box (IE)](#12-border-box-ie)
   - [1.3 BFC 规范](#13-bfc-规范)
     - [1.3.1 如何生成BFC](#131-如何生成bfc)
     - [1.3.2 BFC能用来做什么](#132-bfc能用来做什么)
+  - [1.4 BFC, IFC, GFC, FFC](#14-bfc-ifc-gfc-ffc)
 - [2. CSS加载方式](#2-css加载方式)
   - [2.1 内部样式表](#21-内部样式表)
   - [2.2 内联样式表](#22-内联样式表)
@@ -12,6 +13,7 @@
   - [2.4 加载方式的区别](#24-加载方式的区别)
   - [2.5 @import 和 link 的区别是什么呢？](#25-import-和-link-的区别是什么呢)
   - [2.6 src 和 href 的区别](#26-src-和-href-的区别)
+  - [2.7 CSS阻塞加载](#27-css阻塞加载)
 - [3. 选择器](#3-选择器)
   - [3.1 优先级](#31-优先级)
   - [3.2 css继承](#32-css继承)
@@ -21,6 +23,10 @@
     - [3.3.3 结构伪类选择器](#333-结构伪类选择器)
 - [4. 布局](#4-布局)
   - [4.1 px，em，rem，vw 区别](#41-pxemremvw-区别)
+    - [4.1.1 如何移动端实现1像素细线](#411-如何移动端实现1像素细线)
+      - [4.1.1.1 媒体查询](#4111-媒体查询)
+      - [4.1.1.2 viewport + rem](#4112-viewport--rem)
+      - [4.1.1.3 伪类 + transform](#4113-伪类--transform)
   - [4.2 display的值和作用](#42-display的值和作用)
   - [4.3 position的值和作用](#43-position的值和作用)
   - [4.4 三栏布局](#44-三栏布局)
@@ -34,11 +40,38 @@
     - [4.6.1 水平居中](#461-水平居中)
     - [4.6.2 垂直居中](#462-垂直居中)
   - [4.7 flex值和作用](#47-flex值和作用)
+  - [4.8 flex语法](#48-flex语法)
 - [5. CSS3 新特性](#5-css3-新特性)
 - [6. float元素特征，如何清除](#6-float元素特征如何清除)
 - [7. display:none 与 visibility:hidden 的区别](#7-displaynone-与-visibilityhidden-的区别)
 - [8.性能优化](#8性能优化)
-- [9. CSS hack](#9-css-hack)
+- [9. 响应式布局](#9-响应式布局)
+  - [9.1 bootstrap 响应式布局实现原理](#91-bootstrap-响应式布局实现原理)
+  - [9.2 rem 响应式布局](#92-rem-响应式布局)
+  - [9.3 vw 响应式布局](#93-vw-响应式布局)
+  - [9.4 flex实现](#94-flex实现)
+- [10. 层叠上下文——z-index](#10-层叠上下文z-index)
+  - [10.1 如何产生“层叠上下文”](#101-如何产生层叠上下文)
+  - [10.2 顺序](#102-顺序)
+  - [10.3 CSS3中的属性对层叠上下文的影响](#103-css3中的属性对层叠上下文的影响)
+- [11. CSS 预处理器](#11-css-预处理器)
+  - [11.1 预处理器的功能](#111-预处理器的功能)
+  - [11.2 sass 和 less 区别](#112-sass-和-less-区别)
+- [12. CSS hack](#12-css-hack)
+- [13. 面经问题整理：](#13-面经问题整理)
+  - [13.1 移动端适配](#131-移动端适配)
+    - [13.1.1 rem布局](#1311-rem布局)
+    - [13.1.2 vw，vh布局](#1312-vwvh布局)
+  - [13.2 相邻的两个inline-block节点为什么会出现间隔？怎么解决？](#132-相邻的两个inline-block节点为什么会出现间隔怎么解决)
+  - [13.3 如何实现在图片被加载之前的占位符，宽高比16:9](#133-如何实现在图片被加载之前的占位符宽高比169)
+    - [13.3.1 使用 img 伪对象 after 和 background](#1331-使用-img-伪对象-after-和-background)
+    - [13.3.2 使用 JS 懒加载图片](#1332-使用-js-懒加载图片)
+  - [13.4 宽度自适应，宽高比16：9](#134-宽度自适应宽高比169)
+    - [13.4.1 padding-bottom 实现](#1341-padding-bottom-实现)
+    - [13.4.2 利用vmin来实现](#1342-利用vmin来实现)
+  - [13.5 CSS 画三角形](#135-css-画三角形)
+  - [13.6 Bootstrap清除浮动](#136-bootstrap清除浮动)
+  - [13.7 水平垂直居中矩形，宽高比2:1](#137-水平垂直居中矩形宽高比21)
 
 
 ## 1. CSS 盒模型
@@ -50,7 +83,7 @@
 - 边框区域: 边框
 - 外边框区域：由外边框限制，用空白区域扩展边框区域，开分开相邻的元素
 
-### 1.1 Content-box (W3C)
+### 1.1 Content-box (W3C)（标准盒模型）
 padding 和 border **不被包含**在定义的 width 和 height 之内。对象的实际宽度等于设置的width 值和border、padding 之和，即Elemenet width = width + border + padding。
 
 ```
@@ -61,6 +94,7 @@ padding 和 border **不被包含**在定义的 width 和 height 之内。对象
     border: 15px solid #eee;
 }
 ```
+box-sizing的值为border-box可以转为IE。
 
 ### 1.2 Border-box (IE)
 padding 和 border **包含**在定义的 width 和 height 之内。对象的实际宽度等于设置的width 值，即Elemenet width = width。
@@ -140,6 +174,20 @@ padding 和 border **包含**在定义的 width 和 height 之内。对象的实
 
   <img src="../Assets/css7.png" width="300">
 
+### 1.4 BFC, IFC, GFC, FFC
+
+IFC: 在行内格式化上下文中，框(boxes)一个接一个地水平排列，起点是包含块的顶部。水平方向上的 margin，border 和 padding在框之间得到保留。框在垂直方向上可以以不同的方式对齐：它们的顶部或底部对齐，或根据其中文字的基线对齐。包含那些框的长方形区域，会形成一行，叫做行框。
+
+GFC(CSS3): 直译为"网格布局格式化上下文"（也即是新的布局：display:grid;兼容性问题比较大），当为一个元素设置display值为grid的时候，此元素将会获得一个独立的渲染区域，我们可以通过在网格容器（grid container）上定义网格定义行（grid definition rows）和网格定义列（grid definition columns）属性各在网格项目（grid item）上定义网格行（grid row）和网格列（grid columns）为每一个网格项目（grid item）定义位置和空间。
+
+他将让布局从一维布局变成了二维布局。简单的说，有了GFC之后，布局不再局限于单个维度了。这个时候你要实现类似九宫格，拼图之类的布局效果显得格外的容易。
+
+FFC(Flex Formatting Contexts):直译为"自适应格式化上下文"（也即是现在的flex布局：display:flex;），display值为flex或者inline-flex的元素将会生成自适应容器（flex container）。
+
+Flex Box 由伸缩容器和伸缩项目组成。通过设置元素的 display 属性为 flex 或 inline-flex 可以得到一个伸缩容器。设置为 flex 的容器被渲染为一个块级元素，而设置为 inline-flex 的容器则渲染为一个行内元素。
+
+伸缩容器中的每一个子元素都是一个伸缩项目。伸缩项目可以是任意数量的。伸缩容器外和伸缩项目内的一切元素都不受影响。简单地说，Flexbox 定义了伸缩容器内伸缩项目该如何布局。
+
 ## 2. CSS加载方式
 
 ### 2.1 内部样式表
@@ -189,10 +237,15 @@ padding 和 border **包含**在定义的 width 和 height 之内。对象的实
 
 ### 2.6 src 和 href 的区别
 
-href 是指向网络资源所在位置，建立和当前元素（锚点）或当前文档（链接）之间的链接，用于超链接。浏览器会识别该文档，并**行下载该文档**，并且不会停止对文档的处理。
+href 是指向网络资源所在位置，建立和当前元素（锚点）或当前文档（链接）之间的链接，用于超链接。浏览器会识别该文档，**并行下载该文档**，并且不会停止对文档的处理。
 
 src是指向外部资源的位置，指向的内容将会嵌入到文档中当前标签所在位置；在请求src资源时会将其指向的资源下载并应用到文档内，例如js脚本，img图片和frame等元素。浏览器解析到该元素时，会暂停浏览器的渲染，直到该资源加载完毕。**这也就是js脚本放在底部而不是头部的原因。**
 
+### 2.7 CSS阻塞加载
+
+- css加载不会阻塞DOM树的解析
+- css加载会阻塞DOM树的渲染
+- css加载会阻塞后面js语句的执行、
 
 ## 3. 选择器
 
@@ -204,7 +257,7 @@ src是指向外部资源的位置，指向的内容将会嵌入到文档中当�
   - 后代选择器(li a)
   - 直接相邻元素选择器(h1 + p)
   - 普通相邻元素选择器
-  - 
+  
 - 通配符选择器(*)
 - 属性选择器(a[rel="external"])
 - 伪类选择器(a:hover,li:nth-child)
@@ -243,11 +296,12 @@ id选择符：100
 
 **伪元素**是创造文档树之外的对象。例如文档不能提供访问元素内容第一字或者第一行的机制。
 
-伪元素还提供一些在源文档中不存在的内容分配样式，例如 `:before` 和 `:after` 能够访问产生的内容。
+伪元素还提供一些在源文档中不存在的内容分配样式，例如 `::before` 和 `::after` 能够访问产生的内容。
 
-伪元素的内容实际上和普通 DOM 元素是相同的，但是它本身只是基于元素的抽象，并不存在于文档中，所以叫伪元素。
+伪元素的内容实际上和普通 DOM 元素是相同的，虽然用户可以看到，但是它本身只是基于元素的抽象，并不存在于文档中，所以叫伪元素。
 
-**伪类**是基于元素的特征而不是它们的 id、class、属性或者内容。一般来说，元素的特征是不可以从DOM 树上推断得到的，而且其是动态的，当用户和 DOM 进行交互的时候，元素可以获得或者失去一个伪类（这里有一个例外，就是 `:first-child` 和 `:lang` 是可以从 DOM 树中推断出来的）。
+**伪类**用于当元素处于某个状态时，为其添加对应的样式，这个状态是根据用户行为而动态变化的。比如说，用户悬停在指定的元素时，我们可以通:hover来描述这个元素的状态。虽然它和普通的css类类似，可以为已有的元素添加样式，但是它只有处于dom树无法描述的状态下才能为元素添加样式，所以将其称为伪类。
+
 
 #### 3.3.1 静态动态伪类选择器
 
@@ -294,6 +348,85 @@ id选择符：100
 - rem : rem——root em，是相对于根元素 <html> 的字体大小单位。
 - vw : 1vw 为视口宽度的 1%。
 
+#### 4.1.1 如何移动端实现1像素细线
+移动端CSS里面写了1px，实际上看起来比1px粗， viewport的设置和屏幕物理分辨率是按比例而不是相同的. 移动端window对象有个devicePixelRatio属性, 它表示设备物理像素和css像素的比例, 在retina屏的iphone手机上, 这个值为2或3, css里写的1px长度映射到物理像素上就有2px或3px那么长。
+
+##### 4.1.1.1 媒体查询
+media查询利用设备像素比缩放，设置小数像素。IOS8下已经支持带小数的px值, media query对应devicePixelRatio有个查询值-webkit-min-device-pixel-ratio, css可以写成这样。
+
+```
+.border { border: 1px solid #999 }
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+    .border { border: 0.5px solid #999 }
+}
+@media screen and (-webkit-min-device-pixel-ratio: 3) {
+    .border { border: 0.333333px solid #999 }
+}
+```
+【缺点】对设备有要求，小数像素目前兼容性较差。
+
+##### 4.1.1.2 viewport + rem
+
+viewport + rem + js 动态的修改页面的缩放比例，实现小于1像素的显示。在页面初始化时，在头部引入原始默认状态如下：
+```
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">  
+<meta name="viewport" id="WebViewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"> 
+```
+接下来的任务就是js的动态修改缩放比 以及 实现rem根元素字体大小的设置。
+```
+var viewport = document.querySelector("meta[name=viewport]")
+if (window.devicePixelRatio == 1) {
+    viewport.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no')
+} 
+if (window.devicePixelRatio == 2) {
+    viewport.setAttribute('content', 'width=device-width, initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no')
+} 
+if (window.devicePixelRatio == 3) {
+    viewport.setAttribute('content', 'width=device-width, initial-scale=0.333333333, maximum-scale=0.333333333, minimum-scale=0.333333333, user-scalable=no')
+} 
+
+var docEl = document.documentElement;
+var fontsize = 10 * (docEl.clientWidth / 320) + 'px';
+docEl.style.fontSize = fontsize;
+```
+
+##### 4.1.1.3 伪类 + transform
+1.  设置height: 1px，根据媒体查询结合transform缩放为相应尺寸。
+```
+div {
+    height:1px;
+    background:#000;
+    -webkit-transform: scaleY(0.5);
+    -webkit-transform-origin:0 0;
+    overflow: hidden;
+}
+```
+2.  用::after和::befor,设置border-bottom：1px solid #000,然后在缩放-webkit-transform: scaleY(0.5);可以实现两根边线的需求
+```
+div::after{
+    content:'';width:100%;
+    border-bottom:1px solid #000;
+    transform: scaleY(0.5);
+}
+```
+3.  用::after设置border：1px solid #000; width:200%; height:200%,然后再缩放scaleY(0.5); 优点可以实现圆角，京东就是这么实现的，缺点是按钮添加active比较麻烦。
+
+```
+.div::after {
+    content: '';
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+    -webkit-transform: scale(0.5,0.5);
+    transform: scale(0.5,0.5);
+    -webkit-transform-origin: top left;
+}
+```
+
 ### 4.2 display的值和作用
 | 值 | 作用 |
 | -- | --- |
@@ -313,6 +446,8 @@ id选择符：100
 |static | 默认值。没有定位，元素出现在正常的文档流中（忽略 top, bottom, left, right 或者 z-index 声明）。
 |inherit | 规定应该从父元素继承 position 属性的值。
 |sticky (新增) | 它主要用在对 scroll 事件的监听上；粘性定位可以被认为是相对定位和固定定位的混合。元素在跨越特定阈值前为相对定位，之后为固定定位。例如：#one { position: sticky; top: 10px; } 在 viewport 视口滚动到元素 top 距离小于 10px 之前，元素为相对定位。之后，元素将固定在与顶部距离 10px 的位置，直到 viewport 视口回滚到阈值以下。
+
+float和position混用时，float不会生效。
 
 ### 4.4 三栏布局
 
@@ -690,19 +825,54 @@ flex: 1;
   | 值 | 作用 |
   | -- | --- |
   |order | 设置元素的排列权重 值越大越在后 |
-  |flex-grow | 设置元素的放大比例
+  |flex-grow | 设置元素的放大比例（横向会变宽）
   |flex-shrink | 设置元素的缩小比例
-  |flex-basis | 设置多余空间项目主轴所占比例空间
+  |flex-basis | 设置多余空间项目主轴所占比例空间，设置元素初始大小。比如=content(根据内容自动调节大小)
   |flex | flex-grow和flex-shrink和flex-basis的缩写方式 默认为0 1 auto
   |align-self | 设置子元素自己的垂直排列方式，默认为盒子的align-items的值
+  
+  :warning:：设置flex布局后，子元素的float，clear，vertical-align都无效
 
-:warning:：设置flex布局后，子元素的float，clear，vertical-align都无效
+### 4.8 flex语法
+
+- 单值语法
+  
+  值必须是如下之一：
+
+  - 数值 number，那么解释为 flex: number 1 0
+  - none、auto、initial
+
+- 双值语法
+
+  第一个值必须是 number，它会被解释为 flex-grow 属性，第二个值必须是如下之一：
+
+  - 数值 number，会被解释为 flex-shrink 属性
+  - 一个能够描述宽度的值，例如 10em、30%、min-content，会被解释为 flex-basis 属性
+
+- 三值语法
+
+  三个值的含义：
+
+  - 第一个 number 表示 flex-grow
+  - 第二个 number 表示 flex-shrink
+  - 第三个描述宽度的值表示 flex-basis
+
+```
+flex: 0 auto
+flex: 0 auto 等同于 flex: initial，也是 flex: 0 1 auto 的简写表达。它根据元素自身的 width 或 height 属性来调节元素大小。
+当还剩余一些空闲空间时，它使 flex 元素呈现的是固定大小的样式；当没有足够的空间时，它允许它收缩到最小。auto 边距可用于根据主轴来对齐元素。
+flex: auto
+flex: auto 等同于 flex: 1 1 auto，它根据元素的 width 或 height 属性调整元素的大小，但是其非常灵活，以便让它们吸收沿主轴的任何额外空间。
+flex: none
+flex: none 等同于 flex: 0 0 auto。它根据 width 和 `height 来调节元素大小，但是完全不灵活。
+```
 
 ## 5. CSS3 [新特性](https://juejin.im/post/6844903829679390728)
 
 - 新增各种 CSS 选择器  
   - :not(p)  选择每个非p的元素； 
   - p:empty 选择每个没有任何子级的p元素（包括文本节点）
+  
 - 边框：
   
   ```
@@ -878,4 +1048,412 @@ visibility:hideen 隐藏对应的元素，在文档布局中仍保留原来的�
 
   （7） 图片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。
 
-## 9. CSS hack
+## 9. 响应式布局
+
+响应式布局就是根据屏幕大小变化，页面的内容排版布局会自动调整变动，已呈现更好的用户体验。
+
+当你完成当你已经完成了无响应的网站，做的第一件事是在你的 HTML 页面，粘贴下面的代码到标签之间。
+
+大多数移动浏览器将HTML页面放大为宽的视图（viewport）以符合屏幕分辨率。你可以使用视图的meta标签来进行重置。下面的视图标签告诉浏览器，使用设备的宽度作为视图宽度并禁止初始的缩放。在标签里加入这个meta标签。
+```
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<!-- width=device-width ：表示宽度是设备屏幕的宽度
+initial-scale=1.0：表示初始的缩放比例
+minimum-scale=0.5：表示最小的缩放比例
+maximum-scale=2.0：表示最大的缩放比例
+user-scalable=yes：表示用户是否可以调整缩放比例 -->
+```
+
+>和自适应布局的区别？
+>
+>自适应布局就是宽度自适用布局，在不同大小的设备上，网页以等比例的形式缩放宽度，呈现同样的主体内容和排版布局。随着屏幕宽度缩放，网页内容也以等比例缩放，不管屏幕宽度为多少，网页主体排版布局总是一样的
+>
+>而响应式布局是随着屏幕宽度的缩放，页面做出相应调整，布局和展示的内容会有所变动
+
+### 9.1 bootstrap 响应式布局实现原理
+
+- 媒体查询（media）
+
+  使用 @media 查询，就针对不同的媒体类型定义不同的样式。利用媒体查询设置不同分辨率下的css样式，来适配不同屏幕。
+
+  @media 可以针对不同的屏幕尺寸设置不同的样式，特别是如果你需要设置设计响应式的页面，@media 是非常有用的。
+
+  当你重置浏览器大小的过程中，页面也会根据浏览器的宽度和高度重新渲染页面。
+
+- grid system 行列布局（12等分）
+
+  bootstrap布局划分屏幕空间采用的是12等分。它可以被1、2、3、4、6、12共6个数字整除，本来就是用来分空间的系统，当然可以更好的被整除最好了，这样怎么分都愉快。
+
+  比如，两个div分空间，分别占用50%，或者一个1/3一个2/3，或者1/4对3/4
+
+  3个div分空间，分别占用1/3，或者两个1/6一个2/3，或者两个1/4对1/2
+
+### 9.2 rem 响应式布局
+
+  当前页面中元素的rem 单位的样式值都是针对于html 元素的font-size 的值进行动态计算的，所以有两种方法可以达到适配不同屏幕：
+
+- 第一种利用媒体查询，在不同分辨率下给 html 的 font-size 赋值。
+- 利用js然后根据缩放比例算。但是这样页面在打开的时候，元素大小有个变化的过程。
+
+### 9.3 vw 响应式布局
+根据 PSD 文件宽度或高度作为标准，元素单位 px 转换为 vw 或 vh，比如font-size: 12px，PSD 文件宽度 375，转换公式 12 * 100 / 375，则样式改为font-size: 3.2vw。有工具可以计算。
+
+### 9.4 flex实现
+![meta](../Assets/meta.png)
+
+## 10. 层叠上下文——z-index
+
+层叠上下文(stacking context)，是HTML中一个三维的概念。在CSS2.1规范中，每个盒模型的位置是三维的，分别是平面画布上的X轴，Y轴以及表示层叠的Z轴。
+
+如果一个元素含有层叠上下文，(也就是说它是层叠上下文元素)，表现就是它离屏幕观察者更近。
+
+那么，层叠等级指的又是什么？层叠等级(stacking level，叫“层叠级别”/“层叠水平”也行)
+
+在同一个层叠上下文中，它描述定义的是该层叠上下文中的层叠上下文元素在Z轴上的上下顺序。
+
+在其他普通元素中，它描述定义的是这些普通元素在Z轴上的上下顺序。
+
+### 10.1 如何产生“层叠上下文”
+- HTML中的根元素<html></html>本身j就具有层叠上下文，称为“根层叠上下文”。
+- 普通元素设置position属性为非static值并设置z-index属性为具体数值，产生层叠上下文。
+- CSS3中的新属性也可以产生层叠上下文。
+
+### 10.2 顺序
+![context](../Assets/context.png)
+
+- 左上角"层叠上下文background/border"指的是层叠上下文元素的背景和边框。
+- inline/inline-block元素的层叠顺序要高于block(块级)/float(浮动)元素。
+- 单纯考虑层叠顺序，z-index: auto和z-index: 0在同一层级，但这两个属性值本身是有根本区别的。
+
+1.  首先先看要比较的两个元素是否处于同一个层叠上下文中：
+
+    1.1 如果是，谁的层叠等级大，谁在上面（怎么判断层叠等级大小呢？——看“层叠顺序”图）。
+
+    1.2 如果两个元素不在统一层叠上下文中，请先比较他们所处的层叠上下文的层叠等级。
+
+2.  当两个元素层叠等级相同、层叠顺序相同时，在DOM结构中后面的元素层叠等级在前面元素之上。
+
+### 10.3 CSS3中的属性对层叠上下文的影响
+
+CSS3中出现了很多新属性，其中一些属性对层叠上下文也产生了很大的影响。如下：
+
+- 父元素的display属性值为flex|inline-flex，子元素z-index属性值不为auto的时候，子元素为层叠上下文元素；
+- 元素的opacity属性值不是1；
+- 元素的transform属性值不是none；
+- 元素mix-blend-mode属性值不是normal`；
+- 元素的filter属性值不是none；
+- 元素的isolation属性值是isolate；
+- will-change指定的属性值为上面任意一个；
+- 元素的-webkit-overflow-scrolling属性值设置为touch。
+
+CSS3中，元素属性满足以上条件之一，就会产生层叠上下文。我们用第1条来做一个简单的解释说明。
+
+## 11. CSS 预处理器
+css预处理器：用一种专门的编程语言，为CSS增加了一些编程的特性，将CSS作为目标生成文件，然后开发者就只要使用这种语言进行编码工作，可以让你的CSS更加简洁、适应性更强、可读性更佳，更易于代码的维护等诸多好处
+
+- Sass(Scss)：2007,ruby编写
+- Less: 2009，js编译
+
+### 11.1 预处理器的功能
+- 嵌套： 反映层级和约束
+- 变量和计算： 减少重复代码
+- Extend和mixIn： 代码片段的抽离
+- 循环语句: 适用于复杂有规律的样式
+- 条件语句
+- 单位转换
+- 自动前缀
+- import：可以实现CSS文件的模块化
+
+### 11.2 sass 和 less 区别
+
+- 编译环境不一样
+- 变量符不一样，Less是@，而Scss是$，而且变量的作用域也不一样。
+- 输出设置，Less没有输出设置，Sass提供4种输出选项：
+- Sass支持条件语句，可以使用if{}else{},for{}循环等等。而Less不支持。
+- 引用外部CSS文件
+- 工具库不同
+
+## 12. CSS hack
+
+## 13. 面经问题整理：
+### 13.1 移动端适配
+
+#### 13.1.1 rem布局
+rem 是相对于html节点的font-size来做计算的。所以在页面初始话的时候给根元素设置一个font-size，接下来的元素就根据rem来布局，这样就可以保证在页面大小变化时，布局可以自适应，
+
+如此我们只需要给设计稿的px转换成对应的rem单位即可。
+```
+function refreshRem() {
+    var docEl = doc.documentElement;
+    var width = docEl.getBoundingClientRect().width;
+    var rem = width / 10; // var rem = docEl.clientWidth / 10
+    docEl.style.fontSize = rem + 'px'; 
+    flexible.rem = win.rem = rem;
+}
+win.addEventListener('resize', refreshRem);
+```
+
+缺点：通过rem单位，可以实现响应式的布局，特别是引入相应的postcss相关插件，免去了设计稿中的px到rem的计算。rem单位在国外的一些网站也有使用，这里所说的rem来实现布局的缺点，或者说是小缺陷是：
+
+在响应式布局中，必须通过js来动态控制根元素font-size的大小。
+
+也就是说css样式和js代码有一定的耦合性。且必须将改变font-size的代码放在css样式之前。
+
+#### 13.1.2 vw，vh布局
+vh、vw方案即将视觉视口宽度 window.innerWidth和视觉视口高度 window.innerHeight 等分为 100 份。
+
+vh和vw方案和rem类似也是相当麻烦需要做单位转化，而且px转换成vw不一定能完全整除，因此有一定的像素差。
+
+不过在工程化的今天，webpack解析css 的时候用postcss-loader 有个postcss-px-to-viewport能自动实现px到vw的转化
+
+>总结：
+>
+>px为主，vx和vxxx（vw/vh/vmax/vmin）为辅，搭配一些flex（推荐）
+
+### 13.2 相邻的两个inline-block节点为什么会出现间隔？怎么解决？
+
+归根结底这是一个西文排版的问题。举一个很简单的例子：
+
+I am very happy
+
+南京市长江大桥欢迎您
+
+英文有空格作为词分界，而中文则没有。（这背后延伸出一个中文分词的问题）
+
+这个问题的原因可以上述到SGML(标准通用标记语言)和TeX(排版工具)，它实际上是一个行内（inline）的问题，它由空格、换行或回车所产生空白符所致
+
+解决方法：
+
+- 写的时候中间不要加空格或者空行
+
+![method1](../Assets/method.png)
+
+- 用font-size 改变字符大小
+- margin负值。按照字体大小，值不一样。
+- word-spacing 或者 letter-spacing
+  - 一个是字符间距(letter-spacing)一个是单词间距(word-spacing)，大同小异。
+  - letter-spacing子元素要设置letter-spacing为0，不然会继承父元素的值；使用word-spacing时，只需设置父元素word-spacing为合适值即可。
+  - 使用letter-spacing和word-spacing时，其在不同浏览器下效果不同。
+
+### 13.3 如何实现在图片被加载之前的占位符，宽高比16:9
+
+#### 13.3.1 使用 img 伪对象 after 和 background
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+
+	<style>
+	.placeholder {
+	  width: 120px;
+	  height: 120px;
+	  position: relative;
+	}
+	.placeholder:after {
+	  content: '';
+	  position: absolute;
+	  width: 100%;
+	  height: 100%;
+	  left: 0;
+	  top: 0;
+	  background: url('img.png') no-repeat center #999;
+	  padding-bottom:56.25%;
+	}
+	</style>
+</head>
+
+<body>
+    <img class="placeholder" src="">
+
+</body>
+</html>
+```
+
+#### 13.3.2 使用 JS 懒加载图片
+
+如果图片加载失败，使用一个默认图占位。
+
+插件使用 setTimeout 监听页面元素是否显示，如果图片出现在显示区域则执行图片加载。适应常见的 tab 切换，轮播图等。
+
+### 13.4 宽度自适应，宽高比16：9
+
+#### 13.4.1 padding-bottom 实现
+```
+<!DOCTYPE html>
+<html>
+<head>
+<title>固定宽高比16:9</title>
+<style type="text/css">
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.wrap{
+  width:100%;
+}
+
+/* 16:9宽高比，则设padding-bottom:56.25% */
+/* height: 0px,防止矩形被里面的内容撑出多余的高度*/
+
+.box{
+  width: 100vw;
+  height: 0px;
+  position: relative;
+  padding-bottom: 56.25%;
+  background: pink;
+}
+
+/* 如果需要在div里面设置内容*/
+/* 需要设置position：absolute，才能设置内容高度100%和矩形一样 */
+/*.box p{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}*/
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="box">
+<p>这是一个16：9的矩形</p>
+</div>
+</div>
+</body>
+</html>
+```
+
+#### 13.4.2 利用vmin来实现
+```
+<!DOCTYPE html>
+<html>
+<head>
+<title>固定宽高比16:9</title>
+<style type="text/css">
+*{
+  margin: 0px;
+  padding: 0px;
+}
+.wrap{
+  width:100%;
+}
+ 
+/*vmin：相对于可视窗口的宽度或高度中较小的那个，被均分为100单位的vmin*/
+/*例：当宽度是300，高度是600，那么50vmin则是相对于宽度的50%*/
+
+.box{
+  height: 56.25vmin;
+  background: pink;
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="box">
+    <p>这是一个16：9的矩形</p>
+  </div>
+</div>
+</body>
+</html>
+ ```
+
+ 注意：如果屏幕宽度较大高度较小时，则可以用vmax。如果需要随意切换时，可以通过js来控制。
+
+### 13.5 CSS 画三角形
+```
+div{
+  width: 0;
+  height: 0;
+  border-left:50px solid red;  
+  border-top:50px solid blue;  
+  border-right:50px solid green;  
+  border-bottom:50px solid yellow;  
+}
+```
+![trangle1](../Assets/tri.png)
+
+然后我们在看下border不等的情况下的模式，代码就不发了，改下各个border-width宽度就行了：由此我们可以看出图中每个三角形的高是等于border-width值的。
+
+然后把别的三角形都隐身。
+
+```
+div{
+  width: 0;
+  height: 0;
+  border-left:100px solid transparent;  
+  border-top:80px solid transparent;  
+  border-right:40px solid transparent;  
+  border-bottom:70px solid yellow;  
+}
+```
+
+那怎么得出我们想要的三角形呢，比如直角，或者是底边和高需要确定的角，因为底边=相邻两个border的宽度，高=自身border的宽度。那直角三角行：
+
+![trangle2](../Assets/tri1.png)
+
+这样是不是看的比较明白点，这样border-right，border-bottom都不设置就好像把下面和右边都削掉了一样，最后只留下左上角，即下图：
+
+![trangle3](../Assets/tri2.png)
+
+### 13.6 Bootstrap清除浮动
+
+通过为父元素添加.clearfix类可以很容易地清除浮动（float）。如：
+
+<div class="clearfix">...</div>
+
+### 13.7 水平垂直居中矩形，宽高比2:1
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DIV</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .main{
+      width: 100%;
+      height: 600px;
+      background-color: red
+    }
+    .wrap {
+      position: relative;
+      width: 40%;
+      height: 100%;
+      left: 50%;
+      transform: translate(-50%);
+      /* background-color: green; */
+    }
+    .a1 {
+      position: absolute;
+      width: 100%;
+      height: 0;
+      padding-bottom: 50%;
+      background: burlywood;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="wrap">
+      <div class="a1">Hanyang</div>
+    </div>
+  </div>
+</body>
+</html>
+```
