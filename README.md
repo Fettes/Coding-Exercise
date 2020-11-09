@@ -1,6 +1,5 @@
 # [LeetCode Exercise](https://leetcode.com/problemset/all/)
 
-
 ![Arrays and Strings](https://img.shields.io/badge/Language-JAVA-important)&nbsp;
 ![Programs](https://img.shields.io/badge/Programs-180-blueviolet)&nbsp;
 ![Update](https://img.shields.io/badge/Update-Daily-informational)&nbsp;
