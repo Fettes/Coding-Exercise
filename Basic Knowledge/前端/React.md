@@ -25,7 +25,7 @@
   - [1.13 React-Intl 的理解 ](#113-react-intl-的理解-)
   - [1.14 React.Context理解 ](#114-reactcontext理解-)
     - [1.14.1 React并不推荐优先使用Context？ ](#1141-react并不推荐优先使用context-)
-  - [1.15 受控组件与非受控组件  ](#115-受控组件与非受控组件--)
+  - [1.15 受控组件与非受控组件 ](#115-受控组件与非受控组件-)
     - [受控组件](#受控组件)
     - [非受控组件](#非受控组件)
   - [1.16 React Refs 理解 ](#116-react-refs-理解-)
@@ -33,19 +33,19 @@
     - [回调refs](#回调refs)
   - [1.17 React绑定this的方式 ](#117-react绑定this的方式-)
   - [1.18 React组件构造函数？必须？ ](#118-react组件构造函数必须-)
-  - [1.19 类组件与函数组件  ](#119-类组件与函数组件--)
+  - [1.19 类组件与函数组件 ](#119-类组件与函数组件-)
 - [2. 生命周期](#2-生命周期)
-  - [2.1](#21)
-- [2. Node特点](#2-node特点)
-  - [2.1 单线程](#21-单线程)
-  - [2.2 非阻塞I/O](#22-非阻塞io)
-  - [2.3 事件驱动event-driven](#23-事件驱动event-driven)
-- [3. 模块机制](#3-模块机制)
-- [4. 事件循环](#4-事件循环)
-  - [4.1 任务队列](#41-任务队列)
-  - [4.2 async和await](#42-async和await)
-  - [4.3 async/await 能代替Promise吗?](#43-asyncawait-能代替promise吗)
-  - [4.4 setTimeout运行机制](#44-settimeout运行机制)
+  - [2.1 详细介绍](#21-详细介绍)
+    - [挂载](#挂载)
+    - [组件更新](#组件更新)
+    - [卸载阶段](#卸载阶段)
+    - [错误处理阶段](#错误处理阶段)
+  - [2.2 废弃了哪些生命周期](#22-废弃了哪些生命周期)
+  - [2.3 React 16.X 中 props 改变后在哪个生命周期中处理](#23-react-16x-中-props-改变后在哪个生命周期中处理)
+  - [2.4 state 和 props 触发更新的生命周期分别有什么区别？](#24-state-和-props-触发更新的生命周期分别有什么区别)
+    - [state 更新流程：](#state-更新流程)
+  - [2.5 React中发起网络请求应该在哪个生命周期中进行？为什么？](#25-react中发起网络请求应该在哪个生命周期中进行为什么)
+- [3. 组件通信](#3-组件通信)
 
 
 ## 1. React 组件和架构
@@ -478,7 +478,7 @@ context的更新需要通过setState()触发，这存在问题。Context支持�
 
 Context 主要应用场景在于很多不同层级的组件需要访问同样一些的数据。请谨慎使用，因为这会使得组件的复用性变差。
 
-### 1.15 受控组件与非受控组件  ![很多考察](https://img.shields.io/badge/-%E5%BE%88%E5%A4%9A%E8%80%83%E5%AF%9F-critical)
+### 1.15 受控组件与非受控组件 ![很多考察](https://img.shields.io/badge/-%E5%BE%88%E5%A4%9A%E8%80%83%E5%AF%9F-critical)
 
 #### 受控组件
 在使用表单来收集用户输入时，例如`<input>`，`<select>`，`<textearea>`等元素都要绑定一个change事件，当表单的状态发生变化，就会触发onChange事件，更新组件的state。这种组件在React中被称为受控组件。
@@ -606,7 +606,7 @@ constructor (props) {
 - JavaScript中的 bind 每次都会返回一个新的函数, 为了性能等考虑, 尽量在constructor中绑定事件
 
 
-### 1.19 类组件与函数组件  ![很多考察](https://img.shields.io/badge/-%E5%BE%88%E5%A4%9A%E8%80%83%E5%AF%9F-critical)
+### 1.19 类组件与函数组件 ![很多考察](https://img.shields.io/badge/-%E5%BE%88%E5%A4%9A%E8%80%83%E5%AF%9F-critical)
 
 1. 函数组件是一个纯函数，它接收一个props对象返回一个react元素；而类组件需要去继承React.Component并且创建render函数返回react元素。
 2. 函数组件没有生命周期和状态state，而类组件有。
@@ -629,234 +629,233 @@ constructor (props) {
 
 ## 2. 生命周期
 
-### 2.1
+### 2.1 详细介绍
+
+[生命周期图解](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+
+#### 挂载 
+
+当组件实例被创建并插入 DOM 中时，其生命周期调用顺序如下：
+
+>constructor()
+>
+>static getDerivedStateFromProps()
+>
+>render()
+>
+>componentDidMount()
+
+- getDerivedStateFromProps
+
+  该方法是新增的生命周期方法，是一个静态的方法，因此不能访问到组件的实例。
+
+  执行时机：组件创建和更新阶段，不论是props变化还是state变化，都会调用。
+
+  在每次render方法前调用，第一个参数为即将更新的props，第二个参数为上一个状态的state，可以比较props 和 state来加一些限制条件，防止无用的state更新。
+
+  该方法需要返回一个新的对象作为新的state或者返回null表示state状态不需要更新。
+
+- render
+  
+  render是React 中最核心的方法，一个组件中必须要有这个方法，它会根据状态 `state` 和属性 `props` 渲染组件。这个函数只做一件事，就是返回需要渲染的内容: 
+  - React 元素：这里包括原生的 DOM 以及 React 组件；
+  - 数组和 Fragment（片段）：可以返回多个元素；
+  - Portals（插槽）：可以将子元素渲染到不同的 DOM 子树种；
+  - 字符串和数字：被渲染成 DOM 中的 text 节点；
+  - 布尔值或 null：不渲染任何内容。
 
 
+- componentDidMount() 
+  
+  componentDidMount()会在组件挂载后（插入 DOM 树中）立即调。该阶段通常进行以下操作：
+
+  执行依赖于DOM的操作；
+  - 发送网络请求；（官方建议）
+  - 添加订阅消息（会在componentWillUnmount取消订阅）；
+
+  如果在 `componentDidMount` 中调用 `setState` ，就会触发一次额外的渲染，多调用了一次 render 函数，由于它是在浏览器刷新屏幕前执行的，所以用户对此是没有感知的，但是我应当避免这样使用，这样会带来一定的性能问题，尽量是在 `constructor` 中初始化 `state` 对象。
+
+#### 组件更新
+
+当组件的 `props`  改变了，或组件内部调用了  `setState/forceUpdate`，会触发更新重新渲染，这个过程可能会发生多次。这个阶段会依次调用下面这些方法：
+ 
+>getDerivedStateFromProps
+> 
+>shouldComponentUpdate
+> 
+>render
+>
+>getSnapshotBeforeUpdate
+>
+>componentDidUpdate
+
+- shouldComponentUpdate
+
+  ```
+  shouldComponentUpdate(nextProps, nextState)
+  ```
+  在说这个生命周期函数之前，来看两个问题：
+  
+  setState 函数在任何情况下都会导致组件重新渲染吗？例如下面这种情况：
+
+  父组件重新渲染或者setState时，不管传入的 props 有没有变化，都会引起子组件的重新渲染。
+
+  那么有没有什么方法解决在这两个场景下不让组件重新渲染进而提升性能呢？这个时候 `shouldComponentUpdate` 登场了，这个生命周期函数是用来提升速度的，它是在重新渲染组件开始前触发的，默认返回 `true`，可以比较 `this.props` 和 `nextProps` ，`this.state` 和 `nextState` 值是否变化，来确认返回 `true` 或者 `false`。当返回 `false` 时，组件的更新过程停止，后续的 `render`、`componentDidUpdate` 也不会被调用。
+
+  >注意：添加 `shouldComponentUpdate` 方法时，不建议使用深度相等检查（如使用 `JSON.stringify()`），因为深比较效率很低，可能会比重新渲染组件效率还低。而且该方法维护比较困难，建议使用该方法会产生明显的性能提升时使用。
+
+- getSnapshotBeforeUpdate
+
+  ```
+  getSnapshotBeforeUpdate(prevProps, prevState)
+  ```
+
+  这个方法在 `render` 之后，`componentDidUpdate` 之前调用，有两个参数 `prevProps` 和 `prevState`，表示更新之前的 `props` 和 `state`，这个函数必须要和 `componentDidUpdate` 一起使用，并且要有一个返回值，默认是 `null`，这个返回值作为第三个参数传给 `componentDidUpdate`。
+
+  此方法的目的在于获取组件更新前的一些信息，比如组件的滚动位置之类的，在组件更新后可以根据这些信息恢复一些UI视觉上的状态
+
+- componentDidUpdate
+  
+  componentDidUpdate() 会在更新后会被立即调用，首次渲染不会执行此方法。 该阶段通常进行以下操作：
+  
+  - 当组件更新后，对 DOM 进行操作； 
+  
+  - 如果你对更新前后的 props 进行了比较，也可以选择在此处进行网络请求；（例如，当 props 未发生变化时，则不会执行网络请求）。 
+
+  ```
+  componentDidUpdate(prevProps, prevState, snapshot){}
+  ```
+
+  该方法有三个参数：
+  
+  prevProps: 更新前的props
+  
+  prevState: 更新前的state
+  
+  snapshot: getSnapshotBeforeUpdate()生命周期的返回值
+
+#### 卸载阶段
+
+卸载阶段只有一个生命周期函数，componentWillUnmount() 会在组件卸载及销毁之前直接调用。在此方法中执行必要的清理操作：
+
+- 清除 timer，取消网络请求或清除
+- 取消在 componentDidMount() 中创建的订阅等；
+  
+这个生命周期在一个组件被卸载和销毁之前被调用，因此你不应该再这个方法中使用 `setState`，因为组件一旦被卸载，就不会再装载，也就不会重新渲染。
+
+#### 错误处理阶段
+componentDidCatch(error, info)，此生命周期在后代组件抛出错误后被调用。 它接收两个参数∶
+- error：抛出的错误。
+- info：带有 componentStack key 的对象，其中包含有关组件引发错误的栈信息
+
+**React常见生命周期的过程大致如下：**
+
+- 挂载阶段，首先执行constructor构造方法，来创建组件
+- 创建完成之后，就会执行render方法，该方法会返回需要渲染的内容
+- 随后，React会将需要渲染的内容挂载到DOM树上
+- 挂载完成之后就会执行componentDidMount生命周期函数
+- 如果我们给组件创建一个props（用于组件通信）、调用setState（更改state中的数据）、调用forceUpdate（强制更新组件）时，都会重新调用render函数
+- render函数重新执行之后，就会重新进行DOM树的挂载
+- 挂载完成之后就会执行componentDidUpdate生命周期函数
+- 当移除组件时，就会执行componentWillUnmount生命周期函数
+
+### 2.2 废弃了哪些生命周期
+
+被废弃的三个函数都是在render之前，因为fiber的出现，很可能因为高优先级任务的出现而打断现有任务导致它们会被执行多次。
+
+- componentWillMount
+  
+  首先这个函数的功能完全可以使用componentDidMount和 constructor来代替，异步获取的数据的情况上面已经说明了，而如果抛去异步获取数据，其余的即是初始化而已，这些功能都可以在constructor中执行，除此之外，如果在 willMount 中订阅事件，但在服务端这并不会执行 willUnMount事件，也就是说服务端会导致内存泄漏所以componentWilIMount完全可以不使用，但使用者有时候难免因为各种各样的情况在 componentWilMount中做一些操作，那么React为了约束开发者，干脆就抛掉了这个API 
+
+- componentWillReceiveProps
+  
+  在老版本的 React 中，如果组件自身的某个 state 跟其 props 密切相关的话，一直都没有一种很优雅的处理方式去更新 state，而是需要在 componentWilReceiveProps 中判断前后两个 props 是否相同，如果不同再将新的 props更新到相应的 state 上去。这样做一来会破坏 state 数据的单一数据源，导致组件状态变得不可预测，另一方面也会增加组件的重绘次数。
+
+  类似的业务需求也有很多，如一个可以横向滑动的列表，当前高亮的 Tab 显然隶属于列表自身的时，根据传入的某个值，直接定位到某个 Tab。为了解决这些问题，React引入了第一个新的生命周期：getDerivedStateFromProps。它有以下的优点∶
+
+  - getDSFP是静态方法，在这里不能使用this，也就是一个纯函数，开发者不能写出副作用的代码
+  - 开发者只能通过prevState而不是prevProps来做对比，保证了state和props之间的简单关系以及不需要处理第一次渲染时prevProps为空的情况。
+    
+  基于第一点，将状态变化（setState）和昂贵操作（tabChange）区分开，更加便于 render 和 commit 阶段操作或者说优化。 
+
+- componentWillUpdate
+  
+  与 componentWillReceiveProps 类似，许多开发者也会在 componentWillUpdate 中根据 props 的变化去触发一些回调 。 但不论是 componentWilReceiveProps 还是 componentWilUpdate，都有可能在一次更新中被调用多次，也就是说写在这里的回调函数也有可能会被调用多次，这显然是不可取的。
+
+  与 componentDidMount 类 似， componentDidUpdate 也不存在这样的问题，一次更新中 componentDidUpdate 只会被调用一次，所以将原先写在 componentWillUpdate 中的回调迁移至 componentDidUpdate 就可以解决这个问题。
 
 
+  另外一种情况则是需要获取DOM元素状态，但是由于在fiber中，render可打断，可能在wilMount中获取到的元素状态很可能与实际需要的不同，这个通常可以使用第二个新增的生命函数的解决 
 
 
-## 2. Node特点
+### 2.3 React 16.X 中 props 改变后在哪个生命周期中处理
+在getDerivedStateFromProps中进行处理。
 
-### 2.1 单线程
-Node.js不为每个客户连接创建一个新的线程，而仅仅使用一个线程。当有用户连接了，就触发一个内部事件，通过非阻塞I/O、事件驱动机制，让Node.js程序宏观上也是并行的。
+这个生命周期函数是为了替代`componentWillReceiveProps`存在的，所以在需要使用`componentWillReceiveProps`时，就可以考虑使用`getDerivedStateFromProps`来进行替代。
+两者的参数是不相同的，而`getDerivedStateFromProps`是一个静态函数，也就是这个函数不能通过this访问到class的属性，也并不推荐直接访问属性。而是应该通过参数提供的nextProps以及prevState来进行判断，根据新传入的props来映射到state。
 
-### 2.2 非阻塞I/O
-- 由于Node.js中采用了非阻塞型I/O机制，因此在执行了访问数据库的代码之后，将立即转而执行其后面的代码，把数据库返回结果的处理代码放在回调函数中，从而提高了程序的执行效率。
-
-- 当某个I/O执行完毕时，将以事件的形式通知执行I/O操作的线程，线程执行这个事件的回调函数。为了处理异步I/O，线程必须有事件循环，不断的检查有没有未处理的事件，依次予以处理。
-
-- 阻塞模式下，一个线程只能处理一项任务，要想提高吞吐量必须通过多线程。而非阻塞模式下，一个线程永远在执行计算操作，这个线程的CPU核心利用率永远是100%。所以，这是一种特别有哲理的解决方案：与其人多，但是好多人闲着；还不如一个人玩命，往死里干活儿。
-
-### 2.3 事件驱动event-driven
-- 在Node中，在一个时刻，只能执行一个事件回调函数，但是在执行一个事件回调函数的中途，可以转而处理其他事件（比如，又有新用户连接了），然后返回继续执行原事件的回调函数，这种处理机制，称为“事件环”机制。
-
-- Node.js底层是C++（V8也是C++写的）。底层代码中，近半数都用于事件队列、回调函数队列的构建。
-
-## 3. 模块机制
-
-## 4. 事件循环
-
-在执行代码过程中，如果遇到一些异步代码(比如setTimeout,ajax,promise.then以及用户点击等操作),那么浏览器就会将这些代码放到另一个线程(在这里我们叫做幕后线程)中去执行，在前端由浏览器底层执行，在 node 端由 libuv 执行，这个线程的执行不阻塞主线程的执行，主线程继续执行栈中剩余的代码。
-
-当幕后线程（background thread）里的代码执行完成后(比如setTimeout时间到了，ajax请求得到响应),该线程就会将它的回调函数放到任务队列（又称作事件队列、消息队列）中等待执行。
-
-而当主线程执行完栈中的所有代码后，它就会检查任务队列是否有任务要执行，如果有任务要执行的话，那么就将该任务放到执行栈中执行。如果当前任务队列为空的话，它就会一直循环等待任务到来。**因此，这叫做事件循环。**
-
-
-### 4.1 任务队列
-
-Macrotask（宏任务） 常见的任务：
-- setTimeout
-- setInterval
-- setImmediate
-- I/O
-- 用户交互操作，UI渲染
-
-Microtask（微任务） 常见的任务：
-
-- Promise(重点)
-- process.nextTick(nodejs)
-- Object.observe(不推荐使用)
-- MutationObserver
-
-执行流程：
-
-1.  检查 Macrotask 队列是否为空,若不为空，则进行下一步，若为空，则跳到3
-2.  从 Macrotask 队列中取队首(在队列时间最长)的任务进去执行栈中执行(仅仅一个)，执行完后进入下一步
-3.  检查 Microtask 队列是否为空，若不为空，则进入下一步，否则，跳到1（开始新的事件循环）
-4.  从 Microtask 队列中取队首(在队列时间最长)的任务进去事件队列执行,执行完后，跳到3
-
-其中，在执行代码过程中新增的microtask任务会在当前事件循环周期内执行，而新增的macrotask任务只能等到下一个事件循环才能执行了。
+需要注意的是，如果props传入的内容不需要影响到你的state，那么就需要返回一个null，这个返回值是必须的，所以尽量将其写到函数的末尾：
 
 ```
-console.log(1)
-setTimeout(function() {
-  //settimeout1
-  console.log(2)
-}, 0);
-
-const intervalId = setInterval(function() {
-  //setinterval1
-  console.log(3)
-}, 0)
-
-setTimeout(function() {
-  //settimeout2
-  console.log(10)
-  new Promise(function(resolve) {
-    //promise1
-    console.log(11)
-    resolve()
-  })
-  .then(function() {
-    console.log(12)
-  })
-  .then(function() {
-    console.log(13)
-    clearInterval(intervalId)
-  })
-}, 0);
-
-//promise2
-Promise.resolve()
-  .then(function() {
-    console.log(7)
-  })
-  .then(function() {
-    console.log(8)
-  })
-console.log(9)
-
-```
-
-第一次事件循环:
-
-- console.log(1)被执行，输出1
-- settimeout1执行，加入macrotask队列
-- setinterval1执行，加入macrotask队列
-- settimeout2执行，加入macrotask队列
-- promise2执行，它的两个then函数加入microtask队列
-- console.log(9)执行，输出9
-
-根据事件循环的定义，接下来会执行新增的microtask任务，按照进入队列的顺序，执行console.log(7)和console.log(8),输出7和8
-microtask队列为空，回到第一步，进入下一个事件循环，此时macrotask队列为: settimeout1,setinterval1,settimeout2
-
-第二次事件循环:
-
-从macrotask队列里取位于队首的任务(settimeout1)并执行，输出2
-microtask队列为空，回到第一步，进入下一个事件循环，此时macrotask队列为: setinterval1,settimeout2
-
-第三次事件循环:
-
-从macrotask队列里取位于队首的任务(setinterval1)并执行，输出3,然后又将新生成的setinterval1加入macrotask队列
-microtask队列为空，回到第一步，进入下一个事件循环，此时macrotask队列为: **settimeout2,setinterval1**
-
-第四次事件循环:
-
-从macrotask队列里取位于队首的任务(settimeout2)并执行,输出10，并且执行new Promise内的函数(new Promise内的函数是同步操作，并不是异步操作),输出11，并且将它的两个then函数加入microtask队列
-
-从microtask队列中，取队首的任务执行，直到为空为止。因此，两个新增的microtask任务按顺序执行，输出12和13，并且将setinterval1清空。
-
-
-### 4.2 async和await
-
-async 函数是 Generator 函数的语法糖。使用 关键字 async 来表示，在函数内部使用await 表明当前函数是异步函数 不会阻塞线程导致后续代码停止运行。
-
-```
-async function name([param[, param[, ... param]]]) { statements }
-```
-
-async 函数的返回值很特殊: 不管在函数体内 return 了什么值, async 函数的实际**返回值总是一个 Promise 对象**.详细讲就是:若在 async 函数中 return 了一个值 a, 不管 a 值是什么类型, async 函数的实际返回值总是** Promise.resolve(a)**
-
-
-await意思是async wait(异步等待)。这个关键字只能在使用**async定义的函数里面使用**。任何async函数都会默认返回promise，并且这个promise解析的值都将会是这个函数的返回值，而async函数必须等到内部所有的** await 命令的 Promise 对象执行完**，才会发生状态改变>。
-
-```
-async function async1(){
-    console.log('async1 start')
-    await async2()
-    console.log('async1 end')
+static getDerivedStateFromProps(nextProps, prevState) {
+    const {type} = nextProps;
+    // 当传入的type发生变化的时候，更新state
+    if (type !== prevState.type) {
+        return {
+            type,
+        };
+    }
+    // 否则，对于state不进行任何操作
+    return null;
 }
-async function async2(){
-    console.log('async2')
-}
-console.log('script start')
-setTimeout(function(){
-    console.log('setTimeout')
-},0)
-async1();
-new Promise(function(resolve){
-    console.log('promise1')
-    resolve();
-}).then(function(){
-    console.log('promise2')
-})
-console.log('script end')
-```
-```
-script start
-async1 start
-async2
-promise1
-script end
-asycn1 end
-promise2
-setTimmeout
 ```
 
-### 4.3 async/await 能代替Promise吗?
-```
-const timeoutFn = function(value,timeout){
-    return new Promise(function(resolve){
-        return setTimeout(()=>{resolve(value)},timeout);
-    });
-}
+### 2.4 state 和 props 触发更新的生命周期分别有什么区别？
 
-async function getABC() {
-    let A = await timeoutFn(2,2000); // 2 second to finish
-    let B = await timeoutFn(2,2000); // 4 second to finish
-    let C = await timeoutFn(3,3000); // 3 second to finish
-    return A*B*C;
-}
-getABC()
-    .then((res)=>{
-        console.log(res)
-        //12
-    })
-```
+#### state 更新流程：
 
-上述7秒之后输出12，因为三个变量A，B和C不相互依赖,每个调用将等待前一个返回结果
+这个过程当中涉及的函数：
 
-Promise.all（）。这将允许我们同时发送所有请求。，但异步调用将并行触发，而不是一个接一个地触发,3秒之后返回借过12
+  - shouldComponentUpdate: 当组件的 state 或 props 发生改变时，都会首先触发这个生命周期函数。它会接收两个参数：nextProps, nextState——它们分别代表传入的新 props 和新的 state 值。拿到这两个值之后，我们就可以通过一些对比逻辑来决定是否有 re-render（重渲染）的必要了。如果该函数的返回值为 false，则生命周期终止，反之继续；
 
-```
-const timeoutFn = function(value,timeout){
-    return new Promise(function(resolve){
-        return setTimeout(()=>{resolve(value)},timeout);
-    });
-}
+  - componentWillUpdate。componentWillUpdate 是 React16 废弃的三个生命周期之一。过去，我们可能希望能在这个阶段去收集一些必要的信息（比如更新前的 DOM 信息等等），现在我们完全可以在 React16 的 getSnapshotBeforeUpdate 中去做这些事；
 
-async function getABC() {
-    // Promise.all（）允许我们同时发送所有请求。
-    let results = await Promise.all([ timeoutFn(2,2000), timeoutFn(2,2000), timeoutFn(3,3000) ]);
-    return results.reduce((total,value) => total * value);
-}
-getABC()
-    .then(res => {
-        console.log(res)
-        //12
-    })
-```
+  - componentDidUpdate：componentDidUpdate() 会在UI更新后会被立即调用。它接收 prevProps（上一次的 props 值）作为入参，也就是说在此处我们仍然可以进行 props 值对比（再次说明 componentWillUpdate 确实鸡肋哈）。
+  
 
-### 4.4 setTimeout运行机制
-setTimeout和setInterval的运行机制是，将指定的代码移出本次执行，等到下一轮Event Loop时，再检查是否到了指定时间。如果到了，就执行对应的代码；如果不到，就等到再下一轮Event Loop时重新判断。这意味着，setTimeout指定的代码，必须等到本次执行的所有代码都执行完，才会执行。
+props 更新流程：
 
-每一轮Event Loop时，都会将“任务队列”中需要执行的任务，一次执行完。setTimeout和setInterval都是把任务添加到“任务队列”的尾部。因此，它们实际上要等到当前脚本的所有同步任务执行完，然后再等到本次Event Loop的“任务队列”的所有任务执行完，才会开始执行。由于前面的任务到底需要多少时间执行完，是不确定的，**所以没有办法保证，setTimeout和setInterval指定的任务，一定会按照预定时间执行。**
+相对于 state 更新，props 更新后**唯一的区别是增加了对 componentWillReceiveProps 的调用**。
 
-```
-setTimeout(someTask,100);
-veryLongTask();
-```
+componentWillReceiveProps：它在Component接受到新的 props 时被触发。
 
-上面代码的setTimeout，指定100毫秒以后运行一个任务。但是，如果后面立即运行的任务（当前脚本的同步任务））非常耗时，过了100毫秒还无法结束，那么被推迟运行的someTask就只有等着，等到前面的veryLongTask运行结束，才轮到它执行。
+componentWillReceiveProps 会接收一个名为 nextProps 的参数（对应新的 props 值）。该生命周期是 React16 废弃掉的三个生命周期之一。在它被废弃前，可以用它来比较 this.props 和 nextProps 来重新setState。在 React16 中，用一个类似的新生命周期 getDerivedStateFromProps 来代替它。
+
+
+### 2.5 React中发起网络请求应该在哪个生命周期中进行？为什么？
+
+对于异步请求，最好放在componentDidMount中去操作，对于同步的状态改变，可以放在componentWillMount中，一般用的比较少。
+
+如果认为在componentWillMount里发起请求能提早获得结果，这种想法其实是错误的，通常componentWillMount比componentDidMount早不了多少微秒，网络上任何一点延迟，这一点差异都可忽略不计。
+
+react的生命周期：constructor() -> componentWillMount() -> render() -> componentDidMount()
+
+上面这些方法的调用是有次序的，由上而下依次调用。
+
+constructor被调用是在组件准备要挂载的最开始，此时组件尚未挂载到网页上。
+
+componentWillMount方法的调用在constructor之后，在render之前，在这方法里的代码调用setState方法不会触发重新render，所以它一般不会用来作加载数据之用。
+
+componentDidMount方法中的代码，是在组件已经完全挂载到网页上才会调用被执行，所以可以保证数据的加载。此外，在这方法中调用setState方法，会触发重新渲染。所以，官方设计这个方法就是用来加载外部数据用的，或处理其他的副作用代码。与组件上的数据无关的加载，也可以在constructor里做，但constructor是做组件state初绐化工作，并不是做加载数据这工作的，constructor里也不能setState，还有加载的时间太长或者出错，页面就无法加载出来。所以有副作用的代码都会集中在componentDidMount方法里。
+
+总结：
+
+跟服务器端渲染（同构）有关系，如果在componentWillMount里面获取数据，fetch data会执行两次，一次在服务器端一次在客户端。在componentDidMount中可以解决这个问题，componentWillMount同样也会render两次。
+
+在componentWillMount中fetch data，数据一定在render后才能到达，如果忘记了设置初始状态，用户体验不好。
+
+react16.0以后，componentWillMount可能会被执行多次。
+
+
+## 3. 组件通信
+
