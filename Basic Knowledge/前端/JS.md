@@ -1,11 +1,30 @@
 目录
 - [1. 数据类型](#1-数据类型)
-  - [1.1 typeof可以及检测的数据类型](#11-typeof可以及检测的数据类型)
-  - [1.2 instanceof](#12-instanceof)
-  - [1.3 JS中===和==的区别 和类型转换？](#13-js中和的区别-和类型转换)
-  - [1.4 判断 `[] == ![]`](#14-判断---)
-  - [1.5 判断对象是否为空](#15-判断对象是否为空)
-- [2. prototype](#2-prototype)
+  - [1.1 有哪些类型？他们的区别](#11-有哪些类型他们的区别)
+  - [1.2 typeof可以及检测的数据类型](#12-typeof可以及检测的数据类型)
+  - [1.3 instanceof](#13-instanceof)
+  - [1.4 JS中===和==的区别 和类型转换？](#14-js中和的区别-和类型转换)
+  - [1.5 判断 `[] == ![]`](#15-判断---)
+  - [1.6 判断对象是否为空](#16-判断对象是否为空)
+  - [1.7 为什么0.1+0.2 ! == 0.3](#17-为什么0102---03)
+  - [1.8 js中准确获取undefined的方法](#18-js中准确获取undefined的方法)
+  - [1.9 isNaN 和 Number.isNaN 函数的区别？](#19-isnan-和-numberisnan-函数的区别)
+  - [1.10 其他值到字符串的转换规则？](#110-其他值到字符串的转换规则)
+  - [1.11 其他值到数字值的转换规则？](#111-其他值到数字值的转换规则)
+  - [1.12 JS隐式转换](#112-js隐式转换)
+  - [1.13  `+` 操作符什么时候用于字符串的拼接？](#113---操作符什么时候用于字符串的拼接)
+  - [1.14 为什么会有BigInt的提案？](#114-为什么会有bigint的提案)
+  - [1.15 object.assign和扩展运算法是深拷贝还是浅拷贝，两者区别](#115-objectassign和扩展运算法是深拷贝还是浅拷贝两者区别)
+- [2. ES6](#2-es6)
+  - [2.1 let、const 以及 var 的区别](#21-letconst-以及-var-的区别)
+  - [2.2 箭头函数与普通函数的区别](#22-箭头函数与普通函数的区别)
+  - [2.3 箭头函数的this指向哪⾥？](#23-箭头函数的this指向哪)
+- [3. JS 基础](#3-js-基础)
+  - [3.1 new操作符的实现原理](#31-new操作符的实现原理)
+  - [3.2 map和weakMap的区别](#32-map和weakmap的区别)
+  - [3.3](#33)
+  - [3.4 对JSON的理解](#34-对json的理解)
+- [4. prototype](#4-prototype)
   - [2.1 原型链](#21-原型链)
   - [2.2 new一个对象的过程](#22-new一个对象的过程)
 - [3. 继承](#3-继承)
@@ -38,16 +57,15 @@
   - [11.3 常用方法](#113-常用方法)
   - [11.4 数组去重](#114-数组去重)
   - [11.5 数组最大值](#115-数组最大值)
-  - [11.6 数组扁平化[Code]](#116-数组扁平化code)
+  - [11.6 数组扁平化\[Code\]](#116-数组扁平化code)
 - [12. parseInt](#12-parseint)
-  - [12.1 ["1", "2", "3"].map(parseInt)](#121-1-2-3mapparseint)
+  - [12.1 \["1", "2", "3"\].map(parseInt)](#121-1-2-3mapparseint)
   - [12.2 实现](#122-实现)
 - [13. Ajax](#13-ajax)
   - [13.1 自己实现](#131-自己实现)
   - [13.2 方法解释](#132-方法解释)
   - [13.3 使用](#133-使用)
 - [14. ES6](#14-es6)
-  - [14.1 let、const 以及 var 的区别](#141-letconst-以及-var-的区别)
   - [14.2 Promise](#142-promise)
   - [14.3 Promise 实现](#143-promise-实现)
     - [14.3.1 主体实现](#1431-主体实现)
@@ -59,7 +77,6 @@
     - [14.3.7 racel()方法](#1437-racel方法)
     - [14.3.8 resolve()方法](#1438-resolve方法)
     - [14.3.9 reject()方法](#1439-reject方法)
-  - [14.4 箭头函数](#144-箭头函数)
   - [14.5](#145)
 - [15.Set、Map、WeakSet 和 WeakMap 的区别？](#15setmapweakset-和-weakmap-的区别)
 - [16. 事件流和事件委托](#16-事件流和事件委托)
@@ -88,6 +105,7 @@
 
 ## 1. 数据类型
 
+### 1.1 有哪些类型？他们的区别
 JavaScript 定义了 7 种数据类型。
 
 原始类型：
@@ -97,19 +115,45 @@ JavaScript 定义了 7 种数据类型。
 4. undefined
 5. null
 6. Symbol (ES6新增)
+7. BigInt (ES6新增)
 
 引⽤类型：
 - Object 类，如 Date、Array、Function 等。
 
+其中 Symbol 和 BigInt 是ES6 中新增的数据类型：
+
+symbol不能使用new,因为symbol是原始数据类型，不是对象。
+
+每一个symbol的值都是不相等的，是唯一的。主要是为了防止属性名冲突。
+
+symbol不能和其他的数据类型比较，比较的话会报错。如果symbol和symbol比较，值为false。
+
+for…in和object.keys()均不能访问到symbol作为key的值。可以通过object.getOwnPropertySymbols获取。
+
+>Symbol的应用场景
+>（1）防止属性污染
+>在某些情况下，我们可能要为对象添加一个属性，此时就有可能造成属性覆盖，用Symbol作为对象属性可以保证永远不会出现同名属性。
+>（2）借助Symbol类型的不可枚举，我们可以在类中模拟私有属性，控制变量读写
+>（3）可以防止XSS攻击，JSON中不能存储Symbol类型的变量，这就是防止XSS的一种手段。
+
+- BigInt 是一种数字类型的数据，它可以表示任意精度格式的整数，使用 BigInt 可以安全地存储和操作大整数，即使这个数已经超出了 Number 能够表示的安全整数范围。
+
+
 ⾸先原始类型**存储的都是值**，存储在栈内存。是没有函数可以调⽤的，⽐如 undefined.toString()
 
-此时你肯定会有疑问，这不对呀，明明 '1'.toString() 是可以使 ⽤的。其实在这种情况下，'1' 已经不是原始类型了，⽽是被强制 转换成了 String 类型也就是对象类型，所以可以调⽤ toString 函数。
+为什么'1'.toString() 是可以使⽤的呢？其实在这种情况下，'1' 已经不是原始类型了，⽽是被强制 转换成了 String 类型也就是对象类型，所以可以调⽤ toString 函数。
 
-复杂数据类型**存储在堆内存，存储的是地址**。当我们把对象赋值给另外一个变量的时候，复制的是地址，指向同一块内存空间，当其中一个对象改变时，另一个对象也会变化。
+引⽤类型类型**存储在堆内存，存储的是地址**。当我们把对象赋值给另外一个变量的时候，复制的是地址，指向同一块内存空间，当其中一个对象改变时，另一个对象也会变化。
 
 在参数传递⽅式上，值类型是按值传递，引⽤类型是按共享传递。
 
-### 1.1 typeof可以及检测的数据类型
+>在操作系统中，内存被分为栈区和堆区：
+>
+>栈区内存由编译器自动分配释放，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈。 
+>
+>堆区内存一般由开发者分配释放，若开发者不释放，程序结束时可能由垃圾回收机制回收。
+
+### 1.2 typeof可以及检测的数据类型
 
 - 基本数据类型：Undefined null bool string number
 - 关键点：typeof只能区分值类型，不能区分引用类型
@@ -127,7 +171,7 @@ JavaScript 定义了 7 种数据类型。
 >
 >D. NaN == NaN //false
 
-### 1.2 instanceof
+### 1.3 instanceof
 首先 typeof 能够正确的判断基本数据类型，但是除了 null, typeof null输出的是对象。
 
 但是对象来说，typeof 不能正确的判断其类型， typeof 一个函数可以输出 'function',而除此之外，输出的全是 object,这种情况下，我们无法准确的知道对象的类型。
@@ -151,7 +195,7 @@ function instance_of(L, R) {//L 表示左表达式，R 表示右表达式
 }
 ```
 
-### 1.3 JS中===和==的区别 和类型转换？
+### 1.4 JS中===和==的区别 和类型转换？
 
 == 会进行强制类型转换之后再比较，=== 不会进行强制类型转换的，只有类型相同并且值相等时，才返回 true.
 
@@ -173,7 +217,7 @@ person2.gae = 20;
 console.log(person1 === person2); //true,注意复杂数据类型，比较的是引用地址
 ```
 
-### 1.4 判断 `[] == ![]`
+### 1.5 判断 `[] == ![]`
 
 我们来分析一下: [] == ![] 是true还是false？
 
@@ -187,7 +231,7 @@ console.log(person1 === person2); //true,注意复杂数据类型，比较的是
 
 0 == 0; 为true
 
-### 1.5 判断对象是否为空
+### 1.6 判断对象是否为空
 
 - 利用 for...in 循环
 
@@ -224,7 +268,421 @@ console.log(person1 === person2); //true,注意复杂数据类型，比较的是
   console.log(isEmpty(obj3)) // true
   ```
 
-## 2. prototype
+### 1.7 为什么0.1+0.2 ! == 0.3 
+在开发过程中遇到类似这样的问题：
+```
+let n1 = 0.1, n2 = 0.2
+console.log(n1 + n2)  // 0.30000000000000004
+```
+这里得到的不是想要的结果，要想等于0.3，就要把它进行转化：
+```
+(n1 + n2).toFixed(2) // 注意，toFixed为四舍五入
+```
+
+`toFixed(num)` 方法可把 Number 四舍五入为指定小数位数的数字。那为什么会出现这样的结果呢？
+
+计算机是通过二进制的方式存储数据的，所以计算机计算0.1+0.2的时候，实际上是计算的两个数的二进制的和。0.1的二进制是`0.0001100110011001100...`（1100循环），0.2的二进制是：`0.00110011001100...`（1100循环），这两个数的二进制都是无限循环的数。那JavaScript是如何处理无限循环的二进制小数呢？
+
+一般我们认为数字包括整数和小数，但是在 JavaScript 中只有一种数字类型：Number，它的实现遵循IEEE 754标准，使用64位固定长度来表示，也就是标准的double双精度浮点数。在二进制科学表示法中，双精度浮点数的小数部分最多只能保留52位，再加上前面的1，其实就是保留53位有效数字，剩余的需要舍去，遵从“0舍1入”的原则。
+
+根据这个原则，0.1和0.2的二进制数相加，再转化为十进制数就是：`0.30000000000000004`。
+下面看一下双精度数是如何保存的：
+
+(图像)
+- 第一部分（蓝色）：用来存储符号位（sign），用来区分正负数，0表示正数，占用1位
+- 第二部分（绿色）：用来存储指数（exponent），占用11位
+- 第三部分（红色）：用来存储小数（fraction），占用52位
+  
+对于0.1，它的二进制为：
+```
+0.00011001100110011001100110011001100110011001100110011001 10011...
+```
+
+转为科学计数法（科学计数法的结果就是浮点数）：
+```
+1.1001100110011001100110011001100110011001100110011001*2^-4
+```
+
+可以看出0.1的符号位为0，指数位为-4，小数位为：
+```
+1001100110011001100110011001100110011001100110011001
+```
+
+那么问题又来了，指数位是负数，该如何保存呢？
+
+IEEE标准规定了一个偏移量，对于指数部分，每次都加这个偏移量进行保存，这样即使指数是负数，那么加上这个偏移量也就是正数了。由于JavaScript的数字是双精度数，这里就以双精度数为例，它的指数部分为11位，能表示的范围就是0~2047，IEEE固定双精度数的偏移量为1023。
+
+- 当指数位不全是0也不全是1时(规格化的数值)，IEEE规定，阶码计算公式为 e-Bias。 此时e最小值是1，则1-1023= -1022，e最大值是2046，则2046-1023=1023，可以看到，这种情况下取值范围是`-1022~1013`。
+- 当指数位全部是0的时候(非规格化的数值)，IEEE规定，阶码的计算公式为1-Bias，即1-1023= -1022。
+- 当指数位全部是1的时候(特殊值)，IEEE规定这个浮点数可用来表示3个特殊值，分别是正无穷，负无穷，NaN。 具体的，小数位不为0的时候表示NaN；小数位为0时，当符号位s=0时表示正无穷，s=1时候表示负无穷。
+
+对于上面的0.1的指数位为-4，-4+1023 = 1019 转化为二进制就是：`1111111011`.
+所以，0.1表示为：
+```
+0 1111111011 1001100110011001100110011001100110011001100110011001
+```
+
+说了这么多，是时候该最开始的问题了，如何实现0.1+0.2=0.3呢？
+
+对于这个问题，一个直接的解决方法就是设置一个误差范围，通常称为“机器精度”。对JavaScript来说，这个值通常为2-52，在ES6中，提供了`Number.EPSILON`属性，而它的值就是2-52，只要判断`0.1+0.2-0.3`是否小于`Number.EPSILON`，如果小于，就可以判断为0.1+0.2 ===0.3
+```
+function numberepsilon(arg1,arg2){                   
+  return Math.abs(arg1 - arg2) < Number.EPSILON;        
+}        
+console.log(numberepsilon(0.1 + 0.2, 0.3)); // true
+```
+
+### 1.8 js中准确获取undefined的方法
+
+因为 undefined 是一个标识符，所以可以被当作变量来使用和赋值，但是这样会影响 undefined 的正常判断。
+
+表达式 void ___ 没有返回值，因此返回结果是 undefined。void 并不改变表达式的结果，只是让表达式不返回值。
+
+按惯例我们用 void(0) 来获得 undefined。
+
+### 1.9 isNaN 和 Number.isNaN 函数的区别？
+
+函数 isNaN 接收参数后，会尝试将这个参数转换为数值，任何不能被转换为数值的的值都会返回 true，因此非数字值传入也会返回 true ，会影响 NaN 的判断。
+
+函数 Number.isNaN 会首先判断传入参数是否为数字，如果是数字再继续判断是否为 NaN ，不会进行数据类型的转换，这种方法对于 NaN 的判断更为准确。
+
+### 1.10 其他值到字符串的转换规则？
+- Null 和 Undefined 类型 ，null 转换为 "null"，undefined 转换为 "undefined"，
+- Boolean 类型，true 转换为 "true"，false 转换为 "false"。
+- Number 类型的值直接转换，不过那些极小和极大的数字会使用指数形式。
+- Symbol 类型的值直接转换，但是只允许显式强制类型转换，使用隐式强制类型转换会产生错误。
+- 对普通对象来说，除非自行定义 toString() 方法，否则会调用 toString()（Object.prototype.toString()）来返回内部属性 [[Class]] 的值，如"[object Object]"。如果对象有自己的 toString() 方法，字符串化时就会调用该方法并使用其返回值。
+- 
+### 1.11 其他值到数字值的转换规则？
+- Undefined 类型的值转换为 NaN。
+- Null 类型的值转换为 0。
+- Boolean 类型的值，true 转换为 1，false 转换为 0。
+- String 类型的值转换如同使用 Number() 函数进行转换，如果包含非数字值则转换为 NaN，空字符串为 0。
+- Symbol 类型的值不能转换为数字，会报错。
+- 对象（包括数组）会首先被转换为相应的基本类型值，如果返回的是非数字的基本类型值，则再遵循以上规则将其强制转换为数字。
+  
+为了将值转换为相应的基本类型值，抽象操作 ToPrimitive 会首先（通过内部操作 DefaultValue）检查该值是否有valueOf()方法。如果有并且返回基本类型值，就使用该值进行强制类型转换。如果没有就使用 toString() 的返回值（如果存在）来进行强制类型转换。
+
+如果 valueOf() 和 toString() 均不返回基本类型值，会产生 TypeError 错误。
+
+### 1.12 JS隐式转换
+在JS中，当运算符在运算时，如果两边数据不统一，CPU就无法计算，JS引擎会把运算符两边的数据转成一样的类型再计算。这种自动转换的方式就叫隐式转换。
+
+- 当进行加法运算时：
+  - 有一方为string，那么另一方也会被转为string
+  - 一方为number,另一方为原始值类型，则将原始值转换为number
+  - 一方为number，另一方为引用类型，将双方都转为string（引用类型转string就调用toString函数）
+- 乘除，减号，取模，就隐式调用Number()函数，转为number
+- == （相等操作符）的类型转换是：
+  - Null==undefined//true
+  - 布尔值与其他类型比较时，先转换为number
+  - string与number比较，string转为number
+  - 引用类型与值类型比较，引用类型先转为值类型（引用类型转值类型调用valueOf函数，结果为基础类型就返回，不是基础类型就再调用toString）
+  - 引用类型与引用类型比较，直接判断是否指向同一对象
+- Null,undefined与其他任何类型进行比较，结果都为false
+- ！隐式调用Boolean函数
+
+### 1.13  `+` 操作符什么时候用于字符串的拼接？
+
+根据 ES5 规范，如果某个操作数是字符串或者能够通过以下步骤转换为字符串的话，+ 将进行拼接操作。
+
+如果其中一个操作数是对象（包括数组），则首先对其调用 ToPrimitive 抽象操作，该抽象操作再调用 [[DefaultValue]]，以数字作为上下文。如果不能转换为字符串，则会将其转换为数字类型来进行计算。
+
+简单来说就是，如果 + 的其中一个操作数是字符串（或者通过以上步骤最终得到字符串），则执行字符串拼接，否则执行数字加法。
+
+那么对于除了加法的运算符来说，只要其中一方是数字，那么另一方就会被转为数字。
+
+### 1.14 为什么会有BigInt的提案？ 
+JavaScript中Number.MAX_SAFE_INTEGER表示最⼤安全数字，计算结果是9007199254740991，即在这个数范围内不会出现精度丢失（⼩数除外）。但是⼀旦超过这个范围，js就会出现计算不准确的情况，这在⼤数计算的时候不得不依靠⼀些第三⽅库进⾏解决，因此官⽅提出了BigInt来解决此问题。 
+
+
+### 1.15 object.assign和扩展运算法是深拷贝还是浅拷贝，两者区别
+
+扩展运算符：
+```
+let outObj = {
+  inObj: {a: 1, b: 2}
+}
+let newObj = {...outObj}
+newObj.inObj.a = 2
+console.log(outObj) // {inObj: {a: 2, b: 2}}
+Object.assign():
+let outObj = {
+  inObj: {a: 1, b: 2}
+}
+let newObj = Object.assign({}, outObj)
+newObj.inObj.a = 2
+console.log(outObj) // {inObj: {a: 2, b: 2}}
+```
+可以看到，两者都是浅拷贝。
+
+- Object.assign()方法接收的第一个参数作为目标对象，后面的所有参数作为源对象。然后把所有的源对象合并到目标对象中。它会修改了一个对象，因此会触发 ES6 setter。
+- 扩展操作符（…）使用它时，数组或对象中的每一个值都会被拷贝到一个新的数组或对象中。它不复制继承的属性或类的属性，但是它会复制ES6的 symbols 属性。
+
+## 2. ES6
+
+### 2.1 let、const 以及 var 的区别
+
+（1）块级作用域：块作用域由 `{ }`包括，let和const具有块级作用域，var不存在块级作用域。块级作用域解决了ES5中的两个问题：
+- 内层变量可能覆盖外层变量
+- 用来计数的循环变量泄露为全局变量
+  
+（2）变量提升：var存在变量提升，let和const不存在变量提升，即在变量只能在声明之后使用，否在会报错。
+
+（3）给全局添加属性：浏览器的全局对象是window，Node的全局对象是global。var声明的变量为全局变量，并且会将该变量添加为全局对象的属性，但是let和const不会。
+
+（4）重复声明：var声明变量时，可以重复声明变量，后声明的同名变量会覆盖之前声明的遍历。const和let不允许重复声明变量。
+
+（5）暂时性死区：在使用let、const命令声明变量之前，该变量都是不可用的。这在语法上，称为暂时性死区。使用var声明的变量不存在暂时性死区。
+
+（6）初始值设置：在变量声明时，var 和 let 可以不用设置初始值。而const声明变量必须设置初始值。
+
+（7）指针指向：let和const都是ES6新增的用于创建变量的语法。 let创建的变量是可以更改指针指向（可以重新赋值）。但const声明的变量是不允许改变指针的指向。
+
+
+### 2.2 箭头函数与普通函数的区别
+（1）箭头函数比普通函数更加简洁
+
+- 如果没有参数，就直接写一个空括号即可
+- 如果只有一个参数，可以省去参数的括号
+- 如果有多个参数，用逗号分割
+- 如果函数体不需要返回值，且只有一句话，可以给这个语句前面加一个void关键字。最常见的就是调用一个函数：
+```
+let fn = () => void doesNotReturn();
+```
+
+（2）箭头函数没有自己的this
+箭头函数不会创建自己的this， 所以它没有自己的this，它只会在自己作用域的上一层继承this。所以箭头函数中this的指向在它在定义时已经确定了，之后不会改变。
+
+（3）箭头函数继承来的this指向永远不会改变
+```
+var id = 'GLOBAL';
+var obj = {
+  id: 'OBJ',
+  a: function(){
+    console.log(this.id);
+  },
+  b: () => {
+    console.log(this.id);
+  }
+};
+obj.a();    // 'OBJ'
+obj.b();    // 'GLOBAL'
+new obj.a()  // undefined
+new obj.b()  // Uncaught TypeError: obj.b is not a constructor
+```
+
+对象obj的方法b是使用箭头函数定义的，这个函数中的this就永远指向它定义时所处的全局执行环境中的this，即便这个函数是作为对象obj的方法调用，this依旧指向Window对象。需要注意，定义对象的大括号`{}`是无法形成一个单独的执行环境的，它依旧是处于全局执行环境中。
+
+（4）call()、apply()、bind()等方法不能改变箭头函数中this的指向
+```
+var id = 'Global';
+let fun1 = () => {
+    console.log(this.id)
+};
+fun1();                     // 'Global'
+fun1.call({id: 'Obj'});     // 'Global'
+fun1.apply({id: 'Obj'});    // 'Global'
+fun1.bind({id: 'Obj'})();   // 'Global'
+```
+
+（5）箭头函数不能作为构造函数使用
+
+构造函数在new的步骤在上面已经说过了，实际上第二步就是将函数中的this指向该对象。 但是由于箭头函数时没有自己的this的，且this指向外层的执行环境，且不能改变指向，所以不能当做构造函数使用。
+
+（6）箭头函数没有自己的arguments
+
+箭头函数没有自己的arguments对象。在箭头函数中访问arguments实际上获得的是它外层函数的arguments值。
+
+（7）箭头函数没有prototype
+
+（8）箭头函数不能用作Generator函数，不能使用yield关键字
+
+
+### 2.3 箭头函数的this指向哪⾥？
+
+箭头函数不同于传统JavaScript中的函数，箭头函数并没有属于⾃⼰的this，它所谓的this是捕获其所在上下⽂的 this 值，作为⾃⼰的 this 值，并且由于没有属于⾃⼰的this，所以是不会被new调⽤的，这个所谓的this也不会被改变。
+
+可以⽤Babel理解⼀下箭头函数: 
+```
+// ES6 
+const obj = { 
+  getArrow() { 
+    return () => { 
+      console.log(this === obj); 
+    }; 
+  } 
+}
+```
+
+转化后：
+```
+// ES5，由 Babel 转译
+var obj = { 
+   getArrow: function getArrow() { 
+     var _this = this; 
+     return function () { 
+        console.log(_this === obj); 
+     }; 
+   } 
+};
+```
+
+## 3. JS 基础
+
+### 3.1 new操作符的实现原理
+new操作符的执行过程：
+
+（1）首先创建了一个新的空对象
+
+（2）设置原型，将对象的原型设置为函数的 prototype 对象。
+
+（3）让函数的 this 指向这个对象，执行构造函数的代码（为这个新对象添加属性）
+
+（4）判断函数的返回值类型，如果是值类型，返回创建的对象。如果是引用类型，就返回这个引用类型的对象。
+
+具体实现：
+```
+function objectFactory() {
+  let newObject = null;
+  let constructor = Array.prototype.shift.call(arguments);
+  let result = null;
+  // 判断参数是否是一个函数
+  if (typeof constructor !== "function") {
+    console.error("type error");
+    return;
+  }
+  // 新建一个空对象，对象的原型为构造函数的 prototype 对象
+  newObject = Object.create(constructor.prototype);
+  // 将 this 指向新建对象，并执行函数
+  result = constructor.apply(newObject, arguments);
+  // 判断返回对象
+  let flag = result && (typeof result === "object" || typeof result === "function");
+  // 判断返回结果
+  return flag ? result : newObject;
+}
+// 使用方法
+objectFactory(构造函数, 初始化参数);
+```
+
+自己实现：
+```
+// Object.create的原理 (自定义new)
+// var obj = Object.create(Constructor.prototype);
+// 等价于：
+// var obj = new Object();
+// obj.__proto__ = Constructor.prototype;
+const _new = function () {
+    var Constructor = [].shift.call(arguments);
+    // 1. 创建一个对象，这个对象要继承与构造函数的原型对象
+    var obj = Object.create(Constructor.prototype);
+    // 2. 执行这个构造函数
+    var ret = Constructor.apply(obj, arguments);
+    return typeof ret === 'object' ? ret || obj : obj;
+}
+
+// 实现一个自己的new构造函数
+const _new = function() {
+    // 从Object.prototype上克隆一个对象 
+    var obj = new Object();
+    // 取出来外部传入的构造器
+    var Constructor = [].shift.call(arguments);
+
+    // 使用一个中间的函数来维护原型的关系
+    var F = function(){};
+    F.prototype = Constructor.prototype;
+    obj = new F();
+
+    // 开始执行这个构造函数
+    var res = Constructor.apply(obj, arguments);
+    // 确保构造器总是返回一个对象(使用res || obj 的方式来防止返回null参数)
+    return typeof res === 'object' ? res || obj : obj;
+}
+```
+
+### 3.2 map和weakMap的区别
+（1）Map
+
+map本质上就是键值对的集合，但是普通的Object中的键值对中的键只能是字符串。而ES6提供的Map数据结构类似于对象，但是它的键不限制范围，可以是任意类型，是一种更加完善的Hash结构。如果Map的键是一个原始数据类型，只要两个键严格相同，就视为是同一个键。
+
+实际上Map是一个数组，它的每一个数据也都是一个数组，其形式如下：
+```
+const map = [
+     ["name","张三"],
+     ["age",18],
+]
+```
+
+Map数据结构有以下操作方法：
+- size： `map.size` 返回Map结构的成员总数。
+- set(key,value)：设置键名key对应的键值value，然后返回整个Map结构，如果key已经有值，则键值会被更新，否则就新生成该键。（因为返回的是当前Map对象，所以可以链式调用）
+- get(key)：该方法读取key对应的键值，如果找不到key，返回undefined。
+- has(key)：该方法返回一个布尔值，表示某个键是否在当前Map对象中。
+- delete(key)：该方法删除某个键，返回true，如果删除失败，返回false。
+- clear()：map.clear()清除所有成员，没有返回值。
+
+
+Map结构原生提供是三个遍历器生成函数和一个遍历方法
+- keys()：返回键名的遍历器。
+- values()：返回键值的遍历器。
+- entries()：返回所有成员的遍历器。
+- forEach()：遍历Map的所有成员。
+
+```
+const map = new Map([
+     ["foo",1],
+     ["bar",2],
+])
+for(let key of map.keys()){
+    console.log(key);  // foo bar
+}
+for(let value of map.values()){
+     console.log(value); // 1 2
+}
+for(let items of map.entries()){
+    console.log(items);  // ["foo",1]  ["bar",2]
+}
+map.forEach( (value,key,map) => {
+     console.log(key,value); // foo 1    bar 2
+})
+```
+
+（2）WeakMap
+
+WeakMap 对象也是一组键值对的集合，其中的键是弱引用的。其键必须是对象，原始数据类型不能作为key值，而值可以是任意的。
+
+该对象也有以下几种方法：
+- set(key,value)：设置键名key对应的键值value，然后返回整个Map结构，如果key已经有值，则键值会被更新，否则就新生成该键。（因为返回的是当前Map对象，所以可以链式调用）
+- get(key)：该方法读取key对应的键值，如果找不到key，返回undefined。
+- has(key)：该方法返回一个布尔值，表示某个键是否在当前Map对象中。
+- delete(key)：该方法删除某个键，返回true，如果删除失败，返回false。
+
+其clear()方法已经被弃用，所以可以通过创建一个空的WeakMap并替换原对象来实现清除。
+
+WeakMap的设计目的在于，有时想在某个对象上面存放一些数据，但是这会形成对于这个对象的引用。一旦不再需要这两个对象，就必须手动删除这个引用，否则垃圾回收机制就不会释放对象占用的内存。
+
+而WeakMap的键名所引用的对象都是弱引用，即垃圾回收机制不将该引用考虑在内。因此，只要所引用的对象的其他引用都被清除，垃圾回收机制就会释放该对象所占用的内存。也就是说，一旦不再需要，WeakMap 里面的键名对象和所对应的键值对会自动消失，不用手动删除引用。
+
+总结：
+- Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。
+- WeakMap 结构与 Map 结构类似，也是用于生成键值对的集合。但是 WeakMap 只接受对象作为键名（ null 除外），不接受其他类型的值作为键名。而且 WeakMap 的键名所指向的对象，不计入垃圾回收机制。
+
+### 3.3 
+
+### 3.4 对JSON的理解
+
+JSON 是一种基于文本的轻量级的数据交换格式。它可以被任何的编程语言读取和作为数据格式来传递。
+
+在项目开发中，使用 JSON 作为前后端数据交换的方式。在前端通过将一个符合 JSON 格式的数据结构序列化为 JSON 字符串，然后将它传递到后端，后端通过 JSON 格式的字符串解析后生成对应的数据结构，以此来实现前后端数据的一个传递。
+
+因为 JSON 的语法是基于 js 的，因此很容易将 JSON 和 js 中的对象弄混，但是应该注意的是 JSON 和 js 中的对象不是一回事，JSON 中对象格式更加严格，比如说在 JSON 中属性值不能为函数，不能出现 NaN 这样的属性值等，因此大多数的 js 对象是不符合 JSON 对象的格式的。
+
+在 js 中提供了两个函数来实现 js 数据结构和 JSON 格式的转换处理，
+- JSON.stringify 函数，通过传入一个符合 JSON 格式的数据结构，将其转换为一个 JSON 字符串。如果传入的数据结构不符合 JSON 格式，那么在序列化的时候会对这些值进行对应的特殊处理，使其符合规范。在前端向后端发送数据时，可以调用这个函数将数据对象转化为 JSON 格式的字符串。
+- JSON.parse() 函数，这个函数用来将 JSON 格式的字符串转换为一个 js 数据结构，如果传入的字符串不是标准的 JSON 格式的字符串的话，将会抛出错误。当从后端接收到 JSON 格式的字符串时，可以通过这个方法来将其解析为一个 js 数据结构，以此来进行数据的访问。
+
+
+## 4. prototype
 
 JavaScript是一种通过原型实现继承的语言与别的高级语言是有区别的，像java，C#是通过类型决定继承关系的，JavaScript是的动态的弱类型语言。
 
@@ -282,37 +740,7 @@ JavaScript是一种通过原型实现继承的语言与别的高级语言是有�
   }
 
 
-  // v4：Object.create的原理 (自定义new)
-    // var obj = Object.create(Constructor.prototype);
-    // 等价于：
-    // var obj = new Object();
-    // obj.__proto__ = Constructor.prototype;
-    const _new = function () {
-        var Constructor = [].shift.call(arguments);
-        // 1. 创建一个对象，这个对象要继承与构造函数的原型对象
-        var obj = Object.create(Constructor.prototype);
-        // 2. 执行这个构造函数
-        var ret = Constructor.apply(obj, arguments);
-        return typeof ret === 'object' ? ret || obj : obj;
-    }
-
-    // v5: 实现一个自己的new构造函数
-    const _new = function() {
-        // 从Object.prototype上克隆一个对象 
-        var obj = new Object();
-        // 取出来外部传入的构造器
-        var Constructor = [].shift.call(arguments);
-
-        // 使用一个中间的函数来维护原型的关系
-        var F = function(){};
-        F.prototype = Constructor.prototype;
-        obj = new F();
-
-        // 开始执行这个构造函数
-        var res = Constructor.apply(obj, arguments);
-        // 确保构造器总是返回一个对象(使用res || obj 的方式来防止返回null参数)
-        return typeof res === 'object' ? res || obj : obj;
-    }
+  
 ```
 ## 3. 继承
 
@@ -1205,14 +1633,6 @@ $.ajax({
 
 ## 14. ES6
 
-### 14.1 let、const 以及 var 的区别
-
-- let 和 const 定义的变量不会出现变量提升，而 var 定义的变量会提升。
-- let 和 const 是JS中的块级作用域
-- let 和 const 不允许重复声明(会抛出错误)
-- let 和 const 定义的变量在定义语句之前，如果使用会抛出错误(形成了暂时性死区)，而 var 不会。
-- const 声明一个只读的常量。一旦声明，常量的值就不能改变(如果声明是一个对象，那么不能改变的是对象的引用地址)
-
 ### 14.2 Promise
 
 ES6 原生提供了Promise 对象。
@@ -1479,48 +1899,6 @@ Promise.reject = function(reason){
   });
 }
 ```
-
-### 14.4 箭头函数
-
-箭头函数
-```
-let sum = (a, b) => {
-    return a + b;
-}
-```
-
-普通函数
-```
-var sum = function (a, b){
-    return a + b;
-}
-```
-- 14.4.1 this的指向
-
-    箭头函数的this指向的是父级作用域的this，是通过查找作用域链来确定 this 的值也就是说，看的是上下文的this，指向的是定义它的对象，而不是使用时所在的对象；普通函数指向的是它的直接调用者。
-    ```
-    let obj = {
-            a: 1,
-            b: () => {
-                console.log(this.a); // undefined
-            },
-            c: function() {
-                console.log(this.a); // 1 
-            },
-        };
-    obj.b();
-    obj.c();
-    ```
-    箭头函数没有this，它的this是继承来的，默认指向定义它的时候的对象，就是我们说的宿主对象，而不是执行它的对象。这里通过obj.b()，此时this指向的window对象，上面没有a，所以返回undefined。通过obj.c(),this指向的是它的直接调用者，就是obj，所以返回1。
-
-- 不可以被当作构造函数
-  
-    不能被当作构造函数来使用，通过new命令来作为构造函数会报错，这里没有构建原型的说法，不存在prototype这个属性，也不能通过super访问原型的属性，而且new target也是不能用的。
-
-- arguments问题
-不可以使用arguments对象，该对象在函数体内不存在，如果要用就用rest参数替代。
-
-- 不可以使用yield命令，因此箭头函数不能用作 Generator 函数。
 
 ### 14.5 
 ## 15.Set、Map、WeakSet 和 WeakMap 的区别？
