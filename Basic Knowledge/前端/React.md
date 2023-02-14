@@ -87,6 +87,23 @@
 - [6. Hooks](#6-hooks)
   - [6.1 Hook的理解](#61-hook的理解)
   - [6.2 useState()](#62-usestate)
+    - [对比类组件的state](#对比类组件的state)
+    - [setState执行机制（类组件）](#setstate执行机制类组件)
+  - [6.3 useEffect()](#63-useeffect)
+    - [6.3.15. useEffect 与 useLayoutEffect 的区别](#6315-useeffect-与-uselayouteffect-的区别)
+  - [6.4 useMemo、memo、useCallback.](#64-usememomemousecallback)
+    - [memo](#memo)
+    - [useCallback()](#usecallback)
+    - [React.useMemo](#reactusememo)
+    - [useMemo与useEffect的区别](#usememo与useeffect的区别)
+  - [6.5 React Hooks在开发中需要注意的问题和原因](#65-react-hooks在开发中需要注意的问题和原因)
+  - [6.6 Hooks 与 React 生命周期的关系](#66-hooks-与-react-生命周期的关系)
+- [7. 虚拟DOM](#7-虚拟dom)
+  - [7.1虚拟 DOM 的理解](#71虚拟-dom-的理解)
+  - [7.2 React diff 算法的原理是什么？](#72-react-diff-算法的原理是什么)
+  - [7.3 React key 是干嘛用的 为什么要加？key](#73-react-key-是干嘛用的-为什么要加key)
+  - [7.4 虚拟 DOM 的引入与直接操作原生 DOM 相比，哪一个效率更高，为什么](#74-虚拟-dom-的引入与直接操作原生-dom-相比哪一个效率更高为什么)
+  - [7.5  React 与 Vue 的 diff 算法有何不同？](#75--react-与-vue-的-diff-算法有何不同)
 
 
 ## 1. React 组件和架构
@@ -1680,4 +1697,430 @@ Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情�
 因此，现在的函数组件也可以是有状态的组件，内部也可以维护自身的状态以及做一些逻辑方面的处理
 
 ### 6.2 useState()
+
+定义状态，解决了函数组件没有状态的问题。
+
+接受一个初始值（初始值可以是一个具体数据类型，也可以是一个函数，该函数只执行一次返回值作为初始值）作为参数，返回一个数组，第一项是变量，第二项是设置变量的函数。
+
+
+对象不可局部更新：state是一个对象时，不能局部更新对象属性，useState不会合并，会把整个对象覆盖。要用展开运算符自己进行属性值的覆盖。
+```
+const [state, setState] = useState({ name: 'jerry', age: 18 })
+
+const changeState = () => {
+  setState({name:"tom"}) //覆盖整个state
+}
+```
+
+地址要变更：对于引用类型，数据地址不变的时候，认为数据没有变化，不会更新视图。
+```
+const [state, setState] = useState({ name: 'jerry', age: 18 })
+
+const changeState = () => {
+  const obj = state //obj和state指向同一个地址
+  obj.name = 'tom'
+  setState(obj) // 地址没有变更，不会更新
+}
+```
+
+- useState 传入一个函数：useState初始化是惰性的，initialState只有在初始渲染中起作用，后续渲染会被忽略，如果初始state需要通过复杂的计算获得，可以传入一个函数，在函数中计算并返回初始state，次函数只在初始渲染时被调用。
+
+
+- useState异步回调问题：如何获取到更新后的state，使用useEffect，当state变化时触发
+
+
+操作合并：传入对象会被合并，传入函数，使用preState参数不会被合并
+```
+setState({
+  ...state,
+    name: state.name + '!'
+  })
+  setState({
+    ...state,
+    name: state.name + '!'
+})
+  setState({
+    ...state,
+    name: state.name + '!'
+})
+
+setState((pre) => ({ ...state, name: pre.name + '!' }))
+setState((pre) => ({ ...state, name: pre.name + '!' }))
+setState((pre) => ({ ...state, name: pre.name + '!' }))
+```
+
+
+#### 对比类组件的state
+
+在正常的react的事件流里（如onClick等）：
+
+- setState和useState是异步执行的（不会立即更新state的结果）
+- 多次执行setState和useState，只会调用一次重新渲染render
+- 传入对象会被合并，函数则不会被合并。可以通过setState传入一个函数来更新state，这样不会被合并
+
+
+在setTimeout，Promise.then等异步事件中：
+
+- setState和useState是同步执行的（立即更新state的结果）
+- 多次执行setState和useState，每一次的执行setState和useState，都会调用一次render
+
+
+#### setState执行机制（类组件）
+
+通过setState来修改组件内部的state，并且触发render方法进行视图的更新。
+
+直接修改state不会引起视图的更新，因为react没有像vue一样通过proxy或者definProperty监听数据变化，必须通过setState方法来告知react组件state已经发生了改变。
+
+关于state方法的定义是从React.Component中继承，定义的源码如下：
+```
+Component.prototype.setState = function(partialState, callback) {
+  invariant(
+    typeof partialState === 'object' ||
+      typeof partialState === 'function' ||
+      partialState == null,
+    'setState(...): takes an object of state variables to update or a ' +
+      'function which returns an object of state variables.',
+  );
+  this.updater.enqueueSetState(this, partialState, callback, 'setState');
+};
+```
+从上面可以看到setState第一个参数可以是一个对象，或者是一个函数，而第二个参数是一个回调函数，用于可以实时的获取到更新之后的数据。
+
+同步异步
+
+- 在组件生命周期或React合成事件中，setState是异步。要想获取更新后的值，可以通过setState的第二个参数传入一个函数（函数组件通过useEffect）。
+- 在setTimeout或者原生dom事件中，setState是同步。
+
+批量更新
+
+- 合成事件或者生命周期中setState传入对象会被合并。要想避免合并可以将第一个参数写成函数。
+- 而在setTimeout或者原生dom事件中，由于是同步的操作，所以并不会进行覆盖现象。
+
+### 6.3 useEffect()
+给没有生命周期的组件添加结束渲染的信号，在渲染结束后执行。
+
+- 如果不接受第二个参数，那么在第一次渲染完成之后和每次更新渲染页面的时候，都会调用useEffect的回调函数。
+- 可以对第二个参数传入一个数组，这个数组表示的是更新执行所依赖的列表，只有依赖列表改变时（数组中的任意一项变化时），才会触发回调函数
+- 第二项是一个空数组：只在第一次渲染完成时执行。相当于didMounted
+- 清除副作用：比如绑定了自定义DOM 事件以防止内存泄漏
+
+如何清除：clean-up 函数
+```
+useEffect(()=>{
+document.addEventListener('click',func);
+  return ()=>{
+        //  在每次执行useEffect之前都会执行上一次return中内容
+      document.removeEventListener('click',func)
+  }
+})
+```
+
+异步操作：useEffect返回的是clean-up函数，因此没有办法返回一个promise实现异步
+
+- 立即执行函数：
+  ```
+  useEffect(() => {
+      (async function anyNameFunction() {
+        await loadContent();
+      })();
+    }, []);
+  ```
+
+- 在useEffect外部或者内部实现async/await函数，然后在内部调用
+
+#### 6.3.15. useEffect 与 useLayoutEffect 的区别
+
+共同点
+
+- 运用效果：useEffect 与 useLayoutEffect 两者都是用于处理副作用，这些副作用包括改变 DOM、设置订阅、操作定时器等。在函数组件内部操作副作用是不被允许的，所以需要使用这两个函数去处理。
+- 使用方式：useEffect 与 useLayoutEffect 两者底层的函数签名是完全一致的，都是调用的 mountEffectImpl方法，在使用上也没什么差异，基本可以直接替换。
+
+不同点
+
+- 使用场景：useEffect 在 React 的渲染过程中是被异步调用的，用于绝大多数场景；而 useLayoutEffect 会在所有的 DOM 变更之后同步调用，主要用于处理 DOM 操作、调整样式、避免页面闪烁等问题。也正因为是同步处理，所以需要避免在 useLayoutEffect 做计算量较大的耗时任务从而造成阻塞。
+- 使用效果：useEffect是按照顺序执行代码的，改变屏幕像素之后执行（先渲染，后改变DOM），当改变屏幕内容时可能会产生闪烁；useLayoutEffect是改变屏幕像素之前就执行了（会推迟页面显示的事件，先改变DOM后渲染），不会产生闪烁。useLayoutEffect总是比useEffect先执行。
+
+
+在未来的趋势上，两个 API 是会长期共存的，暂时没有删减合并的计划，需要开发者根据场景去自行选择。React 团队的建议非常实用，如果实在分不清，先用 useEffect，一般问题不大；如果页面有异常，再直接替换为 useLayoutEffect 即可。
+
+### 6.4 useMemo、memo、useCallback.
+
+#### memo 
+
+React.memo 是对组件进行 “记忆”，当它接收的 props 没有发生改变的时候，那么它将返回上次渲染的结果，不会重新执行函数返回新的渲染结果。
+
+父组件：
+```
+import { useState } from "react";
+import { Child } from "./child";
+
+export const Parent = () => {
+  const [count, setCount] = useState(0);
+  const increment = () => setCount(count + 1);
+
+  return (
+    <div>
+      <button onClick={increment}>点击次数：{count}</button>
+      <Child />
+    </div>
+  );
+};
+```
+子组件：
+```
+export const Child = ({}) => {
+  console.log("渲染了");
+  return <div>子组件</div>;
+};
+```
+点击父组件中按钮，会修改 count 变量的值，进而导致父组件重新渲染，此时子组件没有任何变化(props、state)，但在控制台中仍然看到子组件被渲染的打印信息。
+
+子组件的 props 和 state 没有变化，我们并不希望它重现渲染。
+
+React.memo()将组件作为函数(memo)的参数，函数的返回值(Child)是一个新的组件。
+
+```
+import { memo } from "react";
+
+export const Child = memo(() => {
+  console.log("渲染了");
+  return <div>子组件</div>;
+});
+```
+
+#### useCallback()
+
+useCallback 是针对函数进行“记忆”的，当它依赖项没有发生改变时，那么该函数的引用并不会随着组件的刷新而被重新赋值。当我们觉得一个函数不需要随着组件的更新而更新引用地址的时候，我们就可以使用 useCallback 去修饰它。
+
+父组件：
+```
+import { useState } from "react";
+import { Child } from "./child";
+
+export const Parent = () => {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState("小明");
+  const increment = () => setCount(count + 1);
+
+  const onClick = (name: string) => {
+    setName(name);
+  };
+
+  return (
+    <div>
+      <button onClick={increment}>点击次数：{count}</button>
+      <Child name={name} onClick={onClick} />
+    </div>
+  );
+};
+```
+子组件：
+```
+import { memo } from "react";
+
+export const Child = memo(
+  (props: { name: string; onClick: (value: any) => void }) => {
+    const { name, onClick } = props;
+    console.log("渲染了", name, onClick);
+    return (
+      <>
+        <div>子组件</div>
+        <button onClick={() => onClick("小红")}>改变 name 值</button>
+      </>
+    );
+  }
+);
+```
+点击父组件count，看到子组件每次都重新渲染了。
+- 点击父组件按钮，改变了父组件中 count 变量，进而导致父组件重新渲染；
+- 父组件重新渲染时，会重新创建 onClick 函数，即传给子组件的 onClick 属性发生了变化，导致子组件渲染；
+- 如果传给子组件的props只有基本数据类型将不会重新渲
+
+>如果直接使用useState解构的setName传给子组件, 子组件将不会重复渲染，因为解构出来的是一个memoized 函数。
+
+把内联回调函数及依赖项数组作为参数传入 useCallback，它将返回该回调函数的memoized回调函数，该回调函数仅在某个依赖项改变时才会更新。当你把回调函数传递给经过优化的并使用引用相等性去避免非必要渲染（例如 shouldComponentUpdate）的子组件时，它将非常有用。
+
+memoized回调函数: 使用一组参数初次调用函数时，缓存参数和计算结果，当再次使用相同的参数调用该函数时，直接返回相应的缓存结果。(返回对应饮用，所以恒等于 ===)
+
+```
+const onClick = useCallback((name: string) => {
+  setName(name);
+}, []);
+```
+
+#### React.useMemo
+
+React.useMemo 是针对 值计算 的一种“记忆“，当依赖项没有发生改变时，那么无需再去计算，直接使用之前的值，对于组件而言，这带来的一个好处就是，可以减少一些计算，避免一些多余的渲染。当我们遇到一些数据需要在组件内部进行计算的时候，可以考虑一下 React.useMemo
+
+可以把一些昂贵的计算逻辑放到 useMemo 中，只有当依赖值发生改变的时候才去更新。
+```
+const num = useMemo(() => {
+  let num = 0;
+  // 这里使用 count 针对 num 做一些很复杂的计算，当 count 没改变的时候，组件重新渲染就会直接返回之前缓存的值。
+  return num;
+}, [count]);
+
+return <div>{num}</div>
+```
+
+#### useMemo与useEffect的区别
+传入 useMemo 的函数会在渲染期间执行。请不要在这个函数内部执行不应该在渲染期间内执行的操作，诸如副作用这类的操作属于 useEffect 的适用范畴，而不是 useMemo。
+
+useEffect在渲染后执行，可以访问渲染后的值。
+
+如果没有提供依赖项数组，useMemo 在每次渲染时都会计算新的值。和useEffect类似，但是如果每次渲染时都计算，那就没必要使用useMemo了。
+
+### 6.5 React Hooks在开发中需要注意的问题和原因
+- 不要在循环，条件或嵌套函数中调用Hook，必须始终在 React函数的顶层使用Hook
+这是因为React需要利用调用顺序来正确更新相应的状态，以及调用相应的钩子函数。一旦在循环或条件分支语句中调用Hook，就容易导致调用顺序的不一致性，从而产生难以预料到的后果。
+
+- 使用useState时候，使用push，pop，splice等直接更改数组对象的坑
+- 
+使用push直接更改数组无法获取到新值，应该采用**析构方式**，但是在class里面不会有这个问题。代码示例：
+```
+function Indicatorfilter() {
+  let [num,setNums] = useState([0,1,2,3])
+  const test = () => {
+    // 这里坑是直接采用push去更新num
+    // setNums(num)是无法更新num的
+    // 必须使用num = [...num ,1]
+    num.push(1)
+    // num = [...num ,1]
+    setNums(num)
+  }
+return (
+    <div className='filter'>
+      <div onClick={test}>测试</div>
+        <div>
+          {num.map((item,index) => (
+              <div key={index}>{item}</div>
+          ))}
+      </div>
+    </div>
+  )
+}
+```
+
+
+- 善用useCallback
+  
+父组件传递给子组件事件句柄时，如果我们没有任何参数变动可能会选用useMemo。但是每一次父组件渲染子组件即使没变化也会跟着渲染一次。 
+
+- 不要滥用useContext
+  
+可以使用基于 useContext 封装的状态管理工具。
+
+### 6.6 Hooks 与 React 生命周期的关系
+| class 组件 |	Hooks 组件 |
+| ---------- | ---------- |
+constructor|	useState
+getDerivedStateFromProps |useState 里面 update 函数
+shouldComponentUpdate | useMemo
+render | 函数本身
+componentDidMount | useEffect
+componentDidUpdate |useEffect
+componentWillUnmount | useEffect  里面返回的函数
+componentDidCatch | 无
+getDerivedStateFromError | 无
+
+## 7. 虚拟DOM
+
+### 7.1虚拟 DOM 的理解
+
+从本质上来说，Virtual Dom是一个JavaScript对象，通过对象的方式来表示DOM结构。将页面的状态抽象为JS对象的形式，配合不同的渲染工具，使跨平台渲染成为可能。通过事务处理机制，将多次DOM修改的结果一次性的更新到页面上，从而有效的减少页面渲染的次数，减少修改DOM的重绘重排次数，提高渲染性能。
+
+虚拟DOM是对DOM的抽象，这个对象是更加轻量级的对DOM的描述。它设计的最初目的，就是更好的跨平台，比如node.js就没有DOM，如果想实现SSR，那么一个方式就是借助虚拟dom，因为虚拟dom本身是js对象。 在代码渲染到页面之前，vue或者react会把代码转换成一个对象（虚拟DOM）。以对象的形式来描述真实dom结构，最终渲染到页面。在每次数据发生变化前，虚拟dom都会缓存一份，变化之时，现在的虚拟dom会与缓存的虚拟dom进行比较。在vue或者react内部封装了diff算法，通过这个算法来进行比较，渲染时修改改变的变化，原先没有发生改变的通过原先的数据进行渲染。
+
+另外现代前端框架的一个基本要求就是无须手动操作DOM，一方面是因为手动操作DOM无法保证程序性能，多人协作的项目中如果review不严格，可能会有开发者写出性能较低的代码，另一方面更重要的是省略手动DOM操作可以大大提高开发效率。
+
+为什么要用 Virtual DOM：
+
+（1）保证性能下限，在不进行手动优化的情况下，提供过得去的性能
+
+下面对比一下修改DOM时真实DOM操作和Virtual DOM的过程，来看一下它们重排重绘的性能消耗∶
+- 真实DOM∶ 生成HTML字符串＋ 重建所有的DOM元素
+- Virtual DOM∶ 生成vNode＋ DOMDiff＋必要的DOM更新
+  
+Virtual DOM的更新DOM的准备工作耗费更多的时间，也就是JS层面，相比于更多的DOM操作它的消费是极其便宜的。尤雨溪在社区论坛中说道∶ 框架给你的保证是，你不需要手动优化的情况下，我依然可以给你提供过得去的性能。
+
+（2）跨平台
+
+Virtual DOM本质上是JavaScript的对象，它可以很方便的跨平台操作，比如服务端渲染、uniapp等。
+
+### 7.2 React diff 算法的原理是什么？
+实际上，diff 算法探讨的就是虚拟 DOM 树发生变化后，生成 DOM 树更新补丁的方式。它通过对比新旧两株虚拟 DOM 树的变更差异，将更新补丁作用于真实 DOM，以最小成本完成视图更新。
+
+具体的流程如下：
+- 真实的 DOM 首先会映射为虚拟 DOM；
+- 当虚拟 DOM 发生变化后，就会根据差距计算生成 patch，这个 patch 是一个结构化的数据，内容包含了增加、更新、移除等；
+- 根据 patch 去更新真实的 DOM，反馈到用户的界面上。
+
+一个简单的例子：
+```
+import React from 'react'
+export default class ExampleComponent extends React.Component {
+  render() {
+    if(this.props.isVisible) {
+       return <div className="visible">visbile</div>;
+    }
+     return <div className="hidden">hidden</div>;
+  }
+}
+```
+
+这里，首先假定 ExampleComponent 可见，然后再改变它的状态，让它不可见 。映射为真实的 DOM 操作是这样的，React 会创建一个 div 节点。
+```
+<div class="visible">visbile</div>
+```
+
+当把 visbile 的值变为 false 时，就会替换 class 属性为 hidden，并重写内部的 innerText 为 hidden。这样一个生成补丁、更新差异的过程统称为 diff 算法。
+
+策略一：tree diff，忽略节点跨层级操作场景，提升比对效率。（基于树进行对比）
+这一策略需要进行树比对，即对树进行分层比较。树比对的处理手法是非常“暴力”的，即两棵树只对同一层次的节点进行比较，如果发现节点已经不存在了，则该节点及其子节点会被完全删除掉，不会用于进一步的比较，这就提升了比对效率。
+
+策略二：component diff，如果组件的 class 一致，则默认为相似的树结构，否则默认为不同的树结构。（基于组件进行对比）
+
+在组件比对的过程中：
+
+- 如果组件是同一类型则进行树比对；
+- 如果不是则直接放入补丁中。
+  
+只要父组件类型不同，就会被重新渲染。这也就是为什么 shouldComponentUpdate、PureComponent 及 React.memo 可以提高性能的原因。
+
+策略三：element diff，同一层级的子节点，可以通过标记 key 的方式进行列表对比。（基于节点进行对比）
+
+元素比对主要发生在同层级中，通过标记节点操作生成补丁。节点操作包含了插入、移动、删除等。其中节点重新排序同时涉及插入、移动、删除三个操作，所以效率消耗最大，此时策略三起到了至关重要的作用。通过标记 key 的方式，React 可以直接移动 DOM 节点，降低内耗。
+
+### 7.3 React key 是干嘛用的 为什么要加？key 
+
+Keys 是 React 用于追踪哪些列表中元素被修改、被添加或者被移除的辅助标识。在开发过程中，我们需要保证某个元素的 key 在其同级元素中具有唯一性。
+
+在 React Diff 算法中 React 会借助元素的 Key 值来判断该元素是新近创建的还是被移动而来的元素，从而减少不必要的元素重渲染此外，React 还需要借助 Key 值来判断元素与本地状态的关联关系。
+注意事项：
+- key值一定要和具体的元素—一对应；
+- 尽量不要用数组的index去作为key；
+- 不要在render的时候用随机数或者其他操作给元素加上不稳定的key，这样造成的性能开销比不加key的情况下更糟糕。
+
+### 7.4 虚拟 DOM 的引入与直接操作原生 DOM 相比，哪一个效率更高，为什么
+
+虚拟DOM相对原生的DOM不一定是效率更高，如果只修改一个按钮的文案，那么虚拟 DOM 的操作无论如何都不可能比真实的 DOM 操作更快。在首次渲染大量DOM时，由于多了一层虚拟DOM的计算，虚拟DOM也会比innerHTML插入慢。它能保证性能下限，在真实DOM操作的时候进行针对性的优化时，还是更快的。所以要根据具体的场景进行探讨。
+
+在整个 DOM 操作的演化过程中，其实主要矛盾并不在于性能，而在于开发者写得爽不爽，在于研发体验/研发效率。虚拟 DOM 不是别的，正是前端开发们为了追求更好的研发体验和研发效率而创造出来的高阶产物。虚拟 DOM 并不一定会带来更好的性能，React 官方也从来没有把虚拟 DOM 作为性能层面的卖点对外输出过。**虚拟 DOM 的优越之处在于，它能够在提供更爽、更高效的研发模式（也就是函数式的 UI 编程方式）的同时，仍然保持一个还不错的性能。**
+
+### 7.5  React 与 Vue 的 diff 算法有何不同？
+
+diff 算法是指生成更新补丁的方式，主要应用于虚拟 DOM 树变化后，更新真实 DOM。所以 diff 算法一定存在这样一个过程：触发更新 → 生成补丁 → 应用补丁。
+
+React 的 diff 算法，触发更新的时机主要在 state 变化与 hooks 调用之后。此时触发虚拟 DOM 树变更遍历，采用了深度优先遍历算法。但传统的遍历方式，效率较低。为了优化效率，使用了分治的方式。将单一节点比对转化为了 3 种类型节点的比对，分别是树、组件及元素，以此提升效率。
+
+- 树比对：由于网页视图中较少有跨层级节点移动，两株虚拟 DOM 树只对同一层次的节点进行比较。
+- 组件比对：如果组件是同一类型，则进行树比对，如果不是，则直接放入到补丁中。
+- 元素比对：主要发生在同层级中，通过标记节点操作生成补丁，节点操作对应真实的 DOM 剪裁操作。
+
+以上是经典的 React diff 算法内容。自 React 16 起，引入了 Fiber 架构。为了使整个更新过程可随时暂停恢复，节点与树分别采用了 FiberNode 与 FiberTree 进行重构。fiberNode 使用了双链表的结构，可以直接找到兄弟节点与子节点。整个更新过程由 current 与 workInProgress 两株树双缓冲完成。workInProgress 更新完成后，再通过修改 current 相关指针指向新节点。
+
+简单来说，就是vue的diff算法在对新老虚拟dom进行对比时，是从节点的两侧向中间对比；如果节点的key值与元素类型相同，属性值不同，就会认为是不同节点，就会删除重建
+
+Vue 的整体 diff 策略与 React 对齐，虽然缺乏时间切片能力，但这并不意味着 Vue 的性能更差，因为在 Vue 3 初期引入过，后期因为收益不高移除掉了。除了高帧率动画，在 Vue 中其他的场景几乎都可以使用防抖和节流去提高响应性能。
+
 
