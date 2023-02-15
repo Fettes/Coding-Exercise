@@ -25,23 +25,50 @@
   - [3.3](#33)
   - [3.4 对JSON的理解](#34-对json的理解)
 - [4. prototype](#4-prototype)
-  - [2.1 原型链](#21-原型链)
-  - [2.2 new一个对象的过程](#22-new一个对象的过程)
-- [3. 继承](#3-继承)
-  - [3.1 原型继承](#31-原型继承)
-  - [3.2 构造继承](#32-构造继承)
-  - [3.4 组合继承（基本）](#34-组合继承基本)
-  - [3.3 寄生组合式继承](#33-寄生组合式继承)
-  - [3.4 实例继承](#34-实例继承)
-- [4. 闭包](#4-闭包)
-  - [4.1 循环中使用闭包解决`var`定义函数的问题（setTimeout）](#41-循环中使用闭包解决var定义函数的问题settimeout)
-  - [4.2 每多过一秒一个数字(setInterval)](#42-每多过一秒一个数字setinterval)
-  - [4.3 一定时间内只发生一次（setTimeout）](#43-一定时间内只发生一次settimeout)
-- [5. 作用域](#5-作用域)
-  - [5.1 js作用域](#51-js作用域)
-  - [5.2 变量的查找是就近原则去寻找，定义的var变量](#52-变量的查找是就近原则去寻找定义的var变量)
-  - [5.3 作用域链](#53-作用域链)
-  - [5.4 判断结果函数名和变量名一样](#54-判断结果函数名和变量名一样)
+  - [4.1 对原型、原型链的理解](#41-对原型原型链的理解)
+  - [4.2 原型修改、重写](#42-原型修改重写)
+  - [4.3 原型链指向](#43-原型链指向)
+  - [4.4 原型链的终点是什么？如何打印出原型链的终点？](#44-原型链的终点是什么如何打印出原型链的终点)
+  - [4.5 如何获得对象非原型链上的属性？](#45-如何获得对象非原型链上的属性)
+- [5. 执行上下文/作用域链/闭包](#5-执行上下文作用域链闭包)
+  - [5.1 对闭包的理解](#51-对闭包的理解)
+  - [5.2 循环中使用闭包解决`var`定义函数的问题（setTimeout）](#52-循环中使用闭包解决var定义函数的问题settimeout)
+    - [5.2.2 每多过一秒一个数字(setInterval)](#522-每多过一秒一个数字setinterval)
+  - [5.2.3 一定时间内只发生一次（setTimeout）](#523-一定时间内只发生一次settimeout)
+  - [5.3 对作用域、作用域链的理解](#53-对作用域作用域链的理解)
+  - [5.4 对执行上下文的理解](#54-对执行上下文的理解)
+- [6. this/call/apply/bind](#6-thiscallapplybind)
+  - [6.1 对this对象的理解](#61-对this对象的理解)
+  - [6.2 call() 和 apply() 的区别？](#62-call-和-apply-的区别)
+  - [6.3  实现call、apply 及 bind 函数](#63--实现callapply-及-bind-函数)
+    - [call 函数的实现步骤：](#call-函数的实现步骤)
+    - [apply 函数的实现步骤：](#apply-函数的实现步骤)
+    - [bind 函数的实现步骤：](#bind-函数的实现步骤)
+- [7. 面向对象](#7-面向对象)
+  - [7.1 对象创建的方式有哪些？](#71-对象创建的方式有哪些)
+  - [7.2 继承](#72-继承)
+    - [7.2.1 原型继承](#721-原型继承)
+    - [7.2.2 构造继承](#722-构造继承)
+    - [7.2.3 组合继承（基本）](#723-组合继承基本)
+    - [7.2.4 寄生组合式继承](#724-寄生组合式继承)
+    - [7.2.5 实例继承](#725-实例继承)
+- [8 异步编程](#8-异步编程)
+  - [8.1 异步编程的实现方式？](#81-异步编程的实现方式)
+  - [8.2  setTimeout、Promise、Async/Await 的区别](#82--settimeoutpromiseasyncawait-的区别)
+  - [8.3 对Promise的理解](#83-对promise的理解)
+  - [8.4 Promise的基本用法](#84-promise的基本用法)
+    - [创建Promise对象](#创建promise对象)
+    - [Promise方法](#promise方法)
+  - [8.5 Promise解决了什么问题](#85-promise解决了什么问题)
+  - [8.6 Promise.all和Promise.race的区别的使用场景](#86-promiseall和promiserace的区别的使用场景)
+  - [8.7 对async/await 的理解](#87-对asyncawait-的理解)
+  - [8.8 await 到底在等啥？](#88-await-到底在等啥)
+  - [8.9  async/await的优势](#89--asyncawait的优势)
+  - [8.10  async/await对比Promise的优势](#810--asyncawait对比promise的优势)
+  - [8.11 async/await 如何捕获异常](#811-asyncawait-如何捕获异常)
+- [9. 垃圾回收与内存泄漏](#9-垃圾回收与内存泄漏)
+  - [9.1 浏览器的垃圾回收机制](#91-浏览器的垃圾回收机制)
+  - [9.2 哪些情况会导致内存泄漏](#92-哪些情况会导致内存泄漏)
 - [6. this的理解](#6-this的理解)
   - [6.1 setTimeout、setInterval中的this](#61-settimeoutsetinterval中的this)
   - [6.2 严格模式下的this](#62-严格模式下的this)
@@ -65,29 +92,11 @@
   - [13.1 自己实现](#131-自己实现)
   - [13.2 方法解释](#132-方法解释)
   - [13.3 使用](#133-使用)
-- [14. ES6](#14-es6)
-  - [14.2 Promise](#142-promise)
-  - [14.3 Promise 实现](#143-promise-实现)
-    - [14.3.1 主体实现](#1431-主体实现)
-    - [14.3.2 then()方法](#1432-then方法)
-    - [14.3.3 resolvePromise方法](#1433-resolvepromise方法)
-    - [14.3.4 catch()方法](#1434-catch方法)
-    - [14.3.5 deferred()方法](#1435-deferred方法)
-    - [14.3.6 all()方法](#1436-all方法)
-    - [14.3.7 racel()方法](#1437-racel方法)
-    - [14.3.8 resolve()方法](#1438-resolve方法)
-    - [14.3.9 reject()方法](#1439-reject方法)
-  - [14.5](#145)
-- [15.Set、Map、WeakSet 和 WeakMap 的区别？](#15setmapweakset-和-weakmap-的区别)
 - [16. 事件流和事件委托](#16-事件流和事件委托)
   - [16.1 DOM事件流](#161-dom事件流)
   - [16.2 事件对象](#162-事件对象)
   - [16.3 事件类型](#163-事件类型)
   - [16.4 事件委托](#164-事件委托)
-- [17. call,apply,bind](#17-callapplybind)
-  - [17.1 手写call](#171-手写call)
-  - [17.2 手写apply](#172-手写apply)
-  - [17.3 手写bind](#173-手写bind)
 - [18. 脚本加载](#18-脚本加载)
 - [18.1 async和defer更常用哪个（区别就在于js执行的时间）？](#181-async和defer更常用哪个区别就在于js执行的时间)
 - [19. 懒加载和预加载](#19-懒加载和预加载)
@@ -684,20 +693,6 @@ JSON 是一种基于文本的轻量级的数据交换格式。它可以被任何
 
 ## 4. prototype
 
-JavaScript是一种通过原型实现继承的语言与别的高级语言是有区别的，像java，C#是通过类型决定继承关系的，JavaScript是的动态的弱类型语言。
-
-总之可以认为JavaScript中所有都是对象，在JavaScript中，原型也是一个对象，通过原型可以实现对象的属性继承，JavaScript的对象中都包含了一个"prototype"内部属性，这个属性所对应的就是该对象的原型。
-
-"prototype"作为对象的内部属性，是不能被直接访问的。所以为了方便查看一个对象的原型，Firefox和Chrome内核的JavaScript引擎中提供了"__proto__"这个非标准的访问器（ECMA新标准中引入了标准对象原型访问器"Object.getPrototype(object)"）。原型的主要作用就是**为了实现继承与扩展对象**。
-
-### 2.1 原型链
-
-原型链解决的主要是继承问题。
-
-每个对象拥有一个原型对象，通过 proto (读音: dunder proto) 指针指向其原型对象，并从中继承方法和属性，同时原型对象也可能拥有原型，这样一层一层，最终指向 null(Object.proptotype.__proto__ 指向的是null)。这种关系被称为原型链 (prototype chain)，通过原型链一个对象可以拥有定义在其他对象中的属性和方法。
-
-构造函数 Parent、Parent.prototype 和 实例 p 的关系如下:(p.__proto__ === Parent.prototype)
-
 >原型链的5条规则:
 >所有的引用类型（数组，对象，函数），都是具有对象特性的，即可以自由扩展属性（除了null以外）
 >
@@ -709,42 +704,397 @@ JavaScript是一种通过原型实现继承的语言与别的高级语言是有�
 >
 >当试图得到一个对象的某一个属性的时候，如果一个对象本身没有这个属性的话，就会去它的proto( 也就是它的构造函数中去寻找这个属性)
 
-### 2.2 new一个对象的过程
+### 4.1 对原型、原型链的理解
+在JavaScript中是使用构造函数来新建一个对象的，每一个构造函数的内部都有一个 prototype 属性，它的属性值是一个对象，这个对象包含了可以由该构造函数的所有实例共享的属性和方法。当使用构造函数新建一个对象后，在这个对象的内部将包含一个指针，这个指针指向构造函数的 prototype 属性对应的值，在 ES5 中这个指针被称为对象的原型。一般来说不应该能够获取到这个值的，但是现在浏览器中都实现了 __proto__ 属性来访问这个属性，但是最好不要使用这个属性，因为它不是规范中规定的。ES5 中新增了一个 Object.getPrototypeOf() 方法，可以通过这个方法来获取对象的原型。
 
-- 创建一个新对象
-- this指向这个新对象
-- 执行代码（对this赋值）
-- 返回this
+当访问一个对象的属性时，如果这个对象内部不存在这个属性，那么它就会去它的原型对象里找这个属性，这个原型对象又会有自己的原型，于是就这样一直找下去，也就是原型链的概念。原型链的尽头一般来说都是 Object.prototype 所以这就是新建的对象为什么能够使用 toString() 等方法的原因。
+
+特点：JavaScript 对象是通过引用来传递的，创建的每个新对象实体中并没有一份属于自己的原型副本。当修改原型时，与之相关的对象也会继承这一改变。
+
+
+### 4.2 原型修改、重写
 ```
-// v1
-  function objectFactory() {
-      var obj = new Object(),
-          // 因为 shift 会修改原数组，所以 arguments 会被去除第一个参数
-          Constructor = [].shift.call(arguments);     // 拿到伪数组中的第一个参数
-      // 取出参数中的第一个参数，就是我们要传入的构造函数，建立继承关系
-      obj.__proto__ = Constructor.prototype;
-      Constructor.apply(obj, arguments);
-      return obj;
-  }
+function Person(name) {
+    this.name = name
+}
+// 修改原型
+Person.prototype.getName = function() {}
+var p = new Person('hello')
+console.log(p.__proto__ === Person.prototype) // true
+console.log(p.__proto__ === p.constructor.prototype) // true
+// 重写原型
+Person.prototype = {
+    getName: function() {}
+}
+var p = new Person('hello')
+console.log(p.__proto__ === Person.prototype)        // true
+console.log(p.__proto__ === p.constructor.prototype) // false
+```
 
-  // v2 : 还需要判断返回的值是不是一个对象，如果是一个对象，我们就返回这个对象，如果没有，我们该返回什么就返回什么。
-  function objectFactory() {
-      var obj = new Object(),
-          Constructor = [].shift.call(arguments);
-      // 建立继承关系(二者之间的关系)
-      obj.__proto__ = Constructor.prototype;
-      // 开始执行这个构造函数
-      var ret = Constructor.apply(obj, arguments);
-      // 看一下构造函数的返回值，是对象还是一个基本数据类型?
-      return typeof ret === 'object' ? ret : obj;
-  }
+可以看到修改原型的时候p的构造函数不是指向Person了，因为直接给Person的原型对象直接用对象赋值时，它的构造函数指向的了根构造函数Object，所以这时候`p.constructor === Object` ，而不是`p.constructor === Person`。要想成立，就要用constructor指回来：
 
+```
+Person.prototype = {
+    getName: function() {}
+}
+var p = new Person('hello')
+p.constructor = Person
+console.log(p.__proto__ === Person.prototype)        // true
+console.log(p.__proto__ === p.constructor.prototype) // true
+```
 
+### 4.3 原型链指向
+```
+p.__proto__  // Person.prototype
+Person.prototype.__proto__  // Object.prototype
+p.__proto__.__proto__ //Object.prototype
+p.__proto__.constructor.prototype.__proto__ // Object.prototype
+Person.prototype.constructor.prototype.__proto__ // Object.prototype
+p1.__proto__.constructor // Person
+Person.prototype.constructor  // Person
+```
+
+### 4.4 原型链的终点是什么？如何打印出原型链的终点？
+
+由于`Object`是构造函数，原型链终点是`Object.prototype.__proto__`，而`Object.prototype.__proto__=== null // true`，所以，原型链的终点是`null`。原型链上的所有原型都是对象，所有的对象最终都是由`Object`构造的，而`Object.prototype`的下一级是`Object.prototype.__proto__`。
+
+### 4.5 如何获得对象非原型链上的属性？
+使用后`hasOwnProperty()`方法来判断属性是否属于原型链的属性：
+```
+function iterate(obj){
+   var res=[];
+   for(var key in obj){
+        if(obj.hasOwnProperty(key))
+           res.push(key+': '+obj[key]);
+   }
+   return res;
+} 
+```
+
+## 5. 执行上下文/作用域链/闭包
+
+### 5.1 对闭包的理解
+闭包是指有权访问另一个函数作用域中变量的函数，创建闭包的最常见的方式就是在一个函数内创建另一个函数，创建的函数可以访问到当前函数的局部变量。
+
+闭包有两个常用的用途；
+- 闭包的第一个用途是使我们在函数外部能够访问到函数内部的变量。通过使用闭包，可以通过在外部调用闭包函数，从而在外部访问到函数内部的变量，可以使用这种方法来创建私有变量。
+- 闭包的另一个用途是使已经运行结束的函数上下文中的变量对象继续留在内存中，因为闭包函数保留了这个变量对象的引用，所以这个变量对象不会被回收。
   
+比如，函数 A 内部有一个函数 B，函数 B 可以访问到函数 A 中的变量，那么函数 B 就是闭包。
 ```
-## 3. 继承
+function A() {
+  let a = 1
+  window.B = function () {
+      console.log(a)
+  }
+}
+A()
+B() // 1
+```
+### 5.2 循环中使用闭包解决`var`定义函数的问题（setTimeout）
 
-### 3.1 原型继承
+需求：每隔一秒输出一个数字，从 0 - 5；
+```
+for(var i=0;i<=5;i++){            
+    setTimeout(function timer(){                
+        console.log(i)            
+    },i*1000)        
+}        
+console.log(i)
+```
+输出结果：立即输出一个6，然后每隔一秒输出一个6；
+
+首先因为 setTimeout 是个异步函数，所以会先把循环全部执行完毕，这时候 i 就是 6 了，所以会输出一堆 6。
+
+解决办法有3种。
+
+1. 闭包
+
+```
+for(var i=0;i<=5;i++){            
+    (function(j){                
+        setTimeout(function timer(){                    
+            console.log(j)                
+        },j*1000)            
+    })(i)        
+}
+```
+
+在上述代码中，我们首先使用了立即执行函数将 i 传入函数内部，这个时候值就被固定在了参数 j上面不会改变，当下次执行 timer 这个闭包的时候，就可以使用外部函数的变量 j，从而达到目的。
+
+2. 使用 setTimeout 的第三个参数
+
+```
+for(var i=0;i<=5;i++){           
+    setTimeout((j) => {                
+        console.log(j);            
+    },i*1000,i)        
+}
+
+```
+
+3. let 定义 i
+```
+for(let i=0;i<=5;i++){                
+    setTimeout(() => {                    
+        console.log(i)                
+    },i*1000)            
+}
+
+```
+
+#### 5.2.2 每多过一秒一个数字(setInterval)
+```
+let lastIntervalId, counter = 5;
+const greeting = delay => {
+  if (counter === 5) {
+    clearInterval(lastIntervalId);
+    lastIntervalId = setInterval(() => {
+      console.log('Hello World. ', delay);
+      greeting(delay + 100);
+    }, delay);
+    counter = 0;
+  }
+counter += 1;
+};
+greeting(100);
+```
+
+### 5.2.3 一定时间内只发生一次（setTimeout）
+
+```
+<script>
+//定时器 异步运行
+function hello(){
+alert("hello");
+}
+//使用方法名字执行方法
+var t1 = window.setTimeout(hello,1000);
+var t2 = window.setTimeout("hello()",3000);//使用字符串执行方法
+window.clearTimeout(t1);//去掉定时器
+</script>
+```
+
+
+### 5.3 对作用域、作用域链的理解
+1）全局作用域和函数作用域
+
+（1）全局作用域
+
+- 最外层函数和最外层函数外面定义的变量拥有全局作用域
+- 所有未定义直接赋值的变量自动声明为全局作用域
+- 所有window对象的属性拥有全局作用域
+- 全局作用域有很大的弊端，过多的全局作用域变量会污染全局命名空间，容易引起命名冲突。
+  
+（2）函数作用域
+
+- 函数作用域声明在函数内部的变零，一般只有固定的代码片段可以访问到
+- 作用域是分层的，内层作用域可以访问外层作用域，反之不行
+  
+2）块级作用域
+
+- 使用ES6中新增的let和const指令可以声明块级作用域，块级作用域可以在函数中创建也可以在一个代码块中的创建（由`{ }`包裹的代码片段）
+- let和const声明的变量不会有变量提升，也不可以重复声明
+- 在循环中比较适合绑定块级作用域，这样就可以把声明的计数器变量限制在循环内部。
+  
+作用域链：
+在当前作用域中查找所需变量，但是该作用域没有这个变量，那这个变量就是自由变量。如果在自己作用域找不到该变量就去父级作用域查找，依次向上级作用域查找，直到访问到window对象就被终止，这一层层的关系就是作用域链。
+
+作用域链的作用是保证对执行环境有权访问的所有变量和函数的有序访问，通过作用域链，可以访问到外层环境的变量和函数。
+
+作用域链的本质上是一个指向变量对象的指针列表。变量对象是一个包含了执行环境中所有变量和函数的对象。作用域链的前端始终都是当前执行上下文的变量对象。全局执行上下文的变量对象（也就是全局对象）始终是作用域链的最后一个对象。
+
+当查找一个变量时，如果当前执行环境中没有找到，可以沿着作用域链向后查找。
+
+### 5.4 对执行上下文的理解
+1. 执行上下文类型
+   
+（1）全局执行上下文
+
+任何不在函数内部的都是全局执行上下文，它首先会创建一个全局的window对象，并且设置this的值等于这个全局对象，一个程序中只有一个全局执行上下文。
+
+（2）函数执行上下文
+
+当一个函数被调用时，就会为该函数创建一个新的执行上下文，函数的上下文可以有任意多个。
+
+（3）`eval`函数执行上下文
+
+执行在eval函数中的代码会有属于他自己的执行上下文，不过eval函数不常使用，不做介绍。
+
+2. 执行上下文栈
+   
+- JavaScript引擎使用执行上下文栈来管理执行上下文
+- 当JavaScript执行代码时，首先遇到全局代码，会创建一个全局执行上下文并且压入执行栈中，每当遇到一个函数调用，就会为该函数创建一个新的执行上下文并压入栈顶，引擎会执行位于执行上下文栈顶的函数，当函数执行完成之后，执行上下文从栈中弹出，继续执行下一个上下文。当所有的代码都执行完毕之后，从栈中弹出全局执行上下文。
+```
+let a = 'Hello World!';
+function first() {
+  console.log('Inside first function');
+  second();
+  console.log('Again inside first function');
+}
+function second() {
+  console.log('Inside second function');
+}
+first();
+
+//执行顺序
+//先执行second(),在执行first()
+```
+
+3. 创建执行上下文
+   
+创建执行上下文有两个阶段：创建阶段和执行阶段
+
+1）创建阶段
+
+（1）this绑定
+
+- 在全局执行上下文中，this指向全局对象（window对象）
+- 在函数执行上下文中，this指向取决于函数如何调用。如果它被一个引用对象调用，那么 this 会被设置成那个对象，否则 this 的值被设置为全局对象或者 undefined
+  
+（2）创建词法环境组件
+
+- 词法环境是一种有标识符——变量映射的数据结构，标识符是指变量/函数名，变量是对实际对象或原始数据的引用。
+- 词法环境的内部有两个组件：加粗样式：环境记录器:用来储存变量个函数声明的实际位置外部环境的引用：可以访问父级作用域
+  
+（3）创建变量环境组件
+
+- 变量环境也是一个词法环境，其环境记录器持有变量声明语句在执行上下文中创建的绑定关系。
+  
+2）执行阶段
+
+此阶段会完成对变量的分配，最后执行完代码。
+
+**简单来说执行上下文就是指**：
+
+在执行一点JS代码之前，需要先解析代码。解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来，变量先赋值为undefined，函数先声明好可使用。这一步执行完了，才开始正式的执行程序。
+在一个函数执行之前，也会创建一个函数执行上下文环境，跟全局执行上下文类似，不过函数执行上下文会多出this、arguments和函数的参数。
+
+- 全局上下文：变量定义，函数声明
+- 函数上下文：变量定义，函数声明，`this`，`arguments`
+
+## 6. this/call/apply/bind
+
+### 6.1 对this对象的理解
+this 是执行上下文中的一个属性，它指向最后一次调用这个方法的对象。在实际开发中，this 的指向可以通过四种调用模式来判断。
+
+- 第一种是函数调用模式，当一个函数不是一个对象的属性时，直接作为函数来调用时，this 指向全局对象。
+- 第二种是方法调用模式，如果一个函数作为一个对象的方法来调用时，this 指向这个对象。
+- 第三种是构造器调用模式，如果一个函数用 new 调用时，函数执行前会新创建一个对象，this 指向这个新创建的对象。
+- 第四种是 apply 、 call 和 bind 调用模式，这三个方法都可以显示的指定调用函数的 this 指向。其中 apply 方法接收两个参数：一个是 this 绑定的对象，一个是参数数组。call 方法接收的参数，第一个是 this 绑定的对象，后面的其余参数是传入函数执行的参数。也就是说，在使用 call() 方法时，传递给函数的参数必须逐个列举出来。bind 方法通过传入一个对象，返回一个 this 绑定了传入对象的新函数。这个函数的 this 指向除了使用 new 时会被改变，其他情况下都不会改变。
+  
+这四种方式，使用构造器调用模式的优先级最高，然后是 apply、call 和 bind 调用模式，然后是方法调用模式，然后是函数调用模式。
+
+### 6.2 call() 和 apply() 的区别？
+它们的作用一模一样，区别仅在于传入参数的形式的不同。
+- apply 接受两个参数，第一个参数指定了函数体内 this 对象的指向，第二个参数为一个带下标的集合，这个集合可以为数组，也可以为类数组，apply 方法把这个集合中的元素作为参数传递给被调用的函数。
+- call 传入的参数数量不固定，跟 apply 相同的是，第一个参数也是代表函数体内的 this 指向，从第二个参数开始往后，每个参数被依次传入函数。
+  
+### 6.3  实现call、apply 及 bind 函数
+
+#### call 函数的实现步骤：
+- 判断调用对象是否为函数，即使是定义在函数的原型上的，但是可能出现使用 call 等方式调用的情况。
+- 判断传入上下文对象是否存在，如果不存在，则设置为 window 。
+- 处理传入的参数，截取第一个参数后的所有参数。
+- 将函数作为上下文对象的一个属性。
+- 使用上下文对象来调用这个方法，并保存返回结果。
+- 删除刚才新增的属性。
+- 返回结果。
+
+```
+Function.prototype.myCall = function(context) {
+  // 判断调用对象
+  if (typeof this !== "function") {
+    console.error("type error");
+  }
+  // 获取参数
+  let args = [...arguments].slice(1),
+    result = null;
+  // 判断 context 是否传入，如果未传入则设置为 window
+  context = context || window;
+  // 将调用函数设为对象的方法
+  context.fn = this;
+  // 调用函数
+  result = context.fn(...args);
+  // 将属性删除
+  delete context.fn;
+  return result;
+};
+```
+
+#### apply 函数的实现步骤：
+- 判断调用对象是否为函数，即使是定义在函数的原型上的，但是可能出现使用 call 等方式调用的情况。
+- 判断传入上下文对象是否存在，如果不存在，则设置为 window 。
+- 将函数作为上下文对象的一个属性。
+- 判断参数值是否传入
+- 使用上下文对象来调用这个方法，并保存返回结果。
+- 删除刚才新增的属性
+- 返回结果
+
+```
+Function.prototype.myApply = function(context) {
+  // 判断调用对象是否为函数
+  if (typeof this !== "function") {
+    throw new TypeError("Error");
+  }
+  let result = null;
+  // 判断 context 是否存在，如果未传入则为 window
+  context = context || window;
+  // 将函数设为对象的方法
+  context.fn = this;
+  // 调用方法
+  if (arguments[1]) {
+    result = context.fn(...arguments[1]);
+  } else {
+    result = context.fn();
+  }
+  // 将属性删除
+  delete context.fn;
+  return result;
+};
+```
+
+#### bind 函数的实现步骤：
+- 判断调用对象是否为函数，即使是定义在函数的原型上的，但是可能出现使用 call 等方式调用的情况。
+- 函数内部使用 apply 来绑定函数调用，需要判断函数作为构造函数的情况，这个时候需要传入当前函数的 this 给 apply 调用，其余情况都传入指定的上下文对象。
+```
+Function.prototype.myBind = function(context) {
+  // 判断调用对象是否为函数
+  if (typeof this !== "function") {
+    throw new TypeError("Error");
+  }
+  // 获取参数
+  var args = [...arguments].slice(1),
+    fn = this;
+  return function Fn() {
+    // 根据调用方式，传入不同绑定值
+    return fn.apply(
+      this instanceof Fn ? this : context,
+      args.concat(...arguments)
+    );
+  };
+};
+```
+
+## 7. 面向对象
+
+### 7.1 对象创建的方式有哪些？
+一般使用字面量的形式直接创建对象，但是这种创建方式对于创建大量相似对象的时候，会产生大量的重复代码。但 js和一般的面向对象的语言不同，在 ES6 之前它没有类的概念。但是可以使用函数来进行模拟，从而产生出可复用的对象创建方式，常见的有以下几种：
+
+（1）第一种是工厂模式，工厂模式的主要工作原理是用函数来封装创建对象的细节，从而通过调用函数来达到复用的目的。但是它有一个很大的问题就是创建出来的对象无法和某个类型联系起来，它只是简单的封装了复用代码，而没有建立起对象和类型间的关系。
+
+（2）第二种是构造函数模式。js 中每一个函数都可以作为构造函数，只要一个函数是通过 new 来调用的，那么就可以把它称为构造函数。执行构造函数首先会创建一个对象，然后将对象的原型指向构造函数的 prototype 属性，然后将执行上下文中的 this 指向这个对象，最后再执行整个函数，如果返回值不是对象，则返回新建的对象。因为 this 的值指向了新建的对象，因此可以使用 this 给对象赋值。构造函数模式相对于工厂模式的优点是，所创建的对象和构造函数建立起了联系，因此可以通过原型来识别对象的类型。但是构造函数存在一个缺点就是，造成了不必要的函数对象的创建，因为在 js 中函数也是一个对象，因此如果对象属性中如果包含函数的话，那么每次都会新建一个函数对象，浪费了不必要的内存空间，因为函数是所有的实例都可以通用的。
+
+（3）第三种模式是原型模式，因为每一个函数都有一个 prototype 属性，这个属性是一个对象，它包含了通过构造函数创建的所有实例都能共享的属性和方法。因此可以使用原型对象来添加公用属性和方法，从而实现代码的复用。这种方式相对于构造函数模式来说，解决了函数对象的复用问题。但是这种模式也存在一些问题，一个是没有办法通过传入参数来初始化值，另一个是如果存在一个引用类型如 Array 这样的值，那么所有的实例将共享一个对象，一个实例对引用类型值的改变会影响所有的实例。
+
+（4）第四种模式是组合使用构造函数模式和原型模式，这是创建自定义类型的最常见方式。因为构造函数模式和原型模式分开使用都存在一些问题，因此可以组合使用这两种模式，通过构造函数来初始化对象的属性，通过原型对象来实现函数方法的复用。这种方法很好的解决了两种模式单独使用时的缺点，但是有一点不足的就是，因为使用了两种不同的模式，所以对于代码的封装性不够好。
+
+（5）第五种模式是动态原型模式，这一种模式将原型方法赋值的创建过程移动到了构造函数的内部，通过对属性是否存在的判断，可以实现仅在第一次调用函数时对原型对象赋值一次的效果。这一种方式很好地对上面的混合模式进行了封装。
+
+（6）第六种模式是寄生构造函数模式，这一种模式和工厂模式的实现基本相同，我对这个模式的理解是，它主要是基于一个已有的类型，在实例化时对实例化的对象进行扩展。这样既不用修改原来的构造函数，也达到了扩展对象的目的。它的一个缺点和工厂模式一样，无法实现对象的识别。
+
+### 7.2 继承
+#### 7.2.1 原型继承
 基本方法就是一个父类的实例赋值给子类的原型。
 ```
 /**
@@ -804,7 +1154,7 @@ console.log(whiteTtom.name)//whiteTtom
 
 **为了解决这两种问题，我们还有一种方法就是在构造函数继承。**
 
-### 3.2 构造继承
+#### 7.2.2 构造继承
 
 ```
 function Animal(name) {
@@ -834,7 +1184,7 @@ console.log(tom instanceof Animal); // false
 console.log(tom instanceof Cat); // true
 ```
 
-### 3.4 组合继承（基本）
+#### 7.2.3 组合继承（基本）
 ```
 function Parent (name) {
     this.name = name;
@@ -889,7 +1239,7 @@ Parent.call(this, name);
 
 所以，在这个例子中，如果我们打印 child1 对象，我们会发现 Child.prototype 和 child1 都有一个属性为colors，属性值为['red', 'blue', 'green']。
 
-### 3.3 寄生组合式继承
+#### 7.2.4 寄生组合式继承
 ```
 function Parent (name) {
     this.name = name;
@@ -938,7 +1288,7 @@ prototype(Child, Parent);
 
 这种方式的高效率体现它只调用了一次 Parent 构造函数，并且因此避免了在 Parent.prototype 上面创建不必要的、多余的属性。与此同时，原型链还能保持不变；因此，还能够正常使用 instanceof 和 isPrototypeOf。开发人员普遍认为寄生组合式继承是引用类型最理想的继承范式。
 
-### 3.4 实例继承
+#### 7.2.5 实例继承
 ```
 function Animal(name = 'animal') {
   this.name = name ; 
@@ -963,254 +1313,391 @@ console.log(tom);
 console.log(tom instanceof Animal); // true
 console.log(tom instanceof Cat); // false
 ```
-## 4. 闭包
 
-闭包的定义其实很简单：函数 A 内部有一个函数 B，函数 B 可以访问到函数 A 中的变量，那么函数 B 就是闭包。
+## 8 异步编程
 
-```
-function A(){                 
-    let a=1;                 
-    window.B=function(){                     
-        console.log(a)                 
-    }            
-}            
-A();            
-B();//1
-```
-**在 JS 中，闭包存在的意义就是让我们可以间接访问函数内部的变量。**
+### 8.1 异步编程的实现方式？
 
-### 4.1 循环中使用闭包解决`var`定义函数的问题（setTimeout）
+JavaScript中的异步机制可以分为以下几种：
 
-需求：每隔一秒输出一个数字，从 0 - 5；
-```
-for(var i=0;i<=5;i++){            
-    setTimeout(function timer(){                
-        console.log(i)            
-    },i*1000)        
-}        
-console.log(i)
-```
-输出结果：立即输出一个6，然后每隔一秒输出一个6；
+- 回调函数 的方式，使用回调函数的方式有一个缺点是，多个回调函数嵌套的时候会造成回调函数地狱，上下两层的回调函数间的代码耦合度太高，不利于代码的可维护。
+- Promise 的方式，使用 Promise 的方式可以将嵌套的回调函数作为链式调用。但是使用这种方法，有时会造成多个 then 的链式调用，可能会造成代码的语义不够明确。
+- generator 的方式，它可以在函数的执行过程中，将函数的执行权转移出去，在函数外部还可以将执行权转移回来。当遇到异步函数执行的时候，将函数执行权转移出去，当异步函数执行完毕时再将执行权给转移回来。因此在 generator 内部对于异步操作的方式，可以以同步的顺序来书写。使用这种方式需要考虑的问题是何时将函数的控制权转移回来，因此需要有一个自动执行 generator 的机制，比如说 co 模块等方式来实现 generator 的自动执行。
+- async 函数 的方式，async 函数是 generator 和 promise 实现的一个自动执行的语法糖，它内部自带执行器，当函数内部执行到一个 await 语句的时候，如果语句返回一个 promise 对象，那么函数将会等待 promise 对象的状态变为 resolve 后再继续向下执行。因此可以将异步逻辑，转化为同步的顺序来书写，并且这个函数可以自动执行。
 
-首先因为 setTimeout 是个异步函数，所以会先把循环全部执行完毕，这时候 i 就是 6 了，所以会输出一堆 6。
 
-解决办法有3种。
-
-1. 闭包
+### 8.2  setTimeout、Promise、Async/Await 的区别
+（1）setTimeout
 
 ```
-for(var i=0;i<=5;i++){            
-    (function(j){                
-        setTimeout(function timer(){                    
-            console.log(j)                
-        },j*1000)            
-    })(i)        
+console.log('script start')	//1. 打印 script start
+setTimeout(function(){
+    console.log('settimeout')	// 4. 打印 settimeout
+})	// 2. 调用 setTimeout 函数，并定义其完成后执行的回调函数
+console.log('script end')	//3. 打印 script start
+// 输出顺序：script start->script end->settimeout
+```
+
+（2）Promise
+
+Promise本身是同步的立即执行函数， 当在executor中执行resolve或者reject的时候, 此时是异步操作， 会先执行then/catch等，当主栈完成后，才会去调用resolve/reject中存放的方法执行，打印p的时候，是打印的返回结果，一个Promise实例。
+当JS主线程执行到Promise对象时：
+- promise1.then() 的回调就是一个 task
+- promise1 是 resolved或rejected: 那这个 task 就会放入当前事件循环回合的 microtask queue
+- promise1 是 pending: 这个 task 就会放入 事件循环的未来的某个(可能下一个)回合的 microtask queue 中
+- setTimeout 的回调也是个 task ，它会被放入 macrotask queue 即使是 0ms 的情况
+```
+console.log('script start')
+let promise1 = new Promise(function (resolve) {
+    console.log('promise1')
+    resolve()
+    console.log('promise1 end')
+}).then(function () {
+    console.log('promise2')
+})
+setTimeout(function(){
+    console.log('settimeout')
+})
+console.log('script end')
+// 输出顺序: script start->promise1->promise1 end->script end->promise2->settimeout
+```
+  
+（3）async/await
+```
+async function async1(){
+   console.log('async1 start');
+    await async2();
+    console.log('async1 end')
 }
-```
-
-在上述代码中，我们首先使用了立即执行函数将 i 传入函数内部，这个时候值就被固定在了参数 j上面不会改变，当下次执行 timer 这个闭包的时候，就可以使用外部函数的变量 j，从而达到目的。
-
-2. 使用 setTimeout 的第三个参数
-
-```
-for(var i=0;i<=5;i++){           
-    setTimeout((j) => {                
-        console.log(j);            
-    },i*1000,i)        
+async function async2(){
+    console.log('async2')
 }
-
+console.log('script start');
+async1();
+console.log('script end')
+// 输出顺序：script start->async1 start->async2->script end->async1 end
 ```
 
-3. let 定义 i
-```
-for(let i=0;i<=5;i++){                
-    setTimeout(() => {                    
-        console.log(i)                
-    },i*1000)            
-}
+async 函数返回一个 Promise 对象，当函数执行的时候，一旦遇到 await 就会先返回，等到触发的异步操作完成，再执行函数体内后面的语句。可以理解为，是让出了线程，跳出了 async 函数体。
 
-```
+func1的运行结果其实就是一个Promise对象。因此也可以使用then来处理后续逻辑。
 
-### 4.2 每多过一秒一个数字(setInterval)
+await的含义为等待，也就是 async 函数需要等待await后的函数执行完成并且有了返回结果（Promise对象）之后，才能继续执行下面的代码。await通过返回一个Promise对象来实现同步的效果。
+
+### 8.3 对Promise的理解
+
+Promise是异步编程的一种解决方案，它是一个对象，可以获取异步操作的消息，他的出现大大改善了异步编程的困境，避免了地狱回调，它比传统的解决方案回调函数和事件更合理和更强大。
+
+所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。
+
+（1）Promise的实例有三个状态:
+
+- Pending（进行中）
+- Resolved（已完成）
+- Rejected（已拒绝）
+  
+当把一件事情交给promise时，它的状态就是Pending，任务完成了状态就变成了Resolved、没有完成失败了就变成了Rejected。
+
+（2）Promise的实例有两个过程：
+
+- pending -> fulfilled : Resolved（已完成）
+- pending -> rejected：Rejected（已拒绝）
+  
+注意：一旦从进行状态变成为其他状态就永远不能更改状态了。
+
+Promise的特点：
+- 对象的状态不受外界影响。promise对象代表一个异步操作，有三种状态，`pending`（进行中）、`fulfilled`（已成功）、`rejected`（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态，这也是promise这个名字的由来——“承诺”；
+- 一旦状态改变就不会再变，任何时候都可以得到这个结果。promise对象的状态改变，只有两种可能：从`pending`变为`fulfilled`，从`pending`变为`rejected`。这时就称为`resolved`（已定型）。如果改变已经发生了，你再对promise对象添加回调函数，也会立即得到这个结果。这与事件（event）完全不同，事件的特点是：如果你错过了它，再去监听是得不到结果的。
+
+Promise的缺点：
+- 无法取消Promise，一旦新建它就会立即执行，无法中途取消。
+- 如果不设置回调函数，Promise内部抛出的错误，不会反应到外部。
+- 当处于pending状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。
+  
+总结：
+Promise 对象是异步编程的一种解决方案，最早由社区提出。Promise 是一个构造函数，接收一个函数作为参数，返回一个 Promise 实例。一个 Promise 实例有三种状态，分别是pending、resolved 和 rejected，分别代表了进行中、已成功和已失败。实例的状态只能由 pending 转变 resolved 或者rejected 状态，并且状态一经改变，就凝固了，无法再被改变了。
+
+状态的改变是通过 resolve() 和 reject() 函数来实现的，可以在异步操作结束后调用这两个函数改变 Promise 实例的状态，它的原型上定义了一个 then 方法，使用这个 then 方法可以为两个状态的改变注册回调函数。这个回调函数属于微任务，会在本轮事件循环的末尾执行。
+
+注意：在构造 `Promise` 的时候，构造函数内部的代码是立即执行的
+
+### 8.4 Promise的基本用法
+
+#### 创建Promise对象
+Promise对象代表一个异步操作，有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）。
+
+Promise构造函数接受一个函数作为参数，该函数的两个参数分别是`resolve`和`reject`。
 ```
-let lastIntervalId, counter = 5;
-const greeting = delay => {
-  if (counter === 5) {
-    clearInterval(lastIntervalId);
-    lastIntervalId = setInterval(() => {
-      console.log('Hello World. ', delay);
-      greeting(delay + 100);
-    }, delay);
-    counter = 0;
+const promise = new Promise(function(resolve, reject) {
+  // ... some code
+  if (/* 异步操作成功 */){
+    resolve(value);
+  } else {
+    reject(error);
   }
-counter += 1;
+});
+```
+
+一般情况下都会使用`new Promise()`来创建promise对象，但是也可以使用`promise.resolve`和 `promise.reject`这两个方法：
+
+**- Promise.resolve**
+`Promise.resolve(value)`的返回值也是一个promise对象，可以对返回值进行.then调用。
+
+`resolve(11)`代码中，会让promise对象进入确定(`resolve`状态)，并将参数`11`传递给后面的`then`所指定的`onFulfilled` 函数；
+
+创建promise对象可以使用`new Promise`的形式创建对象，也可以使用`Promise.resolve(value)`的形式创建promise对象；
+
+**- Promise.reject**
+`Promise.reject` 也是`new Promise`的快捷形式，也创建一个promise对象。
+
+下面是使用resolve方法和reject方法：
+```
+function testPromise(ready) {
+  return new Promise(function(resolve,reject){
+    if(ready) {
+      resolve("hello world");
+    }else {
+      reject("No thanks");
+    }
+  });
 };
-greeting(100);
+// 方法调用
+testPromise(true).then(function(msg){
+  console.log(msg);
+},function(error){
+  console.log(error);
+});
 ```
 
-### 4.3 一定时间内只发生一次（setTimeout）
 
+上面的代码的含义是给`testPromise`方法传递一个参数，返回一个promise对象，如果为`true`的话，那么调用promise对象中的`resolve()`方法，并且把其中的参数传递给后面的`then`第一个函数内，因此打印出 “`hello world`”, 如果为`false`的话，会调用promise对象中的`reject()`方法，则会进入`then`的第二个函数内，会打印`No thanks`；
+
+#### Promise方法
+Promise有五个常用的方法：then()、catch()、all()、race()、finally。下面就来看一下这些方法。
+
+1. then()
+当Promise执行的内容符合成功条件时，调用`resolve`函数，失败就调用`reject`函数。Promise创建完了，那该如何调用呢？
+
+`then`方法可以接受两个回调函数作为参数。第一个回调函数是Promise对象的状态变为`resolved`时调用，第二个回调函数是Promise对象的状态变为`rejected`时调用。其中第二个参数可以省略。
+
+`then`方法返回的是一个新的Promise实例（不是原来那个Promise实例）。因此可以采用链式写法，即`then`方法后面再调用另一个then方法。
+
+当要写有顺序的异步事件时，需要串行时，可以这样写：
 ```
-<script>
-//定时器 异步运行
-function hello(){
-alert("hello");
+let promise = new Promise((resolve,reject)=>{
+    ajax('first').success(function(res){
+        resolve(res);
+    })
+})
+promise.then(res=>{
+    return new Promise((resovle,reject)=>{
+        ajax('second').success(function(res){
+            resolve(res)
+        })
+    })
+}).then(res=>{
+    return new Promise((resovle,reject)=>{
+        ajax('second').success(function(res){
+            resolve(res)
+        })
+    })
+}).then(res=>{
+    
+})
+```
+
+那当要写的事件没有顺序或者关系时，还如何写呢？可以使用`all` 方法来解决。
+
+2. catch()
+   
+Promise对象除了有then方法，还有一个catch方法，该方法相当于`then`方法的第二个参数，指向`reject`的回调函数。不过`catch`方法还有一个作用，就是在执行`resolve`回调函数时，如果出现错误，抛出异常，不会停止运行，而是进入`catch`方法中。
+
+3. all()
+   
+`all`方法可以完成并行任务， 它接收一个数组，数组的每一项都是一个`promise`对象。当数组中所有的`promise`的状态都达到`resolved`的时候，`all`方法的状态就会变成`resolved`，如果有一个状态变成了`rejected`，那么`all`方法的状态就会变成`rejected`。
+调用`all`方法时的结果成功的时候是回调函数的参数也是一个数组，这个数组按顺序保存着每一个promise对象`resolve`执行时的值。
+
+4. race()
+`race`方法和`all`一样，接受的参数是一个每项都是`promise`的数组，但是与`all`不同的是，当最先执行完的事件执行完之后，就直接返回该`promise`对象的值。如果第一个`promise`对象状态变成`resolved`，那自身的状态变成了`resolved`；反之第一个`promise`变成`rejected`，那自身状态就会变成`rejected`。
+
+那么`race`方法有什么实际作用呢？当要做一件事，超过多长时间就不做了，可以用这个方法来解决：
+```
+Promise.race([promise1,timeOutPromise(5000)]).then(res=>{})
+```
+
+5. finally()
+   
+`finally`方法用于指定不管 Promise 对象最后状态如何，都会执行的操作。该方法是 ES2018 引入标准的。
+
+上面代码中，不管`promise`最后的状态，在执行完`then`或`catch`指定的回调函数以后，都会执行`finally`方法指定的回调函数。
+
+下面是一个例子，服务器使用 Promise 处理请求，然后使用`finally`方法关掉服务器。
+
+`finally`方法的回调函数不接受任何参数，这意味着没有办法知道，前面的 Promise 状态到底是`fulfilled`还是`rejected`。这表明，`finally`方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果。`finally`本质上是`then`方法的特例：
+上面代码中，如果不使用`finally`方法，同样的语句需要为成功和失败两种情况各写一次。有了`finally`方法，则只需要写一次。
+
+### 8.5 Promise解决了什么问题
+在工作中经常会碰到这样一个需求，比如我使用ajax发一个A请求后，成功后拿到数据，需要把数据传给B请求；那么需要如下编写代码：
+
+上面的代码有如下缺点：
+- 后一个请求需要依赖于前一个请求成功后，将数据往下传递，会导致多个ajax请求嵌套的情况，代码不够直观。
+- 如果前后两个请求不需要传递参数的情况下，那么后一个请求也需要前一个请求成功后再执行下一步操作，这种情况下，那么也需要如上编写代码，导致代码不够直观。
+  
+`Promise`出现之后，代码变成这样：
+这样代码看起了就简洁了很多，解决了回调地狱的问题。
+
+### 8.6 Promise.all和Promise.race的区别的使用场景
+
+（1）Promise.all
+`Promise.all`可以将多个`Promise`实例包装成一个新的Promise实例。同时，成功和失败的返回值是不同的，成功的时候返回的是一个结果数组，而失败的时候则返回最先被reject失败状态的值。
+
+Promise.all中传入的是数组，返回的也是是数组，并且会将进行映射，传入的promise对象返回的值是按照顺序在数组中排列的，但是注意的是他们执行的顺序并不是按照顺序的，除非可迭代对象为空。
+
+需要注意，Promise.all获得的成功结果的数组里面的数据顺序和Promise.all接收到的数组顺序是一致的，这样当遇到发送多个请求并根据请求顺序获取和使用数据的场景，就可以使用Promise.all来解决。
+
+（2）Promise.race
+
+顾名思义，Promse.race就是赛跑的意思，意思就是说，Promise.race([p1, p2, p3])里面哪个结果获得的快，就返回那个结果，不管结果本身是成功状态还是失败状态。当要做一件事，超过多长时间就不做了，可以用这个方法来解决：
+```
+Promise.race([promise1,timeOutPromise(5000)]).then(res=>{})
+```
+
+
+### 8.7 对async/await 的理解
+async/await其实是`Generator` 的语法糖，它能实现的效果都能用then链来实现，它是为优化then链而开发出来的。从字面上来看，async是“异步”的简写，await则为等待，所以很好理解async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。
+
+所以，async 函数返回的是一个 Promise 对象。async 函数（包含函数语句、函数表达式、Lambda表达式）会返回一个 Promise 对象，如果在函数中 `return` 一个直接量，async 会把这个直接量通过 `Promise.resolve()` 封装成 Promise 对象。
+
+async 函数返回的是一个 Promise 对象，所以在最外层不能用 await 获取其返回值的情况下，当然应该用原来的方式：`then()` 链来处理这个 Promise 对象。
+
+那如果 async 函数没有返回值，又该如何？很容易想到，它会返回 `Promise.resolve(undefined)`。
+
+联想一下 Promise 的特点——无等待，所以在没有 `await` 的情况下执行 async 函数，它会立即执行，返回一个 Promise 对象，并且，绝不会阻塞后面的语句。这和普通返回 Promise 对象的函数并无二致。
+
+注意：`Promise.resolve(x)` 可以看作是 `new Promise(resolve => resolve(x))` 的简写，可以用于快速封装字面量对象或其他对象，将其封装成 Promise 实例。
+
+### 8.8 await 到底在等啥？
+await 在等待什么呢？一般来说，都认为 await 是在等待一个 async 函数完成。不过按语法说明，await 等待的是一个表达式，这个表达式的计算结果是 Promise 对象或者其它值（换句话说，就是没有特殊限定）。
+
+因为 async 函数返回一个 Promise 对象，所以 await 可以用于等待一个 async 函数的返回值——这也可以说是 await 在等 async 函数，但要清楚，它等的实际是一个返回值。注意到 await 不仅仅用于等 Promise 对象，它可以等任意表达式的结果，所以，await 后面实际是可以接普通函数调用或者直接量的。
+
+所以下面这个示例完全可以正确运行：
+
+await 表达式的运算结果取决于它等的是什么。
+- 如果它等到的不是一个 Promise 对象，那 await 表达式的运算结果就是它等到的东西。
+- 如果它等到的是一个 Promise 对象，await 就忙起来了，它会阻塞后面的代码，等着 Promise 对象 resolve，然后得到 resolve 的值，作为 await 表达式的运算结果。
+  
+
+### 8.9  async/await的优势
+单一的 Promise 链并不能发现 async/await 的优势，但是，如果需要处理由多个 Promise 组成的 then 链的时候，优势就能体现出来了（很有意思，Promise 通过 then 链来解决多层回调的问题，现在又用 async/await 来进一步优化它）。
+假设一个业务，分多个步骤完成，每个步骤都是异步的，而且依赖于上一个步骤的结果。仍然用 `setTimeout` 来模拟异步操作：
+现在用 Promise 方式来实现这三个步骤的处理：
+```
+function doIt() {
+    console.time("doIt");
+    const time1 = 300;
+    step1(time1)
+        .then(time2 => step2(time2))
+        .then(time3 => step3(time3))
+        .then(result => {
+            console.log(`result is ${result}`);
+            console.timeEnd("doIt");
+        });
 }
-//使用方法名字执行方法
-var t1 = window.setTimeout(hello,1000);
-var t2 = window.setTimeout("hello()",3000);//使用字符串执行方法
-window.clearTimeout(t1);//去掉定时器
-</script>
+doIt();
+// c:\var\test>node --harmony_async_await .
+// step1 with 300
+// step2 with 500
+// step3 with 700
+// result is 900
+// doIt: 1507.251ms
 ```
-
-## 5. 作用域
-ES6 之前 JS 没有块级作⽤域。例如 
+输出结果 `result` 是 `step3()` 的参数 `700 + 200` = `900`。`doIt()` 顺序执行了三个步骤，一共用了 `300 + 500 + 700 = 1500` 毫秒，和 `console.time()/console.timeEnd()` 计算的结果一致。
+如果用 async/await 来实现呢，会是这样：
 ```
-if (true) {
-    var name = 'zhangsan'
+async function doIt() {
+    console.time("doIt");
+    const time1 = 300;
+    const time2 = await step1(time1);
+    const time3 = await step2(time2);
+    const result = await step3(time3);
+    console.log(`result is ${result}`);
+    console.timeEnd("doIt");
 }
-console.log(name)
+结果和之前的 Promise 实现是一样的，但是这个代码看起来是不是清晰得多，几乎跟同步代码一样
 ```
 
-从上⾯的例⼦可以体会到作⽤域的概念，作⽤域就是⼀个独⽴的地盘，让变量不会外泄、暴露出去。
+### 8.10  async/await对比Promise的优势
 
-上⾯的 name 就被暴露出去了，因此，JS 没有块级作⽤域，只有全局作⽤域和函数作⽤域。
+- 代码读起来更加同步，Promise虽然摆脱了回调地狱，但是then的链式调⽤也会带来额外的阅读负担 
+- Promise传递中间值⾮常麻烦，⽽async/await⼏乎是同步的写法，⾮常优雅 
+- 错误处理友好，async/await可以⽤成熟的try/catch，Promise的错误捕获⾮常冗余 
+- 调试友好，Promise的调试很差，由于没有代码块，你不能在⼀个返回表达式的箭头函数中设置断点，如果你在⼀个.then代码块中使⽤调试器的步进(step-over)功能，调试器并不会进⼊后续的.then代码块，因为调试器只能跟踪同步代码的每⼀步。 
 
-但是 ES6 中开始加⼊了块级作⽤域，使⽤ let 定义变量即可。
+### 8.11 async/await 如何捕获异常
 ```
-if (true) {
- let name1 = 'zhangsan'
+async function fn(){
+    try{
+        let a = await Promise.reject('error')
+    }catch(error){
+        console.log(error)
+    }
 }
-console.log(name1) // 报错，因为let定义的name是在if这个块级作⽤域
 ```
 
-### 5.1 js作用域
-全局作用域和函数作用域。内部可以访问外部，但外部的不能访问内部的。
+## 9. 垃圾回收与内存泄漏
+
+### 9.1 浏览器的垃圾回收机制
+（1）垃圾回收的概念
+
+垃圾回收：JavaScript代码运行时，需要分配内存空间来储存变量和值。当变量不在参与运行时，就需要系统收回被占用的内存空间，这就是垃圾回收。
+回收机制：
+
+- Javascript 具有自动垃圾回收机制，会定期对那些不再使用的变量、对象所占用的内存进行释放，原理就是找到不再使用的变量，然后释放掉其占用的内存。
+- JavaScript中存在两种变量：局部变量和全局变量。全局变量的生命周期会持续要页面卸载；而局部变量声明在函数中，它的生命周期从函数执行开始，直到函数执行结束，在这个过程中，局部变量会在堆或栈中存储它们的值，当函数执行结束后，这些局部变量不再被使用，它们所占有的空间就会被释放。
+- 不过，当局部变量被外部函数使用时，其中一种情况就是闭包，在函数执行结束后，函数外部的变量依然指向函数内部的局部变量，此时局部变量依然在被使用，所以不会回收。
+
+（2）垃圾回收的方式
+
+浏览器通常使用的垃圾回收方法有两种：标记清除，引用计数。
+1）标记清除
+
+- 标记清除是浏览器常见的垃圾回收方式，当变量进入执行环境时，就标记这个变量“进入环境”，被标记为“进入环境”的变量是不能被回收的，因为他们正在被使用。当变量离开环境时，就会被标记为“离开环境”，被标记为“离开环境”的变量会被内存释放。
+- 垃圾收集器在运行的时候会给存储在内存中的所有变量都加上标记。然后，它会去掉环境中的变量以及被环境中的变量引用的标记。而在此之后再被加上标记的变量将被视为准备删除的变量，原因是环境中的变量已经无法访问到这些变量了。最后。垃圾收集器完成内存清除工作，销毁那些带标记的值，并回收他们所占用的内存空间。
+  
+2）引用计数
+
+- 另外一种垃圾回收机制就是引用计数，这个用的相对较少。引用计数就是跟踪记录每个值被引用的次数。当声明了一个变量并将一个引用类型赋值给该变量时，则这个值的引用次数就是1。相反，如果包含对这个值引用的变量又取得了另外一个值，则这个值的引用次数就减1。当这个引用次数变为0时，说明这个变量已经没有价值，因此，在在机回收期下次再运行时，这个变量所占有的内存空间就会被释放出来。
+- 这种方法会引起循环引用的问题：例如：`obj1`和`obj2`通过属性进行相互引用，两个对象的引用次数都是2。当使用循环计数时，由于函数执行完后，两个对象都离开作用域，函数执行结束，`obj1`和`obj2`还将会继续存在，因此它们的引用次数永远不会是0，就会引起循环引用。
 ```
-var a=10;        
-function aaa(){             
-    alert(a);        
-};        
-aaa();//10
+function fun() {
+    let obj1 = {};
+    let obj2 = {};
+    obj1.a = obj2; // obj1 引用 obj2
+}
 ```
+这种情况下，就要手动释放变量占用的内存：
 ```
-function aaa(){            
-    var a=10;          
-};        
-aaa();        
-console.log(a)//Uncaught ReferenceError: a is not defined
-```
-```
-var a=10;         
-function aaa(){             
-    console.log(a);//10        
-};                    
-function bbb(){            
-    var a=20;            
-    aaa();        
-}        
-bbb();//10
-```
-```
-function aaa(){            
-    a=10;         
-}        
-aaa();        
-function aaa(){            
-    var a=b=10;         
-}      
-aaa();      
-console.log(b)//10    
-console.log(a)//Uncaught ReferenceError: a is not defined
-```
-### 5.2 变量的查找是就近原则去寻找，定义的var变量
-```
-function aaa(){            
-console.log(a);//undefined            
-var a=20;        
-}        
-aaa(); 
-```
-```
-var a=10;        
-function aaa(){            
-    console.log(a);//undefined            
-    var a=20;        
-}        
-aaa();
-```
-```
-var a=10;        
-function aaa(a){             
-    console.log(a);//10            
-    var a=20;  //因为 a 是形参，优先级高于 var a; 所以 局部变量a的声明其实被忽略了。        
-}         
-aaa(a);
+obj1.a =  null
+obj2.a =  null
 ```
 
-### 5.3 作用域链
-⾸先认识⼀下什么叫做**自由变量**。如下代码中， console.log(a) 要得到 a 变量，但是在当前的作⽤域中没有定义 a （可对⽐⼀下 b ）。当前作⽤域没有定义的变量，这成为 ⾃由变量 。⾃由变量如何得到 —— 向⽗级作⽤域寻找。
+（3）减少垃圾回收
 
-```
-var a = 100;
-function fn() {
-    var b = 200;
-    console.log(a);
-    console.log(b);
-};
-fn();
-```
-如果⽗级也没呢？再⼀层⼀层向上寻找，直到找到全局作⽤域还是没找到，就宣布放弃。这种⼀层⼀ 层的关系，就是 作⽤域链 。
-```
-var a = 100;
-function F1() {
-    var b = 200;
-    function F2() {
-        var c = 300;
-        console.log(a) // ⾃由变量，顺作⽤域链向⽗作⽤域找
-        console.log(b) // ⾃由变量，顺作⽤域链向⽗作⽤域找
-        console.log(c) // 本作⽤域的变量
-    };
-    F2();
-};
-F1();
-```
+虽然浏览器可以进行垃圾自动回收，但是当代码比较复杂时，垃圾回收所带来的代价比较大，所以应该尽量减少垃圾回收。
 
-### 5.4 判断结果函数名和变量名一样
-```
-var a = 1;        
-(function a () {            
-    a = 2;            
-    console.log(a);        
-})();
-// 输出结果
-ƒ a () {
-           a = 2;
-           console.log(a);
-       }
-```
+- 对数组进行优化：在清空一个数组时，最简单的方法就是给其赋值为[ ]，但是与此同时会创建一个新的空对象，可以将数组的长度设置为0，以此来达到清空数组的目的。
+- 对`object`进行优化：对象尽量复用，对于不再使用的对象，就将其设置为null，尽快被回收。
+- 对函数进行优化：在循环中的函数表达式，如果可以复用，尽量放在函数的外面。
+  
+### 9.2 哪些情况会导致内存泄漏
+以下四种情况会造成内存的泄漏：
+- 意外的全局变量：由于使用未声明的变量，而意外的创建了一个全局变量，而使这个变量一直留在内存中无法被回收。
+- 被遗忘的计时器或回调函数：设置了 setInterval 定时器，而忘记取消它，如果循环函数有对外部变量的引用的话，那么这个变量会被一直留在内存中，而无法被回收。
+- 脱离 DOM 的引用：获取一个 DOM 元素的引用，而后面这个元素被删除，由于一直保留了对这个元素的引用，所以它也无法被回收。
+- 闭包：不合理的使用闭包，从而导致某些变量一直被留在内存当中。
 
-立即调用的函数表达式（IIFE） 有一个 自己独立的 作用域，如果函数名称与内部变量名称冲突，就会永远执行函数本身；所以上面的结果输出是函数本身；
 
-函数表达式中的函数名称，只有自己独立的作用域可以拿到，不会影响全局
-
-```
-var a = 1;        
-(function a () {            
-    a = 2;            
-    console.log(window.a);        
-})();
-// 1
-```
-```
-var a = 1;        
-(function x () {            
-    a = 2;            
-    console.log(a);        
-})();
-// 2
-```
-     
 ## 6. this的理解
 - 作为构造函数执行
 - 作为对象属性执行
@@ -1630,302 +2117,6 @@ $.ajax({
  })
  ```
 
-
-## 14. ES6
-
-### 14.2 Promise
-
-ES6 原生提供了Promise 对象。
-
-所谓 Promise，就是一个对象，用来传递异步操作的消息。它代表了某个未来才会知道结果的事件（通常是一个异步操作），并且这个事件提供统一的 API，可供进一步处理。
-
-Promise 对象有以下两个特点。
-1.  对象的状态不受外界影响。Promise 对象代表一个异步操作，有三种状态：Pending（进行中）、Resolved（已完成，又称 Fulfilled）和 Rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是 Promise 这个名字的由来，它的英语意思就是「承诺」，表示其他手段无法改变。
-   
-2.  一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise 对象的状态改变，只有两种可能：从 Pending 变为 Resolved 和从 Pending 变为 Rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果。就算改变已经发生了，你再对 Promise 对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。
-   
-有了 Promise对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise 对象提供统一的接口，使得控制异步操作更加容易。
-
-Promise 也有一些缺点。首先，无法取消 Promise，一旦新建它就会立即执行，无法中途取消。其次，如果不设置回调函数，Promise 内部抛出的错误，不会反应到外部。第三，当处于 Pending 状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。
-
-### 14.3 Promise 实现
-
-#### 14.3.1 主体实现
-```
-const PENDING =  'pending';//初始态
-const FULFILLED =  'fulfilled';//初始态
-const REJECTED =  'rejected';//初始态
-
-function Promise(executor){
-  let self = this; //先缓存当前promise实例
-  self.status = PENDING;//设置状态
-  //定义存放成功的回调的数组
-  self.onResolvedCallbacks = [];
-  //定义存放失败回调的数组
-  self.onRejectedCallbacks = [];
-  //当调用此方法的时候，如果promise状态为pending,的话可以转成成功态,如果已经是成功态或者失败态了，则什么都不做
- 
-  //2.1 定义resolve方法;
-  function resolve(value){  
-    if(value!=null &&value.then&&typeof value.then == 'function'){
-      return value.then(resolve,reject);
-    }
-    //如果是初始态，则转成成功态
-    //为什么要把它用setTimeout包起来
-    setTimeout(function(){
-      if(self.status == PENDING){
-        self.status = FULFILLED;
-        self.value = value;//成功后会得到一个值，这个值不能改
-        //调用所有成功的回调
-        self.onResolvedCallbacks.forEach(cb=>cb(self.value));
-      }
-    })
-  }
-
-  //2.1.2 定义reject方法;
-  function reject(reason){ 
-    setTimeout(function(){
-      //如果是初始态，则转成失败态
-      if(self.status == PENDING){
-        self.status = REJECTED;
-        self.value = reason;//失败的原因给了value
-        self.onRejectedCallbacks.forEach(cb=>cb(self.value));
-      }
-    });
-  }
-  try{
-    //因为此函数执行可能会异常，所以需要捕获，如果出错了，需要用错误 对象reject
-    executor(resolve,reject);
-  }catch(e){
-    //如果这函数执行失败了，则用失败的原因reject这个promise
-    reject(e);
-  };
-}
-
-```
-
-#### 14.3.2 then()方法
-```
-//onFulfilled 是用来接收promise成功的值或者失败的原因
-Promise.prototype.then = function(onFulfilled,onRejected){
-  //如果成功和失败的回调没有传，则表示这个then没有任何逻辑，只会把值往后抛
-  //2.2.1
-  onFulfilled = typeof onFulfilled == 'function'?onFulfilled:function(value){return  value};
-  onRejected = typeof onRejected == 'function'?onRejected:reason=>{throw reason};
-  //如果当前promise状态已经是成功态了，onFulfilled直接取值
-  let self = this;
-  let promise2;
-  if(self.status == FULFILLED){
-    return promise2 = new Promise(function(resolve,reject){
-      setTimeout(function(){
-        try{
-          let x =onFulfilled(self.value);
-          //如果获取到了返回值x,会走解析promise的过程
-          resolvePromise(promise2,x,resolve,reject);
-        }catch(e){
-          //如果执行成功的回调过程中出错了，用错误原因把promise2 reject
-          reject(e);
-        }
-      })
-
-    });
-  }
-  if(self.status == REJECTED){
-    return promise2 = new Promise(function(resolve,reject){
-      setTimeout(function(){
-        try{
-          let x =onRejected(self.value);
-          resolvePromise(promise2,x,resolve,reject);
-        }catch(e){
-          reject(e);
-        }
-      })
-    });
-  }
-  if(self.status == PENDING){
-   return promise2 = new Promise(function(resolve,reject){
-     self.onResolvedCallbacks.push(function(){
-         try{
-           let x =onFulfilled(self.value);
-           //如果获取到了返回值x,会走解析promise的过程
-           resolvePromise(promise2,x,resolve,reject);
-         }catch(e){
-           reject(e);
-         }
-
-     });
-     self.onRejectedCallbacks.push(function(){
-         try{
-           let x =onRejected(self.value);
-           resolvePromise(promise2,x,resolve,reject);
-         }catch(e){
-           reject(e);
-         }
-     });
-   });
-  }
-
-}
-
-```
-
-#### 14.3.3 resolvePromise方法
-
-```
-function resolvePromise(promise2,x,resolve,reject){
-  if(promise2 === x){
-    return reject(new TypeError('循环引用'));
-  }
-  let called = false;//promise2是否已经resolve 或reject了
-  if(x instanceof Promise){
-    if(x.status == PENDING){
-      x.then(function(y){
-        resolvePromise(promise2,y,resolve,reject);
-      },reject);
-    }else{
-      x.then(resolve,reject);
-    }
-  //x是一个thenable对象或函数，只要有then方法的对象，
-  }else if(x!= null &&((typeof x=='object')||(typeof x == 'function'))){
-    //当我们的promise和别的promise进行交互，编写这段代码的时候尽量的考虑兼容性，允许别人瞎写
-   try{
-     let then = x.then;
-     if(typeof then == 'function'){
-       //有些promise会同时执行成功和失败的回调
-       then.call(x,function(y){
-         //如果promise2已经成功或失败了，则不会再处理了
-          if(called)return;
-          called = true;
-          resolvePromise(promise2,y,resolve,reject)
-       },function(err){
-         if(called)return;
-         called = true;
-         reject(err);
-       });
-     }else{
-       //到此的话x不是一个thenable对象，那直接把它当成值resolve promise2就可以了
-       resolve(x);
-     }
-   }catch(e){
-     if(called)return;
-     called = true;
-     reject(e);
-   }
-
-  }else{
-    //如果X是一个普通 的值，则用x的值去resolve promise2
-    resolve(x);
-  }
-}
-
-```
-
-#### 14.3.4 catch()方法
-```
-//catch原理就是只传失败的回调
-Promise.prototype.catch = function(onRejected){
-  this.then(null,onRejected);
-}
-```
-
-#### 14.3.5 deferred()方法
-```
-Promise.deferred = Promise.defer = function(){
-  let defer = {};
-  defer.promise = new Promise(function(resolve,reject){
-    defer.resolve = resolve;
-    defer.reject = reject;
-  });
-  return defer;
-}
-```
-
-#### 14.3.6 all()方法
-```
-//Promise的all方法提供了并行执行异步操作的能力，并且在所有异步操作执行完后才执行回调。
-
-Promise.all = function(promises){
- return new Promise(function(resolve,reject){
-   let done = gen(promises.length,resolve);
-   for(let i=0;i<promises.length;i++){
-     promises[i].then(function(data){
-       done(i,data);
-     },reject);
-   }
- });
-}
-
-//计数法
-function gen(times,cb){
-  let result = [],count=0;
-  return function(i,data){
-    result[i] = data;
-    if(++count==times){
-      cb(result);
-    }
-  }
-}
-```
-
-#### 14.3.7 racel()方法
-```
-Promise.race = function(promises){
-  return new Promise(function(resolve,reject){
-    for(let i=0;i<promises.length;i++){
-      promises[i].then(resolve,reject);
-    }
-  });
-}
-
-//返回一个立刻成功的promise
-//别人提供 给你一个方法，需要你传入一个promise,但你只有一个普通的值，你就可以通过这个方法把这个普通的值(string number object)转成一个promise对象
-```
-
-#### 14.3.8 resolve()方法
-```
-Promise.resolve = function(value){
-  return new Promise(function(resolve){
-    resolve(value);
-  });
-}
-```
-
-#### 14.3.9 reject()方法
-```
-//返回一个立刻失败的promise
-Promise.reject = function(reason){
-  return new Promise(function(resolve,reject){
-    reject(reason);
-  });
-}
-```
-
-### 14.5 
-## 15.Set、Map、WeakSet 和 WeakMap 的区别？
-1、Set
-
-- 成员唯一、无序且不重复；
-- [value, value]，键值与键名是一致的（或者说只有键值，没有键名）；
-- 可以遍历，方法有：add、delete、has、clear、entries、forEach、keys、values
-- Set 也能用来保存 NaN 和 undefined， 如果有重复的 NaN， Set 会认为就一个 NaN(实际上 NaN!=NaN);
-
-2、Map
-
-- 本质上是键值对的集合，类似集合；
-- 可以遍历，方法很多，可以跟各种数据格式转换。
-
-3、WeakSet
-
-- 成员都是对象；
-- 成员都是弱引用，可以被垃圾回收机制回收，可以用来保存 DOM 节点，不容易造成内存泄漏；
-- 不能遍历，方法有 add、delete、has。
-
-4、WeakMap
-
-- 只接受对象作为键名（null 除外），不接受其他类型的值作为键名；
-- 键名是弱引用，键值可以是任意的，键名所指向的对象可以被垃圾回收，此时键名是无效的；
-- 不能遍历，方法有 get、set、has、delete。
-
 ## 16. 事件流和事件委托
 
 javascript和HTML之间的交互是通过事件实现的。
@@ -2045,154 +2236,6 @@ window.onload = function(){
 - 使用“事件委托”时，并不是说把事件委托给的元素越靠近顶层就越好。
 - 事件冒泡的过程也需要耗时，越靠近顶层，事件的”事件传播链”越长，也就越耗时。
 - 如果DOM嵌套结构很深，事件冒泡通过大量祖先元素会导致性能损失。
-
-## 17. call,apply,bind
-  借助已实现的方法，改变方法中数据的this指向，减少重复代码，节省内存。
-
-- 语法
-  ```
-  fun.call(thisArg, param1, param2, ...)
-  fun.apply(thisArg, [param1,param2,...])
-  fun.bind(thisArg, param1, param2, ...)
-  ```
-
-- 返回值：
-  ```
-  call/apply：fun执行的结果
-  bind：返回fun的拷贝，并拥有指定的this值和初始参数
-  ```
-
-- 参数
-  - thisArg(可选):
-    - fun的this指向thisArg对象
-    -  非严格模式下：thisArg指定为null，undefined，fun中的this指向window对象.
-    - 严格模式下：fun的this为undefined
-    - 值为原始值(数字，字符串，布尔值)的this会指向该原始值的自动包装对象，如 String、Number、Boolean
-  - param1,param2(可选): 传给fun的参数。
-    - 如果param不传或为 null/undefined，则表示不需要传入任何参数.
-    - apply第二个参数为数组，数组内的值为传给fun的参数。
- 
-- 调用call/apply/bind的必须是个函数
-
-  call、apply和bind是挂在Function对象上的三个方法,只有函数才有这些方法。
-
-  只要是函数就可以，比如: Object.prototype.toString就是个函数，我们经常看到这样的用法：Object.prototype.toString.call(data)
-
-- 作用：
-
-  改变函数执行时的this指向，目前所有关于它们的运用，都是基于这一点来进行的。
-
-- call与apply的唯一区别
-  
-  传给fun的参数写法不同：
-  - apply是第2个参数，这个参数是一个数组：传给fun参数都写在数组中。
-  - call从第2~n的参数都是传给fun的。
-
-  call/apply与bind的区别
-
-  执行：
-  - call/apply改变了函数的this上下文后马上执行该函数
-  - bind则是返回改变了上下文后的函数,不执行该函数
-
-  返回值:
-  - call/apply 返回fun的执行结果
-  - bind返回fun的拷贝，并指定了fun的this指向，保存了fun的参数。
-  
-  返回值这段在下方bind应用中有详细的示例解析。
-
-### 17.1 手写call
-
-- 根据call的规则设置上下文对象,也就是this的指向。
-- 通过设置context的属性,将函数的this指向隐式绑定到context上
-- 通过隐式绑定执行函数并传递参数。
-- 删除临时属性，返回函数执行结果
-
-```
-Function.prototype.myCall = function (context, ...arr) {
-    if (context === null || context === undefined) {
-       // 指定为 null 和 undefined 的 this 值会自动指向全局对象(浏览器中为window)
-        context = window 
-    } else {
-        context = Object(context) // 值为原始值（数字，字符串，布尔值）的 this 会指向该原始值的实例对象
-    }
-    const specialPrototype = Symbol('特殊属性Symbol') // 用于临时储存函数
-    context[specialPrototype] = this; // 函数的this指向隐式绑定到context上
-    let result = context[specialPrototype](...arr); // 通过隐式绑定执行函数并传递参数
-    delete context[specialPrototype]; // 删除上下文对象的属性
-    return result; // 返回函数执行结果
-};
-```
-
-### 17.2 手写apply
-- 传递给函数的参数处理，不太一样，其他部分跟call一样。
-- apply接受第二个参数为类数组对象, 这里用了JavaScript权威指南中判断是否为类数组对象的方法。
-
-```
-Function.prototype.myApply = function (context) {
-    if (context === null || context === undefined) {
-        context = window // 指定为 null 和 undefined 的 this 值会自动指向全局对象(浏览器中为window)
-    } else {
-        context = Object(context) // 值为原始值（数字，字符串，布尔值）的 this 会指向该原始值的实例对象
-    }
-    // JavaScript权威指南判断是否为类数组对象
-    function isArrayLike(o) {
-        if (o &&                                    // o不是null、undefined等
-            typeof o === 'object' &&                // o是对象
-            isFinite(o.length) &&                   // o.length是有限数值
-            o.length >= 0 &&                        // o.length为非负值
-            o.length === Math.floor(o.length) &&    // o.length是整数
-            o.length < 4294967296)                  // o.length < 2^32
-            return true
-        else
-            return false
-    }
-    const specialPrototype = Symbol('特殊属性Symbol') // 用于临时储存函数
-    context[specialPrototype] = this; // 隐式绑定this指向到context上
-    let args = arguments[1]; // 获取参数数组
-    let result
-    // 处理传进来的第二个参数
-    if (args) {
-        // 是否传递第二个参数
-        if (!Array.isArray(args) && !isArrayLike(args)) {
-            throw new TypeError('myApply 第二个参数不为数组并且不为类数组对象抛出错误');
-        } else {
-            args = Array.from(args) // 转为数组
-            result = context[specialPrototype](...args); // 执行函数并展开数组，传递函数参数
-        }
-    } else {
-        result = context[specialPrototype](); // 执行函数 
-    }
-    delete context[specialPrototype]; // 删除上下文对象的属性
-    return result; // 返回函数执行结果
-};
-```
-
-### 17.3 手写bind
-- 拷贝源函数:
-  - 通过变量储存源函数
-  - 使用Object.create复制源函数的prototype给fToBind
-- 返回拷贝的函数
-- 调用拷贝的函数：
-  - new调用判断：通过instanceof判断函数是否通过new调用，来决定绑定的context
-  - 绑定this+传递参数
-  - 返回源函数的执行结果
-
-```
-Function.prototype.myBind = function (objThis, ...params) {
-    const thisFn = this; // 存储源函数以及上方的params(函数参数)
-    // 对返回的函数 secondParams 二次传参
-    let fToBind = function (...secondParams) {
-        const isNew = this instanceof fToBind // this是否是fToBind的实例 也就是返回的fToBind是否通过new调用
-        const context = isNew ? this : Object(objThis) // new调用就绑定到this上,否则就绑定到传入的objThis上
-        return thisFn.call(context, ...params, ...secondParams); // 用call调用源函数绑定this的指向并传递参数,返回执行结果
-    };
-    if (thisFn.prototype) {
-        // 复制源函数的prototype给fToBind 一些情况下函数没有prototype，比如箭头函数
-        fToBind.prototype = Object.create(thisFn.prototype);
-    }
-    return fToBind; // 返回拷贝的函数
-};
-```
 
 ## 18. 脚本加载
 
